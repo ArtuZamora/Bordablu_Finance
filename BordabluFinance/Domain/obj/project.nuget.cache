@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "G2+zGHEcbkCbv0UCeIYYDxFKmPtzsZFQnv3Z819TZIu76iV2uLE/NxrlGm/G2UGqyXxj0UmyUtMNzgGN2+eQWg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\r2zam\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\r2zam\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
