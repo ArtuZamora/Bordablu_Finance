@@ -1,0 +1,14 @@
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\Domain.deps.json
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\Domain.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\Domain.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\Common.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\DataAccess.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\Common.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\bin\Debug\netstandard2.0\DataAccess.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.csprojAssemblyReference.cache
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.AssemblyInfoInputs.cache
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.AssemblyInfo.cs
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.csproj.CopyComplete
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Domain\obj\Debug\netstandard2.0\Domain.pdb

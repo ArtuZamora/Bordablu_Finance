@@ -1,2 +1,7 @@
 descuentos en materia prima -> abono al negocio
 monto en cada forma de pago
+
+
+SQLCMD Script:
+
+sqlcmd -S DESKTOP-G2BG0KM\SQLEXPRESS -i C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\script.sql

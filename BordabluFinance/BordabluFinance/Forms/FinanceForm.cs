@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Presentation
+namespace Presentation.Forms
 {
-    public partial class MainForm : Form
+    public partial class FinanceForm : Form
     {
-        public MainForm()
+        public FinanceForm()
         {
             InitializeComponent();
         }
