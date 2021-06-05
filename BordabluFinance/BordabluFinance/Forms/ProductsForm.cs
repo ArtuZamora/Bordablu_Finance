@@ -1,5 +1,6 @@
 ﻿using Common.Model;
 using Domain;
+using Presentation.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace Presentation.Forms
         private static Product curr_product = null;
         private static Specification curr_specification = null;
         private static List<DataType> dataTypes = new List<DataType>();
+        private static bool filling = true;
         #endregion
 
         public ProductsForm()
@@ -40,12 +42,19 @@ namespace Presentation.Forms
         }
         private void FillProductDgv()
         {
-            productsDgv.DataSource = null;
-            productsDgv.DataSource = model.Select_Products();
-            if (productsDgv.Rows.Count != 0)
+            try
             {
-                productsDgv.Columns[0].HeaderText = "Código";
-                productsDgv.Columns[1].HeaderText = "Producto";
+                productsDgv.DataSource = null;
+                productsDgv.DataSource = model.Select_Products();
+                if (productsDgv.Rows.Count != 0)
+                {
+                    productsDgv.Columns[0].HeaderText = "Código";
+                    productsDgv.Columns[1].HeaderText = "Producto";
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
         private void productBtn_Click(object sender, EventArgs e)
@@ -53,7 +62,7 @@ namespace Presentation.Forms
             try
             {
                 if (string.IsNullOrEmpty(productNameTxt.Text))
-                    errorPvdr.SetError(productNameTxt, "No debe dejar el campo vacío");
+                    GlobalMethods.errorProvider.SetError(productNameTxt, "No debe dejar el campo vacío");
                 else
                 {
                     if(curr_product != null)
@@ -68,12 +77,12 @@ namespace Presentation.Forms
                     else
                     {
                         model.Insert_Product(new Product("P000", productNameTxt.Text.Trim()));
-                        MessageBox.Show("El producto ha sido ingresado con éxito",
+                        MessageBox.Show("El registro ha sido ingresado con éxito",
                             "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     productNameTxt.Text = "";
                     productNameTxt.Focus();
-                    errorPvdr.SetError(productNameTxt, null);
+                    GlobalMethods.errorProvider.SetError(productNameTxt, null);
                     FillProductDgv();
                     FillProductsCmb();
                 }
@@ -86,10 +95,7 @@ namespace Presentation.Forms
         }
         private void productNameTxt_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(productNameTxt.Text))
-                errorPvdr.SetError(productNameTxt, "No debe dejar el campo vacío");
-            else
-                errorPvdr.SetError(productNameTxt, null);
+            GlobalMethods.VerifyEmpty((TextBox)sender);
         }
         private void productNameTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -98,16 +104,12 @@ namespace Presentation.Forms
         }
         private void productsDgv_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Right) 
-                return;
-            if (e.ColumnIndex < 0 || e.RowIndex < 0)
-                return;
-            productsDgv.CurrentCell = productsDgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            productsCtxtMenu.Show(MousePosition);
+            GlobalMethods.ContextDGV((DataGridView)sender, e, MousePosition, productsCtxtMenu);
         }
         private void productsCtxtMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch(e.ClickedItem.Text)
+            ((ContextMenuStrip)sender).Hide();
+            switch (e.ClickedItem.Text)
             {
                 case "Modificar":
                     curr_product = new Product(productsDgv.CurrentRow.Cells[0].Value.ToString(),
@@ -163,12 +165,14 @@ namespace Presentation.Forms
         }
         private void FillProductsCmb()
         {
+            GlobalMethods.errorProvider.SetError(productCmb, null);
             productCmb.DataSource = null;
             productCmb.DataSource = model.Select_Products();
             productCmb.ValueMember = "ID_P";
             productCmb.DisplayMember = "Name";
+            filling = false;
         }
-        private void FillSpecifitacionsDgv()
+        private void FillSpecificationsDgv()
         {
             try
             {
@@ -179,18 +183,21 @@ namespace Presentation.Forms
                 specifDgv.Columns[3].HeaderText = "Tipo";
                 specifDgv.Columns[1].Visible = false;
             }
-            catch (Exception ex) { Console.WriteLine(ex); }
+            catch (Exception ex) { Console.WriteLine(ex); throw; }
         }
         private void productCmb_SelectedValueChanged(object sender, EventArgs e)
         {
-            FillSpecifitacionsDgv();
+            if (!filling)
+                FillSpecificationsDgv();
         }
         private void specifBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 if (string.IsNullOrEmpty(specifTxt.Text))
-                    errorPvdr.SetError(specifTxt, "No debe dejar el campo vacío");
+                    GlobalMethods.errorProvider.SetError(specifTxt, "No debe dejar el campo vacío");
+                else if (productCmb.SelectedValue == null)
+                    GlobalMethods.errorProvider.SetError(productCmb, "No existen actualmente productos");
                 else
                 {
                     if (curr_specification != null)
@@ -208,13 +215,13 @@ namespace Presentation.Forms
                         model.Insert_Specification(
                             new Specification("S000", productCmb.SelectedValue.ToString()
                             , specifTxt.Text.Trim(), ((DataType)dataTypeCmb.SelectedItem).Type));
-                        MessageBox.Show("La especificación ha sido ingresada con éxito",
+                        MessageBox.Show("El registro ha sido ingresado con éxito",
                             "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     specifTxt.Text = "";
                     specifTxt.Focus();
-                    errorPvdr.SetError(specifTxt, null);
-                    FillSpecifitacionsDgv();
+                    GlobalMethods.errorProvider.SetError(specifTxt, null);
+                    FillSpecificationsDgv();
                 }
             }
             catch (Exception ex)
@@ -225,13 +232,11 @@ namespace Presentation.Forms
         }
         private void specifTxt_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(specifTxt.Text))
-                errorPvdr.SetError(specifTxt, "No debe dejar el campo vacío");
-            else
-                errorPvdr.SetError(specifTxt, null);
+            GlobalMethods.VerifyEmpty((TextBox)sender);
         }
         private void specifCtxtMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            ((ContextMenuStrip)sender).Hide();
             switch (e.ClickedItem.Text)
             {
                 case "Modificar":
@@ -254,9 +259,9 @@ namespace Presentation.Forms
                         try
                         {
                             model.Delete_Specification(specifDgv.CurrentRow.Cells[0].Value.ToString());
-                            MessageBox.Show("La espcificación ha sido eliminada con éxito",
+                            MessageBox.Show("El registro ha sido eliminado con éxito",
                                     "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            FillSpecifitacionsDgv();
+                            FillSpecificationsDgv();
                         }
                         catch (Exception ex)
                         {
@@ -269,12 +274,7 @@ namespace Presentation.Forms
         }
         private void specifDgv_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Right)
-                return;
-            if (e.ColumnIndex < 0 || e.RowIndex < 0)
-                return;
-            specifDgv.CurrentCell = specifDgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            specifCtxtMenu.Show(MousePosition);
+            GlobalMethods.ContextDGV((DataGridView)sender, e, MousePosition, specifCtxtMenu);
         }
         private void specifTxt_KeyPress(object sender, KeyPressEventArgs e)
         {

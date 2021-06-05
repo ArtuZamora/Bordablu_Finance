@@ -1,0 +1,17 @@
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Presentation.exe
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Presentation.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Presentation.deps.json
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Presentation.runtimeconfig.json
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Presentation.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\System.Data.SqlClient.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\runtimes\win-arm64\native\sni.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\runtimes\win-x64\native\sni.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\runtimes\win-x86\native\sni.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Common.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\DataAccess.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Domain.dll
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Common.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\Domain.pdb
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\bin\Release\netcoreapp3.1\publish\DataAccess.pdb

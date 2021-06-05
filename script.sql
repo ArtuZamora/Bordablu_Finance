@@ -50,7 +50,7 @@ CREATE TABLE Orders
 	Total_Amount money NOT NULL,
 	Earned_Amount money NOT NULL,
 	ID_PM char(4) NOT NULL,
-	Description nvarchar(300) NOT NULL,
+	Description nvarchar(300),
 	Status char(30) NOT NULL
 	CONSTRAINT PK_Orders PRIMARY KEY (ID_O),
 	CONSTRAINT FK_Orders_Payment_Method FOREIGN KEY (ID_PM) REFERENCES Payment_Methods(ID_PM)
@@ -74,7 +74,7 @@ CREATE TABLE Raw_Material
 	Stock int NOT NULL,
 	Cost money NOT NULL,
 	Supplier varchar(50) NOT NULL,
-	Description nvarchar(300) NOT NULL
+	Description nvarchar(300)
 	CONSTRAINT PK_Raw_Material PRIMARY KEY (ID_RM)
 )
 
@@ -149,7 +149,7 @@ FOR INSERT
 AS
 	DECLARE @identity int
 	SET @identity = 0
-	SELECT TOP 1 @identity = CONVERT(int, SUBSTRING(ID_RM, 2, LEN(ID_RM))) 
+	SELECT TOP 1 @identity = CONVERT(int, SUBSTRING(ID_RM, 3, LEN(ID_RM))) 
 		FROM Raw_Material ORDER BY ID_RM DESC;
 	SET @identity = @identity + 1;
 	UPDATE Raw_Material 
@@ -161,10 +161,20 @@ ON Expenses
 FOR INSERT
 AS
 	DECLARE @identity int
-	SET @identity = 0
+	DECLARE @quantity int
+	DECLARE @amount decimal
+	DECLARE @toCredit decimal
+	DECLARE @ID_RM char(5)
 	SELECT TOP 1 @identity = CONVERT(int, SUBSTRING(ID_E, 2, LEN(ID_E))) 
 		FROM Expenses ORDER BY ID_E DESC;
 	SET @identity = @identity + 1;
+	SELECT @quantity = Quantity, @amount = Amount, @ID_RM = ID_RM
+		FROM Expenses WHERE ID_RM = 'E0000000'
+	UPDATE Raw_Material
+		SET Stock += @quantity WHERE ID_RM = @ID_RM
+	SELECT @toCredit = (@quantity * Cost) - @amount
+		FROM Raw_Material WHERE ID_RM = @ID_RM
+	UPDATE Finance_Details SET Balance += @amount WHERE ID_FD = 'FD001'
 	UPDATE Expenses 
 	SET ID_RM = CONCAT('E', REPLICATE('0',7 - LEN(RTRIM(@identity))) + RTRIM(@identity))
 	WHERE ID_RM = 'E0000000'

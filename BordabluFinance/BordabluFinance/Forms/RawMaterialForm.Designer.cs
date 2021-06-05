@@ -29,6 +29,7 @@ namespace Presentation.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,40 +39,44 @@ namespace Presentation.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RawMaterialForm));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.expensesDetDgv = new System.Windows.Forms.DataGridView();
+            this.expensesBtn = new System.Windows.Forms.Button();
+            this.datePurc = new System.Windows.Forms.DateTimePicker();
+            this.rawMaterialCmb = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.expePrice = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.qtyNum = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.specifDgv = new System.Windows.Forms.DataGridView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rawMaterialDgv = new System.Windows.Forms.DataGridView();
+            this.descriptionTxt = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.supplierTxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.setPriceNum = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.productBtn = new System.Windows.Forms.Button();
+            this.stockNum = new System.Windows.Forms.NumericUpDown();
+            this.rawMaterialBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.productNameTxt = new System.Windows.Forms.TextBox();
+            this.rawMaterialTxt = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.expensesCtxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rawMatCtxMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.specifDgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.expensesDetDgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.expePrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qtyNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rawMaterialDgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setPriceNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,37 +93,59 @@ namespace Presentation.Forms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.expensesDetDgv);
+            this.panel1.Controls.Add(this.expensesBtn);
+            this.panel1.Controls.Add(this.datePurc);
+            this.panel1.Controls.Add(this.rawMaterialCmb);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.numericUpDown3);
+            this.panel1.Controls.Add(this.expePrice);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.numericUpDown4);
+            this.panel1.Controls.Add(this.qtyNum);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.specifDgv);
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.rawMaterialDgv);
+            this.panel1.Controls.Add(this.descriptionTxt);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.supplierTxt);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.numericUpDown2);
+            this.panel1.Controls.Add(this.setPriceNum);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.numericUpDown1);
-            this.panel1.Controls.Add(this.productBtn);
+            this.panel1.Controls.Add(this.stockNum);
+            this.panel1.Controls.Add(this.rawMaterialBtn);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.productNameTxt);
+            this.panel1.Controls.Add(this.rawMaterialTxt);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 940);
             this.panel1.TabIndex = 0;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Roboto Condensed", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(534, 90);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(22, 25);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "$";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Roboto Condensed", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(288, 666);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(22, 25);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "$";
             // 
             // label12
             // 
@@ -130,13 +157,13 @@ namespace Presentation.Forms
             this.label12.TabIndex = 46;
             this.label12.Text = "Detalle de gastos";
             // 
-            // dataGridView1
+            // expensesDetDgv
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.expensesDetDgv.AllowUserToAddRows = false;
+            this.expensesDetDgv.AllowUserToDeleteRows = false;
+            this.expensesDetDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.expensesDetDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
+            this.expensesDetDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(201)))), ((int)(((byte)(189)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -144,8 +171,8 @@ namespace Presentation.Forms
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.expensesDetDgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.expensesDetDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(176)))), ((int)(((byte)(110)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -153,11 +180,11 @@ namespace Presentation.Forms
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.GridColor = System.Drawing.Color.DimGray;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 216);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
+            this.expensesDetDgv.DefaultCellStyle = dataGridViewCellStyle2;
+            this.expensesDetDgv.GridColor = System.Drawing.Color.DimGray;
+            this.expensesDetDgv.Location = new System.Drawing.Point(29, 216);
+            this.expensesDetDgv.Name = "expensesDetDgv";
+            this.expensesDetDgv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(201)))), ((int)(((byte)(189)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -165,43 +192,45 @@ namespace Presentation.Forms
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(595, 236);
-            this.dataGridView1.TabIndex = 45;
+            this.expensesDetDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.expensesDetDgv.RowTemplate.Height = 25;
+            this.expensesDetDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.expensesDetDgv.Size = new System.Drawing.Size(595, 236);
+            this.expensesDetDgv.TabIndex = 6;
+            this.expensesDetDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.expensesDetDgv_CellMouseClick);
             // 
-            // button1
+            // expensesBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(93)))), ((int)(((byte)(57)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(112)))), ((int)(((byte)(104)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(262, 133);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 41);
-            this.button1.TabIndex = 44;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.expensesBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(93)))), ((int)(((byte)(57)))));
+            this.expensesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.expensesBtn.FlatAppearance.BorderSize = 0;
+            this.expensesBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(112)))), ((int)(((byte)(104)))));
+            this.expensesBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
+            this.expensesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.expensesBtn.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.expensesBtn.Location = new System.Drawing.Point(262, 133);
+            this.expensesBtn.Name = "expensesBtn";
+            this.expensesBtn.Size = new System.Drawing.Size(145, 41);
+            this.expensesBtn.TabIndex = 5;
+            this.expensesBtn.Text = "Agregar";
+            this.expensesBtn.UseVisualStyleBackColor = false;
+            this.expensesBtn.Click += new System.EventHandler(this.expensesBtn_Click);
             // 
-            // dateTimePicker1
+            // datePurc
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimePicker1.Location = new System.Drawing.Point(275, 89);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(180, 30);
-            this.dateTimePicker1.TabIndex = 43;
+            this.datePurc.CalendarFont = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.datePurc.Location = new System.Drawing.Point(275, 89);
+            this.datePurc.Name = "datePurc";
+            this.datePurc.Size = new System.Drawing.Size(180, 30);
+            this.datePurc.TabIndex = 2;
             // 
-            // comboBox1
+            // rawMaterialCmb
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(24, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(247, 31);
-            this.comboBox1.TabIndex = 42;
+            this.rawMaterialCmb.FormattingEnabled = true;
+            this.rawMaterialCmb.Location = new System.Drawing.Point(24, 88);
+            this.rawMaterialCmb.Name = "rawMaterialCmb";
+            this.rawMaterialCmb.Size = new System.Drawing.Size(247, 31);
+            this.rawMaterialCmb.TabIndex = 1;
             // 
             // label7
             // 
@@ -217,25 +246,25 @@ namespace Presentation.Forms
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(550, 67);
+            this.label8.Location = new System.Drawing.Point(542, 67);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 18);
             this.label8.TabIndex = 39;
             this.label8.Text = "Precio";
             // 
-            // numericUpDown3
+            // expePrice
             // 
-            this.numericUpDown3.DecimalPlaces = 2;
-            this.numericUpDown3.Location = new System.Drawing.Point(550, 88);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.expePrice.DecimalPlaces = 2;
+            this.expePrice.Location = new System.Drawing.Point(555, 88);
+            this.expePrice.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(83, 30);
-            this.numericUpDown3.TabIndex = 38;
-            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.expePrice.Name = "expePrice";
+            this.expePrice.Size = new System.Drawing.Size(83, 30);
+            this.expePrice.TabIndex = 4;
+            this.expePrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
             // 
@@ -247,18 +276,28 @@ namespace Presentation.Forms
             this.label9.TabIndex = 37;
             this.label9.Text = "Cantidad";
             // 
-            // numericUpDown4
+            // qtyNum
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(461, 88);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
+            this.qtyNum.Location = new System.Drawing.Point(461, 88);
+            this.qtyNum.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(83, 30);
-            this.numericUpDown4.TabIndex = 36;
-            this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.qtyNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.qtyNum.Name = "qtyNum";
+            this.qtyNum.Size = new System.Drawing.Size(58, 30);
+            this.qtyNum.TabIndex = 3;
+            this.qtyNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.qtyNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label10
             // 
@@ -280,13 +319,13 @@ namespace Presentation.Forms
             this.label11.TabIndex = 34;
             this.label11.Text = "Gastos en materia prima";
             // 
-            // specifDgv
+            // rawMaterialDgv
             // 
-            this.specifDgv.AllowUserToAddRows = false;
-            this.specifDgv.AllowUserToDeleteRows = false;
-            this.specifDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.specifDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
-            this.specifDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rawMaterialDgv.AllowUserToAddRows = false;
+            this.rawMaterialDgv.AllowUserToDeleteRows = false;
+            this.rawMaterialDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.rawMaterialDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
+            this.rawMaterialDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(201)))), ((int)(((byte)(189)))));
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -294,8 +333,8 @@ namespace Presentation.Forms
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.specifDgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.specifDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rawMaterialDgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.rawMaterialDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(176)))), ((int)(((byte)(110)))));
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -303,11 +342,11 @@ namespace Presentation.Forms
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.specifDgv.DefaultCellStyle = dataGridViewCellStyle5;
-            this.specifDgv.GridColor = System.Drawing.Color.DimGray;
-            this.specifDgv.Location = new System.Drawing.Point(29, 758);
-            this.specifDgv.Name = "specifDgv";
-            this.specifDgv.ReadOnly = true;
+            this.rawMaterialDgv.DefaultCellStyle = dataGridViewCellStyle5;
+            this.rawMaterialDgv.GridColor = System.Drawing.Color.DimGray;
+            this.rawMaterialDgv.Location = new System.Drawing.Point(29, 758);
+            this.rawMaterialDgv.Name = "rawMaterialDgv";
+            this.rawMaterialDgv.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(201)))), ((int)(((byte)(189)))));
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -315,21 +354,22 @@ namespace Presentation.Forms
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.specifDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.specifDgv.RowTemplate.Height = 25;
-            this.specifDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.specifDgv.Size = new System.Drawing.Size(595, 173);
-            this.specifDgv.TabIndex = 32;
+            this.rawMaterialDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.rawMaterialDgv.RowTemplate.Height = 25;
+            this.rawMaterialDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.rawMaterialDgv.Size = new System.Drawing.Size(595, 173);
+            this.rawMaterialDgv.TabIndex = 13;
+            this.rawMaterialDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.rawMaterialDgv_CellMouseClick);
             // 
-            // richTextBox1
+            // descriptionTxt
             // 
-            this.richTextBox1.EnableAutoDragDrop = true;
-            this.richTextBox1.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox1.Location = new System.Drawing.Point(427, 598);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(197, 96);
-            this.richTextBox1.TabIndex = 31;
-            this.richTextBox1.Text = "";
+            this.descriptionTxt.EnableAutoDragDrop = true;
+            this.descriptionTxt.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.descriptionTxt.Location = new System.Drawing.Point(427, 598);
+            this.descriptionTxt.Name = "descriptionTxt";
+            this.descriptionTxt.Size = new System.Drawing.Size(197, 96);
+            this.descriptionTxt.TabIndex = 11;
+            this.descriptionTxt.Text = "";
             // 
             // label6
             // 
@@ -351,37 +391,38 @@ namespace Presentation.Forms
             this.label5.TabIndex = 29;
             this.label5.Text = "Proveedor";
             // 
-            // textBox1
+            // supplierTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(29, 663);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Ej. Tiendita de la esquina ...";
-            this.textBox1.Size = new System.Drawing.Size(244, 30);
-            this.textBox1.TabIndex = 28;
+            this.supplierTxt.Location = new System.Drawing.Point(29, 663);
+            this.supplierTxt.Name = "supplierTxt";
+            this.supplierTxt.PlaceholderText = "Ej. Tiendita de la esquina ...";
+            this.supplierTxt.Size = new System.Drawing.Size(244, 30);
+            this.supplierTxt.TabIndex = 8;
+            this.supplierTxt.TextChanged += new System.EventHandler(this.supplierTxt_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(308, 643);
+            this.label4.Location = new System.Drawing.Point(292, 643);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 18);
             this.label4.TabIndex = 27;
             this.label4.Text = "Precio fijo";
             // 
-            // numericUpDown2
+            // setPriceNum
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Location = new System.Drawing.Point(308, 664);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.setPriceNum.DecimalPlaces = 2;
+            this.setPriceNum.Location = new System.Drawing.Point(311, 663);
+            this.setPriceNum.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(83, 30);
-            this.numericUpDown2.TabIndex = 26;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.setPriceNum.Name = "setPriceNum";
+            this.setPriceNum.Size = new System.Drawing.Size(83, 30);
+            this.setPriceNum.TabIndex = 10;
+            this.setPriceNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
@@ -393,34 +434,35 @@ namespace Presentation.Forms
             this.label3.TabIndex = 25;
             this.label3.Text = "Stock";
             // 
-            // numericUpDown1
+            // stockNum
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(308, 597);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.stockNum.Location = new System.Drawing.Point(311, 597);
+            this.stockNum.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(83, 30);
-            this.numericUpDown1.TabIndex = 24;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.stockNum.Name = "stockNum";
+            this.stockNum.Size = new System.Drawing.Size(84, 30);
+            this.stockNum.TabIndex = 9;
+            this.stockNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // productBtn
+            // rawMaterialBtn
             // 
-            this.productBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(93)))), ((int)(((byte)(57)))));
-            this.productBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.productBtn.FlatAppearance.BorderSize = 0;
-            this.productBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(112)))), ((int)(((byte)(104)))));
-            this.productBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
-            this.productBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.productBtn.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.productBtn.Location = new System.Drawing.Point(259, 711);
-            this.productBtn.Name = "productBtn";
-            this.productBtn.Size = new System.Drawing.Size(145, 41);
-            this.productBtn.TabIndex = 23;
-            this.productBtn.Text = "Agregar";
-            this.productBtn.UseVisualStyleBackColor = false;
+            this.rawMaterialBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(93)))), ((int)(((byte)(57)))));
+            this.rawMaterialBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rawMaterialBtn.FlatAppearance.BorderSize = 0;
+            this.rawMaterialBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(112)))), ((int)(((byte)(104)))));
+            this.rawMaterialBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
+            this.rawMaterialBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rawMaterialBtn.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rawMaterialBtn.Location = new System.Drawing.Point(259, 711);
+            this.rawMaterialBtn.Name = "rawMaterialBtn";
+            this.rawMaterialBtn.Size = new System.Drawing.Size(145, 41);
+            this.rawMaterialBtn.TabIndex = 12;
+            this.rawMaterialBtn.Text = "Agregar";
+            this.rawMaterialBtn.UseVisualStyleBackColor = false;
+            this.rawMaterialBtn.Click += new System.EventHandler(this.rawMaterialBtn_Click);
             // 
             // label2
             // 
@@ -442,23 +484,36 @@ namespace Presentation.Forms
             this.label1.TabIndex = 21;
             this.label1.Text = "Materia prima";
             // 
-            // productNameTxt
+            // rawMaterialTxt
             // 
-            this.productNameTxt.Location = new System.Drawing.Point(29, 596);
-            this.productNameTxt.Name = "productNameTxt";
-            this.productNameTxt.PlaceholderText = "Ej. Hilos, Agujas ...";
-            this.productNameTxt.Size = new System.Drawing.Size(244, 30);
-            this.productNameTxt.TabIndex = 20;
+            this.rawMaterialTxt.Location = new System.Drawing.Point(29, 596);
+            this.rawMaterialTxt.Name = "rawMaterialTxt";
+            this.rawMaterialTxt.PlaceholderText = "Ej. Hilos, Agujas ...";
+            this.rawMaterialTxt.Size = new System.Drawing.Size(244, 30);
+            this.rawMaterialTxt.TabIndex = 7;
+            this.rawMaterialTxt.TextChanged += new System.EventHandler(this.rawMaterialTxt_TextChanged);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 463);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 463);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(646, 47);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
+            // 
+            // expensesCtxtMenu
+            // 
+            this.expensesCtxtMenu.Name = "expensesCtxtMenu";
+            this.expensesCtxtMenu.Size = new System.Drawing.Size(61, 4);
+            this.expensesCtxtMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.expensesCtxtMenu_ItemClicked);
+            // 
+            // rawMatCtxMenu
+            // 
+            this.rawMatCtxMenu.Name = "rawMatCtxMenu";
+            this.rawMatCtxMenu.Size = new System.Drawing.Size(61, 4);
+            this.rawMatCtxMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.rawMatCtxMenu_ItemClicked);
             // 
             // RawMaterialForm
             // 
@@ -469,18 +524,18 @@ namespace Presentation.Forms
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "RawMaterialForm";
             this.Text = "RawMaterialForm";
+            this.Load += new System.EventHandler(this.RawMaterialForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.specifDgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.expensesDetDgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.expePrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qtyNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rawMaterialDgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setPriceNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -491,28 +546,32 @@ namespace Presentation.Forms
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown expePrice;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown qtyNum;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridView specifDgv;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridView rawMaterialDgv;
+        private System.Windows.Forms.RichTextBox descriptionTxt;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox supplierTxt;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown setPriceNum;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button productBtn;
+        private System.Windows.Forms.NumericUpDown stockNum;
+        private System.Windows.Forms.Button rawMaterialBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox productNameTxt;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox rawMaterialTxt;
+        private System.Windows.Forms.DateTimePicker datePurc;
+        private System.Windows.Forms.ComboBox rawMaterialCmb;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView expensesDetDgv;
+        private System.Windows.Forms.Button expensesBtn;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ContextMenuStrip expensesCtxtMenu;
+        private System.Windows.Forms.ContextMenuStrip rawMatCtxMenu;
     }
 }

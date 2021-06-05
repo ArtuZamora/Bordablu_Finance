@@ -1,0 +1,296 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\Presentation.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\Presentation.csproj",
+        "projectName": "Presentation",
+        "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\Presentation.csproj",
+        "packagesPath": "C:\\Users\\r2zam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\obj\\publish\\win-x86\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\r2zam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj"
+              },
+              "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+              "version": "[3.1.13, 3.1.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x86",
+              "version": "[3.1.13, 3.1.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
+              "version": "[3.1.13, 3.1.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+              "version": "[3.1.13, 3.1.13]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj",
+        "projectName": "Common",
+        "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\r2zam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\r2zam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\r2zam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\r2zam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\r2zam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\r2zam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\Common\\Common.csproj"
+              },
+              "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\DataAccess\\DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

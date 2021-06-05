@@ -46,5 +46,43 @@ namespace Domain
             consults.Delete_Specification(ID_S);
         }
         #endregion
+
+        #region Raw Material
+        public List<RawMaterial> Select_Raw_Materials()
+        {
+            return consults.Select_Raw_Material();
+        }
+        public void Insert_Raw_Material(RawMaterial rawMaterial)
+        {
+            consults.Insert_Raw_Material(rawMaterial);
+        }
+        public void Update_Raw_Material(RawMaterial rawMaterial)
+        {
+            consults.Update_Raw_Material(rawMaterial);
+        }
+        public void Delete_Raw_Material(string ID_RM)
+        {
+            consults.Delete_Raw_Material(ID_RM);
+        }
+        #endregion
+
+        #region Expenses
+        public List<Expense> Select_Expenses()
+        {
+            return consults.Select_Expenses();
+        }
+        public void Insert_Expenses(Expense expense)
+        {
+            consults.Insert_Expenses(expense);
+        }
+        public void Update_Expenses(Expense expenseAfter, Expense expenseBefore)
+        {
+            consults.Update_Expenses(expenseAfter, expenseBefore);
+        }
+        public void Delete_Expenses(Expense expense)
+        {
+            consults.Delete_Expenses(expense);
+        }
+        #endregion
     }
 }

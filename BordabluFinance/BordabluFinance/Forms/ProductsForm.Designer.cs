@@ -59,7 +59,6 @@ namespace Presentation.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.errorPvdr = new System.Windows.Forms.ErrorProvider(this.components);
             this.productsCtxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.specifCtxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flowLayoutPanel1.SuspendLayout();
@@ -68,7 +67,6 @@ namespace Presentation.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsDgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorPvdr)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -400,11 +398,6 @@ namespace Presentation.Forms
             this.textBox1.Size = new System.Drawing.Size(244, 23);
             this.textBox1.TabIndex = 6;
             // 
-            // errorPvdr
-            // 
-            this.errorPvdr.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorPvdr.ContainerControl = this;
-            // 
             // productsCtxtMenu
             // 
             this.productsCtxtMenu.Name = "contextMenuStrip1";
@@ -434,7 +427,6 @@ namespace Presentation.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsDgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorPvdr)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,7 +454,6 @@ namespace Presentation.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox productCmb;
-        private System.Windows.Forms.ErrorProvider errorPvdr;
         private System.Windows.Forms.ContextMenuStrip productsCtxtMenu;
         private System.Windows.Forms.DataGridView specifDgv;
         private System.Windows.Forms.ContextMenuStrip specifCtxtMenu;
