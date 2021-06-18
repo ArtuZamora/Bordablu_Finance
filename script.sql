@@ -51,7 +51,8 @@ CREATE TABLE Orders
 	Earned_Amount money NOT NULL,
 	ID_PM char(4) NOT NULL,
 	Description nvarchar(300),
-	Status char(30) NOT NULL
+	Status char(30) NOT NULL DEFAULT 'En Proceso',
+	Help bit NOT NULL DEFAULT 0
 	CONSTRAINT PK_Orders PRIMARY KEY (ID_O),
 	CONSTRAINT FK_Orders_Payment_Method FOREIGN KEY (ID_PM) REFERENCES Payment_Methods(ID_PM)
 )
@@ -61,10 +62,12 @@ CREATE TABLE Order_Details
 	ID_OD char(9) NOT NULL, --Code to generate: ODXXXXXXX
 	ID_O char(8) NOT NULL,
 	ID_S char(5) NOT NULL,
+	ID_P char(5) NOT NULL,
 	Detail varchar(50) NOT NULL
 	CONSTRAINT PK_Orders_Details PRIMARY KEY (ID_OD),
-	CONSTRAINT FK_Orders_Details_Orders FOREIGN KEY (ID_O) REFERENCES Orders(ID_O),
-	CONSTRAINT FK_Orders_Details_Specification FOREIGN KEY (ID_S) REFERENCES Specifications(ID_S)
+	CONSTRAINT FK_Orders_Details_Orders FOREIGN KEY (ID_O) REFERENCES Orders(ID_O) ON DELETE CASCADE,
+	CONSTRAINT FK_Orders_Details_Specification FOREIGN KEY (ID_S) REFERENCES Specifications(ID_S),
+	CONSTRAINT FK_Orders_Details_Products FOREIGN KEY (ID_P) REFERENCES Products(ID_P)
 )
 
 CREATE TABLE Raw_Material
@@ -163,21 +166,23 @@ AS
 	DECLARE @identity int
 	DECLARE @quantity int
 	DECLARE @amount decimal
-	DECLARE @toCredit decimal
 	DECLARE @ID_RM char(5)
 	SELECT TOP 1 @identity = CONVERT(int, SUBSTRING(ID_E, 2, LEN(ID_E))) 
 		FROM Expenses ORDER BY ID_E DESC;
 	SET @identity = @identity + 1;
+
 	SELECT @quantity = Quantity, @amount = Amount, @ID_RM = ID_RM
-		FROM Expenses WHERE ID_RM = 'E0000000'
+		FROM Expenses WHERE ID_E = 'E0000000'
+
 	UPDATE Raw_Material
 		SET Stock += @quantity WHERE ID_RM = @ID_RM
-	SELECT @toCredit = (@quantity * Cost) - @amount
-		FROM Raw_Material WHERE ID_RM = @ID_RM
-	UPDATE Finance_Details SET Balance += @amount WHERE ID_FD = 'FD001'
+
+	UPDATE Finance_Details SET Balance -= @amount WHERE ID_FD = 'FD001'
+	UPDATE Payment_Methods SET Balance -= @amount WHERE ID_PM = 'PM01'
+
 	UPDATE Expenses 
-	SET ID_RM = CONCAT('E', REPLICATE('0',7 - LEN(RTRIM(@identity))) + RTRIM(@identity))
-	WHERE ID_RM = 'E0000000'
+	SET ID_E = CONCAT('E', REPLICATE('0',7 - LEN(RTRIM(@identity))) + RTRIM(@identity))
+	WHERE ID_E = 'E0000000'
 GO
 CREATE TRIGGER TG_PK_Order_Details
 ON Order_Details
@@ -213,9 +218,9 @@ INSERT INTO Payment_Methods VALUES
 	('PM00', 'Agrícola', 0.00);
 INSERT INTO Payment_Methods VALUES
 	('PM00', 'BIM', 0.00);
-
+	
 INSERT INTO Finance_Details VALUES
-	('FD000', 'Negocio', 0.00);
+	('FD000', 'Bordablu', 0.00);
 INSERT INTO Finance_Details VALUES
 	('FD000', 'Margarita', 0.00);
 INSERT INTO Finance_Details VALUES

@@ -153,6 +153,7 @@ namespace Presentation.Forms
         }
         private void FillDataTypeCombo()
         {
+            dataTypes.Clear();
             dataTypes.Add(new DataType(dataTypes.Count + 1, "Texto corto"));
             dataTypes.Add(new DataType(dataTypes.Count + 1, "Texto largo"));
             dataTypes.Add(new DataType(dataTypes.Count + 1, "Número entero"));
@@ -165,6 +166,7 @@ namespace Presentation.Forms
         }
         private void FillProductsCmb()
         {
+            filling = true;
             GlobalMethods.errorProvider.SetError(productCmb, null);
             productCmb.DataSource = null;
             productCmb.DataSource = model.Select_Products();

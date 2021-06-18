@@ -118,11 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BB_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BB_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Blue_EditIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blue_EditIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_CancelIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_CancelIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green_DoneIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green_DoneIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddLineBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddLineBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FinanceIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FinanceIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_DoneIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_DoneIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_EditIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_EditIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DivisionLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DivisionLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RawMaterialIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RawMaterialIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,16 +151,55 @@
   <data name="AddOrderIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddOrderIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BankIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BankIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CheckOrdersIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckOrdersIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_CancelIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_CancelIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddLineBar_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddLineBar_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DashboardIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DashboardIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BB_Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BB_Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Black_EditIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_EditIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_DoneIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_DoneIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomerIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CustomerIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BB_Logo_Black - Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BB_Logo_Black - Copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BB_Logo_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BB_Logo_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProductIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProductIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DivisionLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DivisionLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Red_CancelIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red_CancelIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BB_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BB_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CashIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CashIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LineBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BB_Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BB_Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LegendDGV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LegendDGV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

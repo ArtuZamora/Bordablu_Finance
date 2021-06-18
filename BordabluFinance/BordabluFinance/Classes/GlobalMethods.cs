@@ -9,12 +9,17 @@ namespace Presentation.Classes
     public static class GlobalMethods
     {
         public static ErrorProvider errorProvider = new ErrorProvider();
-        public static void VerifyEmpty(TextBox textBox)
+        public static bool VerifyEmpty(TextBox textBox)
         {
+            bool state = false;
             if (string.IsNullOrEmpty(textBox.Text))
                 errorProvider.SetError(textBox, "No debe dejar el campo vacío");
             else
+            {
                 errorProvider.SetError(textBox, null);
+                state = true;
+            }
+            return state;
         }
         public static void ContextDGV(DataGridView dgv, DataGridViewCellMouseEventArgs e,
                                         Point MousePosition, ContextMenuStrip contextMenu)

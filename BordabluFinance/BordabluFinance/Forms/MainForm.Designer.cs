@@ -46,6 +46,9 @@ namespace Presentation
             this.financePanel = new System.Windows.Forms.Panel();
             this.financeLbl = new System.Windows.Forms.Label();
             this.financePict = new System.Windows.Forms.PictureBox();
+            this.checkOrderPanel = new System.Windows.Forms.Panel();
+            this.checkOrderLbl = new System.Windows.Forms.Label();
+            this.checkOrderPict = new System.Windows.Forms.PictureBox();
             this.addOrderPanel = new System.Windows.Forms.Panel();
             this.addOrderLbl = new System.Windows.Forms.Label();
             this.addOrderPict = new System.Windows.Forms.PictureBox();
@@ -65,6 +68,8 @@ namespace Presentation
             ((System.ComponentModel.ISupportInitialize)(this.productPic)).BeginInit();
             this.financePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financePict)).BeginInit();
+            this.checkOrderPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkOrderPict)).BeginInit();
             this.addOrderPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addOrderPict)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -108,8 +113,8 @@ namespace Presentation
             this.controlsFLP.Controls.Add(this.rawMatPanel);
             this.controlsFLP.Controls.Add(this.productPanel);
             this.controlsFLP.Controls.Add(this.financePanel);
+            this.controlsFLP.Controls.Add(this.checkOrderPanel);
             this.controlsFLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlsFLP.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.controlsFLP.Location = new System.Drawing.Point(0, 0);
             this.controlsFLP.Name = "controlsFLP";
             this.controlsFLP.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
@@ -292,6 +297,50 @@ namespace Presentation
             this.financePict.MouseEnter += new System.EventHandler(this.financePict_MouseEnter);
             this.financePict.MouseLeave += new System.EventHandler(this.financePict_MouseLeave);
             // 
+            // checkOrderPanel
+            // 
+            this.checkOrderPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(163)))), ((int)(((byte)(136)))));
+            this.checkOrderPanel.Controls.Add(this.checkOrderLbl);
+            this.checkOrderPanel.Controls.Add(this.checkOrderPict);
+            this.checkOrderPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkOrderPanel.Location = new System.Drawing.Point(1, 177);
+            this.checkOrderPanel.Margin = new System.Windows.Forms.Padding(1);
+            this.checkOrderPanel.Name = "checkOrderPanel";
+            this.checkOrderPanel.Size = new System.Drawing.Size(198, 42);
+            this.checkOrderPanel.TabIndex = 5;
+            this.checkOrderPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkOrderPanel_MouseClick);
+            this.checkOrderPanel.MouseEnter += new System.EventHandler(this.checkOrderPanel_MouseEnter);
+            this.checkOrderPanel.MouseLeave += new System.EventHandler(this.checkOrderPanel_MouseLeave);
+            // 
+            // checkOrderLbl
+            // 
+            this.checkOrderLbl.AutoSize = true;
+            this.checkOrderLbl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkOrderLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.checkOrderLbl.Location = new System.Drawing.Point(60, 7);
+            this.checkOrderLbl.Name = "checkOrderLbl";
+            this.checkOrderLbl.Size = new System.Drawing.Size(117, 25);
+            this.checkOrderLbl.TabIndex = 1;
+            this.checkOrderLbl.Text = "Ver Ordenes";
+            this.checkOrderLbl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkOrderLbl_MouseClick);
+            this.checkOrderLbl.MouseEnter += new System.EventHandler(this.checkOrderLbl_MouseEnter);
+            this.checkOrderLbl.MouseLeave += new System.EventHandler(this.checkOrderLbl_MouseLeave);
+            // 
+            // checkOrderPict
+            // 
+            this.checkOrderPict.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkOrderPict.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkOrderPict.Image = ((System.Drawing.Image)(resources.GetObject("checkOrderPict.Image")));
+            this.checkOrderPict.Location = new System.Drawing.Point(0, 0);
+            this.checkOrderPict.Name = "checkOrderPict";
+            this.checkOrderPict.Size = new System.Drawing.Size(58, 42);
+            this.checkOrderPict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.checkOrderPict.TabIndex = 0;
+            this.checkOrderPict.TabStop = false;
+            this.checkOrderPict.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkOrderPict_MouseClick);
+            this.checkOrderPict.MouseEnter += new System.EventHandler(this.checkOrderPict_MouseEnter);
+            this.checkOrderPict.MouseLeave += new System.EventHandler(this.checkOrderPict_MouseLeave);
+            // 
             // addOrderPanel
             // 
             this.addOrderPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(163)))), ((int)(((byte)(136)))));
@@ -404,6 +453,9 @@ namespace Presentation
             this.financePanel.ResumeLayout(false);
             this.financePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financePict)).EndInit();
+            this.checkOrderPanel.ResumeLayout(false);
+            this.checkOrderPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkOrderPict)).EndInit();
             this.addOrderPanel.ResumeLayout(false);
             this.addOrderPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addOrderPict)).EndInit();
@@ -434,8 +486,11 @@ namespace Presentation
         private System.Windows.Forms.Label financeLbl;
         private System.Windows.Forms.PictureBox financePict;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel addOrderPanel;
         private System.Windows.Forms.Label addOrderLbl;
         private System.Windows.Forms.PictureBox addOrderPict;
+        private System.Windows.Forms.Panel checkOrderPanel;
+        private System.Windows.Forms.Label checkOrderLbl;
+        private System.Windows.Forms.PictureBox checkOrderPict;
+        public System.Windows.Forms.Panel addOrderPanel;
     }
 }

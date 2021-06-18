@@ -2,12 +2,13 @@
 using DataAccess.Access;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Domain
 {
     public class UserModel
     {
-        Consults consults = new Consults();
+        private Consults consults = new Consults();
 
         #region Products
         public List<Product> Select_Products()
@@ -67,7 +68,7 @@ namespace Domain
         #endregion
 
         #region Expenses
-        public List<Expense> Select_Expenses()
+        public DataTable Select_Expenses()
         {
             return consults.Select_Expenses();
         }
@@ -82,6 +83,62 @@ namespace Domain
         public void Delete_Expenses(Expense expense)
         {
             consults.Delete_Expenses(expense);
+        }
+        #endregion
+
+        #region Finance Details
+        public List<FinanceDetail> Select_Finance_Details()
+        {
+            return consults.Select_Finance_Details();
+        }
+        public void Update_Finance_Detail(FinanceDetail financeDetail)
+        {
+            consults.Update_Finance_Detail(financeDetail);
+        }
+        #endregion
+
+        #region Payment Method
+        public List<PaymentMethod> Select_Payment_Methods()
+        {
+            return consults.Select_Payment_Methods();
+        }
+        public void Update_Payment_Method(PaymentMethod paymentMethod)
+        {
+            consults.Update_Payment_Method(paymentMethod);
+        }
+        #endregion
+
+        #region Orders
+        public List<Order> Select_Orders()
+        {
+            return consults.Select_Orders();
+        }
+        public Order Select_Orders(string ID_O)
+        {
+            return consults.Select_Orders(ID_O);
+        }
+        public void Insert_Order(Order order, List<OrderDetail> orderDetails)
+        {
+            consults.Insert_Order(order, orderDetails);
+        }
+        public void Update_Order_Status(string ID_O, string Status)
+        {
+            consults.Update_Order_Status(ID_O, Status);
+        }
+        public void Delete_Order(Order order)
+        {
+            consults.Delete_Order(order);
+        }
+        #endregion
+
+        #region Order Details
+        public List<OrderDetail> Select_Order_Details(string ID_O)
+        {
+            return consults.Select_Order_Details(ID_O);
+        }
+        public List<Product> Select_Order_Detail_Products(string ID_O)
+        {
+            return consults.Select_Order_Detail_Products(ID_O);
         }
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using Presentation.Forms;
+﻿using Common.Model;
+using Presentation.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,10 +32,9 @@ namespace Presentation
         }
 
         #region Appearence Methods
-            #region Change Control Colors
         private void StayColor(Control control, int color)
         {
-            switch(color)
+            switch (color)
             {
                 case 1:
                     control.BackColor = Color.FromArgb(211, 140, 86);
@@ -64,13 +64,13 @@ namespace Presentation
         }
         private void EnterForm(Control control, int color)
         {
-            if(active != control)
+            if (active != control)
             {
                 activeForm.Close();
                 StayColor(active, 2);
                 active = control;
                 StayColor(active, color);
-                switch(control.Name)
+                switch (control.Name)
                 {
                     case "dashPanel":
                         activeForm = new DashboardForm();
@@ -85,9 +85,30 @@ namespace Presentation
                         activeForm = new FinanceForm();
                         break;
                     case "addOrderPanel":
-                        activeForm = new AddOrderForm();
+                        activeForm = new AddOrderForm("Agregar nueva orden");
+                        break;
+                    case "checkOrderPanel":
+                        activeForm = new CheckOrderForm();
                         break;
                 }
+                activeForm.TopLevel = false;
+                activeForm.FormBorderStyle = FormBorderStyle.None;
+                activeForm.Dock = DockStyle.Fill;
+                childFormPanel.Controls.Add(activeForm);
+                activeForm.BringToFront();
+                activeForm.Show();
+            }
+        }
+        public void EnterForm(Control control, int color, string text,
+            Order order, List<Control> controls)
+        {
+            if (active != control)
+            {
+                activeForm.Close();
+                StayColor(active, 2);
+                active = control;
+                StayColor(active, color);
+                activeForm = new AddOrderForm(text, order, controls);
                 activeForm.TopLevel = false;
                 activeForm.FormBorderStyle = FormBorderStyle.None;
                 activeForm.Dock = DockStyle.Fill;
@@ -218,6 +239,31 @@ namespace Presentation
         {
             LeaveColor(addOrderPanel);
         }
+        private void checkOrderPanel_MouseEnter(object sender, EventArgs e)
+        {
+            EnterColor(checkOrderPanel, 1);
+        }
+        private void checkOrderLbl_MouseEnter(object sender, EventArgs e)
+        {
+            EnterColor(checkOrderPanel, 1);
+        }
+        private void checkOrderPict_MouseEnter(object sender, EventArgs e)
+        {
+            EnterColor(checkOrderPanel, 1);
+        }
+        private void checkOrderPanel_MouseLeave(object sender, EventArgs e)
+        {
+            LeaveColor(checkOrderPanel);
+        }
+        private void checkOrderLbl_MouseLeave(object sender, EventArgs e)
+        {
+            LeaveColor(checkOrderPanel);
+        }
+        private void checkOrderPict_MouseLeave(object sender, EventArgs e)
+        {
+            LeaveColor(checkOrderPanel);
+        }
+
         private void dashLbl_Click(object sender, EventArgs e)
         {
             EnterForm(dashPanel, 1);
@@ -278,8 +324,18 @@ namespace Presentation
         {
             EnterForm(addOrderPanel, 3);
         }
-        #endregion
-
+        private void checkOrderPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            EnterForm(checkOrderPanel, 1);
+        }
+        private void checkOrderLbl_MouseClick(object sender, MouseEventArgs e)
+        {
+            EnterForm(checkOrderPanel, 1);
+        }
+        private void checkOrderPict_MouseClick(object sender, MouseEventArgs e)
+        {
+            EnterForm(checkOrderPanel, 1);
+        }
         #endregion
     }
 }

@@ -12,7 +12,8 @@ namespace Common.Model
         public decimal Cost { get; set; }
         public string Supplier { get; set; }
         public string Description { get; set; }
-        public RawMaterial(string ID_RM, string Name, int Stock, decimal Cost, string Supplier, string Description)
+        public RawMaterial(string ID_RM, string Name, int Stock,
+            decimal Cost, string Supplier, string Description)
         {
             this.ID_RM = ID_RM;
             this.Name = Name;

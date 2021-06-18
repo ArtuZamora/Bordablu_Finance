@@ -29,27 +29,34 @@ namespace Presentation.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.boardPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // label1
+            // boardPanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(331, 128);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Finanzas";
+            this.boardPanel.AutoScroll = true;
+            this.boardPanel.AutoSize = true;
+            this.boardPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.boardPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.boardPanel.Location = new System.Drawing.Point(0, 0);
+            this.boardPanel.Margin = new System.Windows.Forms.Padding(5);
+            this.boardPanel.Name = "boardPanel";
+            this.boardPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.boardPanel.Size = new System.Drawing.Size(677, 450);
+            this.boardPanel.TabIndex = 0;
+            this.boardPanel.WrapContents = false;
             // 
             // FinanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(677, 450);
+            this.Controls.Add(this.boardPanel);
+            this.Font = new System.Drawing.Font("Roboto Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "FinanceForm";
             this.Text = "FinanceForm";
+            this.Load += new System.EventHandler(this.FinanceForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -57,6 +64,6 @@ namespace Presentation.Forms
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel boardPanel;
     }
 }

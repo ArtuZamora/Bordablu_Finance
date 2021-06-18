@@ -25,7 +25,6 @@ namespace Presentation.Forms
         {
             LoadRawMaterialData();
             LoadExpensesData();
-            panel2.Hide();
         }
 
         #region Raw Material Methods
@@ -137,6 +136,7 @@ namespace Presentation.Forms
                             MessageBox.Show("El registro ha sido eliminado con éxito",
                                     "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             FillRawMaterialDgv();
+                            FillRawMaterialCmb();
                         }
                         catch (Exception ex)
                         {
@@ -179,11 +179,11 @@ namespace Presentation.Forms
                 {
                     Expense tempExpense =
                         new Expense(curr_expense.ID_E, curr_expense.Purchase_Date,
-                            curr_expense.Amount, curr_expense.Quantity, curr_expense.ID_RM);
+                            curr_expense.Amount, curr_expense.Quantity, curr_expense.rawMaterial);
                     curr_expense.Purchase_Date = datePurc.Value;
                     curr_expense.Amount = expePrice.Value;
                     curr_expense.Quantity = Convert.ToInt32(qtyNum.Value);
-                    curr_expense.ID_RM = rawMaterialCmb.SelectedValue.ToString();
+                    curr_expense.rawMaterial.ID_RM = rawMaterialCmb.SelectedValue.ToString();
                     model.Update_Expenses(curr_expense, tempExpense);
                     curr_expense = null;
                     MessageBox.Show("El registro ha sido modificado con éxito",
@@ -192,9 +192,11 @@ namespace Presentation.Forms
                 }
                 else
                 {
+                    RawMaterial rawMaterial = new RawMaterial();
+                    rawMaterial.ID_RM = rawMaterialCmb.SelectedValue.ToString();
                     model.Insert_Expenses(
                         new Expense("E0000000", datePurc.Value, expePrice.Value,
-                        Convert.ToInt32(qtyNum.Value), rawMaterialCmb.SelectedValue.ToString()));
+                        Convert.ToInt32(qtyNum.Value), rawMaterial));
                     MessageBox.Show("El registro ha sido ingresado con éxito",
                         "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -219,10 +221,12 @@ namespace Presentation.Forms
                 expensesDetDgv.Columns[0].HeaderText = "Código";
                 expensesDetDgv.Columns[1].HeaderText = "F. Compra";
                 expensesDetDgv.Columns[2].HeaderText = "Costo";
+                expensesDetDgv.Columns[2].DefaultCellStyle.Format = "$0.00";
                 expensesDetDgv.Columns[3].HeaderText = "Cantidad";
                 expensesDetDgv.Columns[4].Visible = false;
                 expensesDetDgv.Columns[5].HeaderText = "Materia P.";
-                expensesDetDgv.Columns[2].DefaultCellStyle.Format = "$0.00";
+                expensesDetDgv.Columns[6].HeaderText = "Proveedor";
+
             }
             catch
             {
@@ -239,13 +243,15 @@ namespace Presentation.Forms
             switch (e.ClickedItem.Text)
             {
                 case "Modificar":
+                    RawMaterial rawMaterial = new RawMaterial();
+                    rawMaterial.ID_RM = expensesDetDgv.CurrentRow.Cells[4].Value.ToString();
                     curr_expense =
                         new Expense(expensesDetDgv.CurrentRow.Cells[0].Value.ToString(),
                         Convert.ToDateTime(expensesDetDgv.CurrentRow.Cells[1].Value),
                         Convert.ToDecimal(expensesDetDgv.CurrentRow.Cells[2].Value),
                         Convert.ToInt32(expensesDetDgv.CurrentRow.Cells[3].Value),
-                        expensesDetDgv.CurrentRow.Cells[4].Value.ToString());
-                    rawMaterialCmb.SelectedValue = curr_expense.ID_RM;
+                        rawMaterial);
+                    rawMaterialCmb.SelectedValue = curr_expense.rawMaterial.ID_RM;
                     datePurc.Value = curr_expense.Purchase_Date;
                     qtyNum.Value = curr_expense.Quantity;
                     expePrice.Value = curr_expense.Amount;
@@ -259,12 +265,14 @@ namespace Presentation.Forms
                     {
                         try
                         {
+                            RawMaterial rawMaterial1 = new RawMaterial();
+                            rawMaterial1.ID_RM = expensesDetDgv.CurrentRow.Cells[4].Value.ToString();
                             model.Delete_Expenses(
                                 new Expense(expensesDetDgv.CurrentRow.Cells[0].Value.ToString(),
                                     Convert.ToDateTime(expensesDetDgv.CurrentRow.Cells[1].Value),
                                     Convert.ToDecimal(expensesDetDgv.CurrentRow.Cells[2].Value),
                                     Convert.ToInt32(expensesDetDgv.CurrentRow.Cells[3].Value),
-                                    expensesDetDgv.CurrentRow.Cells[4].Value.ToString()));
+                                    rawMaterial1));
                             MessageBox.Show("El registro ha sido eliminado con éxito",
                                     "EXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             FillExpensesDgv();

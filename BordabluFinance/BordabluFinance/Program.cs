@@ -9,6 +9,7 @@ namespace BordabluFinance
 {
     static class Program
     {
+        public static Bordablu mainForm;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -18,7 +19,8 @@ namespace BordabluFinance
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Bordablu());
+            mainForm = new Bordablu();
+            Application.Run(mainForm);
         }
     }
 }
