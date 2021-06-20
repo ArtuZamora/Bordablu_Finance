@@ -43,7 +43,7 @@ namespace Presentation
                     control.BackColor = Color.FromArgb(200, 163, 136);
                     break;
                 case 3:
-                    control.BackColor = Color.FromArgb(85, 141, 161);
+                    control.BackColor = Color.FromArgb(215, 169, 156);
                     break;
             }
         }
@@ -52,7 +52,7 @@ namespace Presentation
             if (control != active)
             {
                 control.BackColor = color == 1 ? Color.FromArgb(211, 140, 86) :
-                    control.BackColor = Color.FromArgb(85, 141, 161);
+                    control.BackColor = Color.FromArgb(215, 169, 156);
             }
         }
         private void LeaveColor(Control control)
@@ -62,10 +62,12 @@ namespace Presentation
                 control.BackColor = Color.FromArgb(200, 163, 136);
             }
         }
-        private void EnterForm(Control control, int color)
+        public void EnterForm(Control control, int color)
         {
             if (active != control)
             {
+                if(addOrderLbl.Text != "Agregar Orden")
+                    addOrderLbl.Text = "Agregar Orden";
                 activeForm.Close();
                 StayColor(active, 2);
                 active = control;
@@ -100,15 +102,35 @@ namespace Presentation
             }
         }
         public void EnterForm(Control control, int color, string text,
-            Order order, List<Control> controls)
+            Order order, ref List<Control> controls)
         {
             if (active != control)
             {
+                addOrderLbl.Text = "Ver Orden";
                 activeForm.Close();
                 StayColor(active, 2);
                 active = control;
                 StayColor(active, color);
-                activeForm = new AddOrderForm(text, order, controls);
+                activeForm = new AddOrderForm(text, order, ref controls);
+                activeForm.TopLevel = false;
+                activeForm.FormBorderStyle = FormBorderStyle.None;
+                activeForm.Dock = DockStyle.Fill;
+                childFormPanel.Controls.Add(activeForm);
+                activeForm.BringToFront();
+                activeForm.Show();
+            }
+        }
+        public void EnterForm(Control control, int color, string text,
+            Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
+        {
+            if (active != control)
+            {
+                addOrderLbl.Text = "Editar Orden";
+                activeForm.Close();
+                StayColor(active, 2);
+                active = control;
+                StayColor(active, color);
+                activeForm = new AddOrderForm(text, order, ref orderDetails, ref products);
                 activeForm.TopLevel = false;
                 activeForm.FormBorderStyle = FormBorderStyle.None;
                 activeForm.Dock = DockStyle.Fill;

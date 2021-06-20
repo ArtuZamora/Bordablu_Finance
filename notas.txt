@@ -1,7 +1,26 @@
-descuentos en materia prima -> abono al negocio
-monto en cada forma de pago
+Faltante:
 
+- Dashboard:
+	* Gráfico barras/lineas de ventas por año/mes/día
+	* Información de cuentas de manera rápida
+	* Gráfico de pastel para ventas por producto
+- Operaciones adicionales al insertar/eliminar orden (ingreso a cuentas)
+- Filtros para las ordenes:
+	* Ordenar por cada uno de los campos
+	* Mostar ordenes año/mes/día (Colocar un boton para: día de hoy)
+	* Filtro de búsqueda (elegir campo)
+
+Notas para arturo del futuro:
+
+- 80% de bordablu, 20% maggie; salvo excepciones, 10% maggie %10 andrea.
+- Modificar valor de saldo en cuentas por entidad
+
+-NOTA2 : total en camisas :v
 
 SQLCMD Script:
 
 sqlcmd -S DESKTOP-G2BG0KM\SQLEXPRESS -i C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\script.sql
+
+
+
+

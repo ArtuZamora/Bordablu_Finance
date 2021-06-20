@@ -44,6 +44,9 @@ namespace Presentation.Forms
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchTxt = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.filterLbl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ordersCtxtMenu.SuspendLayout();
@@ -79,12 +82,12 @@ namespace Presentation.Forms
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(176)))), ((int)(((byte)(110)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ordersDgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.ordersDgv.GridColor = System.Drawing.Color.DimGray;
-            this.ordersDgv.Location = new System.Drawing.Point(12, 72);
+            this.ordersDgv.Location = new System.Drawing.Point(12, 88);
             this.ordersDgv.Name = "ordersDgv";
             this.ordersDgv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -97,7 +100,7 @@ namespace Presentation.Forms
             this.ordersDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.ordersDgv.RowTemplate.Height = 25;
             this.ordersDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersDgv.Size = new System.Drawing.Size(653, 356);
+            this.ordersDgv.Size = new System.Drawing.Size(653, 358);
             this.ordersDgv.TabIndex = 4;
             this.ordersDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ordersDgv_CellFormatting);
             this.ordersDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ordersDgv_CellMouseClick);
@@ -105,7 +108,7 @@ namespace Presentation.Forms
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(541, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(541, 45);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(124, 37);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -164,12 +167,48 @@ namespace Presentation.Forms
             this.toolStripMenuItem6.Size = new System.Drawing.Size(132, 22);
             this.toolStripMenuItem6.Text = "Terminado";
             // 
+            // searchTxt
+            // 
+            this.searchTxt.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchTxt.Location = new System.Drawing.Point(81, 56);
+            this.searchTxt.Name = "searchTxt";
+            this.searchTxt.Size = new System.Drawing.Size(157, 26);
+            this.searchTxt.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(14, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 18);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Búsqueda";
+            // 
+            // filterLbl
+            // 
+            this.filterLbl.AutoSize = true;
+            this.filterLbl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filterLbl.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.filterLbl.LinkColor = System.Drawing.Color.Yellow;
+            this.filterLbl.Location = new System.Drawing.Point(244, 64);
+            this.filterLbl.Name = "filterLbl";
+            this.filterLbl.Size = new System.Drawing.Size(53, 18);
+            this.filterLbl.TabIndex = 9;
+            this.filterLbl.TabStop = true;
+            this.filterLbl.Text = "Filtros..";
+            this.filterLbl.VisitedLinkColor = System.Drawing.Color.Yellow;
+            this.filterLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.filterLbl_LinkClicked);
+            // 
             // CheckOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
             this.ClientSize = new System.Drawing.Size(677, 450);
+            this.Controls.Add(this.filterLbl);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.searchTxt);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ordersDgv);
             this.Controls.Add(this.label1);
@@ -196,5 +235,8 @@ namespace Presentation.Forms
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.TextBox searchTxt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel filterLbl;
     }
 }

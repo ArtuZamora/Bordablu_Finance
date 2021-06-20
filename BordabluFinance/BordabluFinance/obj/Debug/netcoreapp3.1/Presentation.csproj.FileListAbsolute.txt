@@ -33,3 +33,4 @@ C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\Borda
 C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\obj\Debug\netcoreapp3.1\Presentation.Forms.RawMaterialForm.resources
 C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\obj\Debug\netcoreapp3.1\Presentation.Bordablu.resources
 C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\obj\Debug\netcoreapp3.1\Presentation.Forms.CheckOrderForm.resources
+C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\BordabluFinance\BordabluFinance\obj\Debug\netcoreapp3.1\Presentation.Forms.OrderFilter.resources

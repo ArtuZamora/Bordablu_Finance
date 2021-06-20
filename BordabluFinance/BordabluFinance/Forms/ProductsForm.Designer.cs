@@ -128,7 +128,7 @@ namespace Presentation.Forms
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.specifDgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.specifDgv.GridColor = System.Drawing.Color.DimGray;
-            this.specifDgv.Location = new System.Drawing.Point(285, 392);
+            this.specifDgv.Location = new System.Drawing.Point(285, 371);
             this.specifDgv.Name = "specifDgv";
             this.specifDgv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -141,7 +141,7 @@ namespace Presentation.Forms
             this.specifDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.specifDgv.RowTemplate.Height = 25;
             this.specifDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.specifDgv.Size = new System.Drawing.Size(365, 175);
+            this.specifDgv.Size = new System.Drawing.Size(365, 285);
             this.specifDgv.TabIndex = 15;
             this.specifDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.specifDgv_CellMouseClick);
             // 
@@ -283,7 +283,7 @@ namespace Presentation.Forms
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.productsDgv.DefaultCellStyle = dataGridViewCellStyle5;
             this.productsDgv.GridColor = System.Drawing.Color.DimGray;
-            this.productsDgv.Location = new System.Drawing.Point(329, 58);
+            this.productsDgv.Location = new System.Drawing.Point(329, 18);
             this.productsDgv.Name = "productsDgv";
             this.productsDgv.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -296,7 +296,7 @@ namespace Presentation.Forms
             this.productsDgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.productsDgv.RowTemplate.Height = 25;
             this.productsDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productsDgv.Size = new System.Drawing.Size(317, 150);
+            this.productsDgv.Size = new System.Drawing.Size(317, 221);
             this.productsDgv.TabIndex = 3;
             this.productsDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.productsDgv_CellMouseClick);
             // 

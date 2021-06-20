@@ -14,7 +14,9 @@ namespace Presentation.Forms
 {
     public partial class CheckOrderForm : Form
     {
-        UserModel model = new UserModel();
+        private UserModel model = new UserModel();
+        private Filters filters = new Filters();
+        
         public CheckOrderForm()
         {
             InitializeComponent();
@@ -63,6 +65,7 @@ namespace Presentation.Forms
                     SeeOrderDetail();
                     break;
                 case "Modificar":
+                    EditOrder();
                     break;
                 case "Eliminar":
                     ((ContextMenuStrip)sender).Hide();
@@ -92,7 +95,6 @@ namespace Presentation.Forms
                     break;
             }
         }
-
         private void FillOrdersDgv()
         {
             ordersDgv.DataSource = null;
@@ -115,8 +117,6 @@ namespace Presentation.Forms
             ordersDgv.Columns[10].Visible = false;
             ordersDgv.Columns[11].Visible = false; //status
             ordersDgv.Columns[12].Visible = false;
-
-
         }
         private void SeeOrderDetail()
         {
@@ -131,7 +131,16 @@ namespace Presentation.Forms
                 controls.Add(productPanel);
             }
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
-                "Detalle de orden", order, controls);
+                "Detalle de orden", order, ref controls);
+        }
+        private void EditOrder()
+        {
+            Order order = model.Select_Orders(ordersDgv.CurrentRow.Cells[0].Value.ToString());
+            List<OrderDetail> orderDetails = model.Select_Order_Details(order.ID_O);
+            List<Product> products = model.Select_Order_Detail_Products(order.ID_O);
+            List<Control> controls = new List<Control>();
+            Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
+                "Editar Orden", order, ref orderDetails, ref products);
         }
         private Panel CreateProductPanel(Product product, List<OrderDetail> orderDetails)
         {
@@ -165,7 +174,7 @@ namespace Presentation.Forms
 
             foreach (Specification specification in specifications)
             {
-                string data = FindMatch(orderDetails, specification.ID_S);
+                string data = FindMatch(ref orderDetails, specification.ID_S);
                 table.Controls.Add(CreateSpecificationPanel(specification, data));
             }
             return panel;
@@ -244,13 +253,37 @@ namespace Presentation.Forms
             control.Location = new Point(11, 32);
             return panel;
         }
-        private string FindMatch(List<OrderDetail> orderDetails, string ID_S)
+        private string FindMatch(ref List<OrderDetail> orderDetails, string ID_S)
         {
             foreach (OrderDetail order in orderDetails)
             {
                 if (order.ID_S == ID_S) return order.Detail;
             }
             return "null";
+        }
+
+        private void filterLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OrderFilter orderFilter = new OrderFilter(ref filters);
+            orderFilter.FormClosed += OrderFilter_FormClosed;
+            orderFilter.ShowDialog();
+        }
+
+        private void OrderFilter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        }
+    }
+    public class Filters
+    {
+        public int OrderBy { get; set; }
+        public int OrderTo { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int SearchBy { get; set; }
+        public Filters()
+        {
+            OrderBy = OrderTo = Year = Month = Day = SearchBy = 0;
         }
     }
 }

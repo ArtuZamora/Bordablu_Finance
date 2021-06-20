@@ -488,9 +488,9 @@ namespace Presentation
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label addOrderLbl;
         private System.Windows.Forms.PictureBox addOrderPict;
-        private System.Windows.Forms.Panel checkOrderPanel;
         private System.Windows.Forms.Label checkOrderLbl;
         private System.Windows.Forms.PictureBox checkOrderPict;
         public System.Windows.Forms.Panel addOrderPanel;
+        public System.Windows.Forms.Panel checkOrderPanel;
     }
 }

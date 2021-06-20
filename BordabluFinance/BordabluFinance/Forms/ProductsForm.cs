@@ -173,6 +173,7 @@ namespace Presentation.Forms
             productCmb.ValueMember = "ID_P";
             productCmb.DisplayMember = "Name";
             filling = false;
+            FillSpecificationsDgv();
         }
         private void FillSpecificationsDgv()
         {
@@ -180,7 +181,7 @@ namespace Presentation.Forms
             {
                 specifDgv.DataSource = null;
                 specifDgv.DataSource = model.Select_Specifications(productCmb.SelectedValue.ToString());
-                specifDgv.Columns[0].HeaderText = "Código";
+                specifDgv.Columns[0].Visible = false;
                 specifDgv.Columns[2].HeaderText = "Descripción";
                 specifDgv.Columns[3].HeaderText = "Tipo";
                 specifDgv.Columns[1].Visible = false;

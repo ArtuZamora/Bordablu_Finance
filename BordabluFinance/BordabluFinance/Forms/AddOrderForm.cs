@@ -1,4 +1,5 @@
-﻿using Common.Model;
+﻿using BordabluFinance;
+using Common.Model;
 using Domain;
 using Presentation.Classes;
 using System;
@@ -20,6 +21,7 @@ namespace Presentation.Forms
         private static List<List<Control>> textBoxes = new List<List<Control>>();
         private static List<NumericUpDown> subTotals = new List<NumericUpDown>();
         private static List<string> ids = new List<string>();
+        private static Order actualOrder = null;
         #endregion
 
         public AddOrderForm(string title)
@@ -40,13 +42,14 @@ namespace Presentation.Forms
             payMCmb.ValueMember = "ID_PM";
             payMCmb.DisplayMember = "Method";
 
+            textBoxes.Clear();
             List<Control> client = new List<Control>();
             client.Add(clientTxt);
             textBoxes.Add(client);
 
             deliveryDate.MinDate = orderDate.Value;
         }
-        public AddOrderForm(string title, Order order, List<Control> controls)
+        public AddOrderForm(string title, Order order, ref List<Control> controls)
         {
             InitializeComponent();
 
@@ -83,11 +86,63 @@ namespace Presentation.Forms
                 handPrice.Enabled = teamWorkChk.Enabled =
                 payMCmb.Enabled = statusCmb.Enabled = false;
         }
+        public AddOrderForm(string title, Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
+        {
+            InitializeComponent();
+
+            actualOrder = order;
+
+            titleLbl.Text = title;
+            toolTip1.SetToolTip(addProdBtn, "Agregar producto");
+
+            FillColors();
+            FillStatus();
+
+            productListCmb.DataSource = model.Select_Products();
+            productListCmb.ValueMember = "ID_P";
+            productListCmb.DisplayMember = "Name";
+
+            payMCmb.DataSource = model.Select_Payment_Methods();
+            payMCmb.ValueMember = "ID_PM";
+            payMCmb.DisplayMember = "Method";
+
+            deliveryDate.MinDate = orderDate.Value;
+
+            orderDate.Value = order.Order_Date;
+            deliveryDate.Value = order.Delivery_Date;
+            clientTxt.Text = order.Client;
+            orderPrice.Value = order.Order_Amount;
+            deliveryPrice.Value = order.Delivery_Amount;
+            handPrice.Value = order.Labor_Amount;
+            descriptionTxt.Text = order.Description;
+            teamWorkChk.Checked = order.Help;
+            payMCmb.SelectedValue = order.ID_PM;
+            statusCmb.SelectedValue =
+                status.Find(s => s.Status.Trim().ToLower() == order.Status.Trim().ToLower()).ID;
+
+            textBoxes.Clear();
+            List<Control> client = new List<Control>();
+            client.Add(clientTxt);
+            textBoxes.Add(client);
+
+            foreach (Product product in products)
+            {
+                Panel productPanel =
+                    CreateProductPanel(product, orderDetails.FindAll(od => od.ID_P == product.ID_P));
+                mainFlowPanel.Controls.Add(productPanel);
+            }
+            mainFlowPanel.Controls.Add(addPanel);
+            mainFlowPanel.Controls.Add(lastPanel);
+
+            orderBtn.Text = "Modificar Orden";
+
+            UpdateTotal();
+        }
 
         #region Event Methods
         private void addProdBtn_Click(object sender, EventArgs e)
         {
-            mainFlowPanel.Controls.Add(CreateProductPanel((Product)productListCmb.SelectedItem));
+            mainFlowPanel.Controls.Add(CreateProductPanel((Product)productListCmb.SelectedItem, null));
             mainFlowPanel.Controls.Add(addPanel);
             mainFlowPanel.Controls.Add(lastPanel);
         }
@@ -142,6 +197,10 @@ namespace Presentation.Forms
                 {
                     if (VerifyTextBoxes())
                     {
+                        if(actualOrder != null)
+                        {
+                            model.Delete_Order(actualOrder);
+                        }
                         Order order = new Order();
                         order.ID_O = "O0000000";
                         order.Order_Date = orderDate.Value;
@@ -201,6 +260,10 @@ namespace Presentation.Forms
                         model.Insert_Order(order, orderDetails);
                         MessageBox.Show("Orden ingresada con éxito",
                              "INGRESO CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (actualOrder != null)
+                        {
+                            Program.mainForm.EnterForm(Program.mainForm.checkOrderPanel, 1);
+                        }
                         ReloadForm();
                     }
                     else
@@ -236,10 +299,9 @@ namespace Presentation.Forms
         #endregion
 
         #region Visual Methods
-        private Panel CreateProductPanel(Product product)
+        private Panel CreateProductPanel(Product product, List<OrderDetail> orderDetails)
         {
-            List<Specification> specifications =
-                model.Select_Specifications(((Product)productListCmb.SelectedItem).ID_P);
+            List<Specification> specifications = model.Select_Specifications(product.ID_P);
             List<Control> controls = new List<Control>();
             Panel panel = new Panel();
             Label label = new Label();
@@ -270,12 +332,18 @@ namespace Presentation.Forms
 
             foreach (Specification specification in specifications)
             {
-                table.Controls.Add(CreateSpecificationPanel(specification, controls));
+                if(orderDetails != null)
+                {
+                    string data = FindMatch(ref orderDetails, specification.ID_S);
+                    table.Controls.Add(CreateSpecificationPanel(specification, ref controls, data));
+                }
+                else
+                    table.Controls.Add(CreateSpecificationPanel(specification, ref controls, "null"));
             }
             textBoxes.Add(controls);
             return panel;
         }
-        private Panel CreateSpecificationPanel(Specification specification, List<Control> controls)
+        private Panel CreateSpecificationPanel(Specification specification, ref List<Control> controls, string data)
         {
             Panel panel = new Panel();
             Label label = new Label();
@@ -290,6 +358,8 @@ namespace Presentation.Forms
             {
                 case "texto corto":
                     TextBox textBox = new TextBox();
+                    if (data != "null")
+                        textBox.Text = data;
                     textBox.TextChanged += TextBox_TextChanged;
                     textBox.Size = new Size(258, 27);
                     control = textBox;
@@ -297,6 +367,8 @@ namespace Presentation.Forms
                     break;
                 case "texto largo":
                     RichTextBox richTextBox = new RichTextBox();
+                    if (data != "null")
+                        richTextBox.Text = data;
                     richTextBox.TextChanged += RichTextBox_TextChanged;
                     richTextBox.Size = new Size(274, 96);
                     control = richTextBox;
@@ -304,6 +376,8 @@ namespace Presentation.Forms
                     break;
                 case "número entero":
                     NumericUpDown numericUpDown = new NumericUpDown();
+                    if (data != "null")
+                        numericUpDown.Value = Convert.ToDecimal(data);
                     numericUpDown.Minimum = 1;
                     numericUpDown.Size = new Size(120, 33);
                     numericUpDown.TextAlign = HorizontalAlignment.Center;
@@ -312,6 +386,8 @@ namespace Presentation.Forms
                     break;
                 case "número decimal":
                     NumericUpDown numericUpDownDec = new NumericUpDown();
+                    if (data != "null")
+                        numericUpDownDec.Value = Convert.ToDecimal(data);
                     numericUpDownDec.Size = new Size(120, 33);
                     numericUpDownDec.DecimalPlaces = 2;
                     numericUpDownDec.TextAlign = HorizontalAlignment.Center;
@@ -321,9 +397,11 @@ namespace Presentation.Forms
                 case "dinero":
                     NumericUpDown numericUpDownMoney = new NumericUpDown();
                     Label moneyLbl = new Label();
+                    if (data != "null")
+                        numericUpDownMoney.Value = Convert.ToDecimal(data);
                     moneyLbl.AutoSize = true;
                     moneyLbl.Text = "USD";
-                    numericUpDownMoney.ValueChanged += NumericUpDownMoney_ValueChanged;
+                    numericUpDownMoney.ValueChanged += NumericUpDownMoney_ValueChanged;//add
                     numericUpDownMoney.DecimalPlaces = 2;
                     numericUpDownMoney.Size = new Size(112, 33);
                     numericUpDownMoney.TextAlign = HorizontalAlignment.Center;
@@ -335,6 +413,8 @@ namespace Presentation.Forms
                     break;
                 case "color":
                     ComboBox combo = new ComboBox();
+                    if (data != "nul")
+                        combo.SelectedItem = colors.Find(c => c.Colors.Trim() == data.Trim());
                     combo.Size = new Size(258, 27);
                     combo.DataSource = colors;
                     combo.ValueMember = "ID";
@@ -369,6 +449,14 @@ namespace Presentation.Forms
         #endregion
 
         #region Functional Methods
+        private string FindMatch(ref List<OrderDetail> orderDetails, string ID_S)
+        {
+            foreach (OrderDetail order in orderDetails)
+            {
+                if (order.ID_S == ID_S) return order.Detail;
+            }
+            return "null";
+        }
         private void FillColors()
         {
             colors.Clear();

@@ -84,6 +84,7 @@ namespace Presentation.Forms
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
             this.panel1.Controls.Add(this.clientTxt);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -173,6 +174,7 @@ namespace Presentation.Forms
             // mainFlowPanel
             // 
             this.mainFlowPanel.AutoScroll = true;
+            this.mainFlowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(169)))), ((int)(((byte)(156)))));
             this.mainFlowPanel.Controls.Add(this.addPanel);
             this.mainFlowPanel.Controls.Add(this.lastPanel);
             this.mainFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
