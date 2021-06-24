@@ -11,11 +11,15 @@ namespace Presentation.Forms
 {
     public partial class UpdateFinance : Form
     {
+        #region Properties
         private StringBuilder id = new StringBuilder();
         private string code;
         private static UserModel model = new UserModel();
         private decimal diference;
         private bool visited = false;
+        #endregion
+
+        #region Constructor
         public UpdateFinance(string code, ref StringBuilder ID, decimal diference)
         {
             InitializeComponent();
@@ -33,6 +37,9 @@ namespace Presentation.Forms
             else
                 FillFinance();
         }
+        #endregion
+
+        #region Functional Methods
         private void FillPayment()
         {
             cmb.DataSource = null;
@@ -47,6 +54,9 @@ namespace Presentation.Forms
             cmb.ValueMember = "ID_PM";
             cmb.DisplayMember = "Method";
         }
+        #endregion
+
+        #region Event Methods
         private void accptBtn_Click(object sender, EventArgs e)
         {
             if (!visited)
@@ -67,7 +77,6 @@ namespace Presentation.Forms
                 id.Append("S");
             this.Close();
         }
-
         private void transPM_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             visited = true;
@@ -76,5 +85,6 @@ namespace Presentation.Forms
             cmb.ValueMember = "ID_PM";
             cmb.DisplayMember = "Method";
         }
+        #endregion
     }
 }

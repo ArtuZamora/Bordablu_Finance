@@ -10,9 +10,13 @@ namespace Presentation.Forms
 {
     public partial class OrderFilter : Form
     {
+        #region Properties
         private bool filling = false, filling2 = false, filling3 = false, filling4 = false;
         private static Dictionary<int, string> years;
         private Filters filters;
+        #endregion
+
+        #region Constructors
         public OrderFilter(ref Filters filters)
         {
             InitializeComponent();
@@ -30,6 +34,9 @@ namespace Presentation.Forms
             searchByCmb.SelectedIndex = filters.SearchBy;
 
         }
+        #endregion
+
+        #region Functional Methods
         private void FillCombos()
         {
             Dictionary<int, string> fields = new Dictionary<int, string>();
@@ -139,45 +146,41 @@ namespace Presentation.Forms
                 filling4 = false;
             }
         }
+        #endregion
 
+        #region Event Methods
         private void todayLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             yearCmb.SelectedIndex = 1;
             monthCmb.SelectedIndex = DateTime.Now.Month;
             dayCmb.SelectedIndex = DateTime.Now.Day;
         }
-
         private void orderByCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!filling3)
                 filters.OrderBy = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
         private void orderToCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!filling3)
                 filters.OrderTo = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
         private void dateFilterCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!filling3)
                 filters.DateFilter = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
         private void dayCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!filling4)
                 filters.Day = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
         private void monthCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             FillDays();
             if (!filling3)
                 filters.Month = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
         private void yearCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             FillDays();
@@ -187,12 +190,11 @@ namespace Presentation.Forms
                 filters.Year = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Value;
             }
         }
-
         private void searchByCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!filling3)
                 filters.SearchBy = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
-
+        #endregion
     }
 }

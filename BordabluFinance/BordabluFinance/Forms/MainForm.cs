@@ -12,12 +12,19 @@ namespace Presentation
 {
     public partial class Bordablu : Form
     {
+        #region Properties
         private Control active = null;
         private Form activeForm = null;
+        #endregion
+
+        #region Constructor
         public Bordablu()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region Event Methods
         private void MainForm_Load(object sender, EventArgs e)
         {
             active = dashPanel;
@@ -30,6 +37,7 @@ namespace Presentation
             activeForm.BringToFront();
             activeForm.Show();
         }
+        #endregion
 
         #region Appearence Methods
         private void StayColor(Control control, int color)

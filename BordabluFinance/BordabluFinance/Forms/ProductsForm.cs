@@ -13,7 +13,7 @@ namespace Presentation.Forms
 {
     public partial class ProductsForm : Form
     {
-        #region Local Properties
+        #region Properties
         private static UserModel model = new UserModel();
         private static Product curr_product = null;
         private static Specification curr_specification = null;
@@ -21,16 +21,20 @@ namespace Presentation.Forms
         private static bool filling = true;
         #endregion
 
+        #region Constructor
         public ProductsForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Event Methods
         private void ProductsForm_Load(object sender, EventArgs e)
         {
             LoadProductData();
             LoadSpecificationData();
         }
+        #endregion
 
         #region Products Methods
         private void LoadProductData()

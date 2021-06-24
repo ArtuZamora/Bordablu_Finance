@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -12,11 +13,14 @@ namespace Presentation.Forms
 {
     public partial class DashboardForm : Form
     {
+        #region Properties
         private UserModel model = new UserModel();
-        CustomChart salesChart = new CustomChart();
-        CustomChart earnExpenseChart = new CustomChart();
+        private CustomChart salesChart = new CustomChart();
+        private CustomChart earnExpenseChart = new CustomChart();
         private bool filling = false;
+        #endregion
 
+        #region Constructor
         public DashboardForm()
         {
             InitializeComponent();
@@ -30,7 +34,6 @@ namespace Presentation.Forms
             FillCombos();
             filling = false;
 
-            salesChart.Size = new Size(600, 400);
             salesChart.Location = new Point(24, 105);
             salesChart.Parent = dashPanel;
             salesChart.DataSource = null;
@@ -38,8 +41,8 @@ namespace Presentation.Forms
             salesChart.Series[0].XValueMember = "Product";
             salesChart.Series[0].YValueMembers = "Qty";
             salesChart.ChartAreas[0].AxisX.Interval = 1;
+            salesChart.Series[0].LegendText = "Ventas";
 
-            earnExpenseChart.Size = new Size(600, 400);
             earnExpenseChart.Location = new Point(24, 615);
             earnExpenseChart.Parent = dashPanel;
             earnExpenseChart.AddSeries();
@@ -54,7 +57,18 @@ namespace Presentation.Forms
             earnExpenseChart.Series[0].YValueMembers = "Earnings";
             earnExpenseChart.Series[1].YValueMembers = "Expenses";
             earnExpenseChart.ChartAreas[0].AxisX.Interval = 1;
+            earnExpenseChart.Series[0].LegendText = "Ganancias";
+            earnExpenseChart.Series[1].LegendText = "Gastos";
+            earnExpenseChart.ChartAreas[0].AxisY.LabelStyle.Format = "$0.00";
+            earnExpenseChart.Series[0].LabelFormat = 
+                earnExpenseChart.Series[1].LabelFormat = "$0.00";
+
+            salesChart.Series[0].BorderWidth = earnExpenseChart.Series[0].BorderWidth =
+                earnExpenseChart.Series[1].BorderWidth = 3;
         }
+        #endregion
+
+        #region Functional Methods
         private DataTable BindTables(DataTable earningsTable, DataTable expensesTable)
         {
             DataTable bindedTable = new DataTable();
@@ -90,7 +104,31 @@ namespace Presentation.Forms
             dv.Sort = "Year ASC";
             return dv.ToTable();
         }
-        public void FillCombos()
+        private DataTable FillAllMonths(DataTable dataTable)
+        {
+            bool find;
+            for (int i = 1; i <= 12; i++)
+            {
+                find = false;
+                foreach (DataRow item in dataTable.Rows)
+                    if (item.ItemArray[0].ToString() == i.ToString())
+                        find = true;
+                if (!find)
+                    dataTable.Rows.Add(i, 0);
+            }
+            dataTable.Columns[0].ColumnName = "Year";
+            DataView dv = dataTable.DefaultView;
+            dv.Sort = "Year asc";
+            DataTable dt1 = dv.ToTable();
+            DataTable dt2 = dt1.Clone();
+            dt2.Columns[0].DataType = typeof(string);
+            foreach (DataRow row in dt1.Rows)
+                dt2.ImportRow(row);
+            foreach (DataRow item in dt2.Rows)
+                item[0] = MonthName(Convert.ToInt32(item.ItemArray[0]));
+            return dt2;
+        }
+        private void FillCombos()
         {
             Dictionary<int, string> salesBy = new Dictionary<int, string>();
             salesBy.Add(1, "Producto");
@@ -190,69 +228,77 @@ namespace Presentation.Forms
             graphTypeCmb.ValueMember = "Key";
             graphTypeCmb.DisplayMember = "Value";
         }
+        private string MonthName(int month)
+        {
+            DateTimeFormatInfo dtinfo = new CultureInfo("es-ES", false).DateTimeFormat;
+            return dtinfo.GetMonthName(month);
+        }
+        #endregion
+
+        #region Internal Classes
         public class CustomChart : Chart
         {
             public CustomChart()
             {
                 InitializeChart();
+                this.Enabled = false;
+                this.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                this.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+                this.CustomizeLegend += CustomChart_CustomizeLegend;
+            }
+            private void CustomChart_CustomizeLegend(object sender, CustomizeLegendEventArgs e)
+            {
+                foreach (LegendItem lit in e.LegendItems)
+                {
+                    var cells = lit.Cells;
+                    cells[0].Margins = new Margins(0, 0, 0, 0);
+                    cells[1].Margins = new Margins(0, 0, 0, 0);
+                }
             }
             private void InitializeChart()
             {
                 ChartArea chartArea1 = new ChartArea();
                 Legend legend1 = new Legend();
-                Series series1 = new Series();
                 ((ISupportInitialize)(this)).BeginInit();
-                this.BackColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+                this.BackColor = Color.FromArgb(211, 140, 86);
                 chartArea1.Area3DStyle.IsRightAngleAxes = false;
                 chartArea1.Area3DStyle.Rotation = 5;
                 chartArea1.Area3DStyle.WallWidth = 5;
                 chartArea1.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
                 chartArea1.AxisX2.IntervalAutoMode = IntervalAutoMode.VariableCount;
-                chartArea1.BackColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+                chartArea1.BackColor = Color.FromArgb(211, 140, 86);
                 chartArea1.Name = "ChartArea1";
                 this.ChartAreas.Add(chartArea1);
-                legend1.BackColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-                legend1.Font = new Font("Microsoft Sans Serif", 10F);
+                legend1.BackColor = Color.FromArgb(211, 140, 86);
+                legend1.Font = new Font("Roboto Condensed", 10F);
                 legend1.InterlacedRowsColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
                 legend1.IsTextAutoFit = false;
                 legend1.Name = "Legend1";
-                legend1.Title = "Percentage";
+                legend1.Title = "Cantidad";
                 this.Legends.Add(legend1);
                 this.Location = new Point(40, 177);
                 this.Name = "chart";
-                this.Palette = ChartColorPalette.EarthTones;
-                series1.ChartArea = "ChartArea1";
-                series1.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
-                series1.IsValueShownAsLabel = true;
-                series1.LabelBackColor = Color.Transparent;
-                series1.LabelForeColor = Color.MediumBlue;
-                series1.Legend = "Legend1";
-                series1.Name = "Series1";
-                this.Series.Add(series1);
-                this.Size = new Size(500, 500);
+                this.Palette = ChartColorPalette.Chocolate;
+                AddSeries();
+                this.Size = new Size(652, 400);
                 this.TabIndex = 0;
                 this.Text = "chartTop5";
             }
             public void AddSeries()
             {
                 Series series = new Series();
-                Legend legend = new Legend();
-                legend.BackColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-                legend.Font = new Font("Microsoft Sans Serif", 10F);
-                legend.InterlacedRowsColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-                legend.IsTextAutoFit = false;
-                legend.Title = "Percentage";
-                this.Legends.Add(legend);
                 series.ChartArea = "ChartArea1";
-                series.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
+                series.Font = new Font("Roboto Condensed", 13F, FontStyle.Bold);
                 series.IsValueShownAsLabel = true;
                 series.LabelBackColor = Color.Transparent;
-                series.LabelForeColor = Color.MediumBlue;
+                series.LabelForeColor = Color.Black;
                 series.Legend = "Legend1";
                 this.Series.Add(series);
             }
         }
+        #endregion
 
+        #region Sales Event Methods
         private void salesPerCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             salesYearCmb.Visible = salesMonthCmb.Visible =
@@ -338,6 +384,7 @@ namespace Presentation.Forms
         {
             if (!filling)
             {
+                salesChart.Series[0].LegendText = "Ventas";
                 switch (chartTypeCmb.SelectedIndex)
                 {
                     case 0:
@@ -347,12 +394,15 @@ namespace Presentation.Forms
                         salesChart.Series[0].ChartType = SeriesChartType.Line;
                         break;
                     case 2:
+                        salesChart.Series[0].LegendText = "";
                         salesChart.Series[0].ChartType = SeriesChartType.Pie;
                         break;
                 }
             }
         }
+        #endregion
 
+        #region Incomes And Outcomes Event Methods
         private void graphByCmb_SelectedValueChanged(object sender, EventArgs e)
         {
 
@@ -375,8 +425,9 @@ namespace Presentation.Forms
                         graphYearCmb.Visible = graphYearLbl.Visible = true;
                         earnExpenseChart.DataSource = null;
                         earnExpenseChart.DataSource =
+                            FillAllMonths(
                             BindTables(model.EarningsPerMonth(DateTime.Now.Year),
-                            model.ExpensesPerMonth(DateTime.Now.Year));
+                            model.ExpensesPerMonth(DateTime.Now.Year)));
                         earnExpenseChart.Series[0].XValueMember = "Year";
                         earnExpenseChart.Series[0].YValueMembers = "Earnings";
                         earnExpenseChart.Series[1].XValueMember = "Year";
@@ -408,10 +459,11 @@ namespace Presentation.Forms
                         graphYearCmb.Visible = graphYearLbl.Visible = true;
                         earnExpenseChart.DataSource = null;
                         earnExpenseChart.DataSource =
+                            FillAllMonths(
                             BindTables(model.EarningsPerMonth(Convert.ToInt32(
                         ((KeyValuePair<int, string>)graphYearCmb.SelectedItem).Value)),
                             model.ExpensesPerMonth(Convert.ToInt32(
-                        ((KeyValuePair<int, string>)graphYearCmb.SelectedItem).Value)));
+                        ((KeyValuePair<int, string>)graphYearCmb.SelectedItem).Value))));
                         earnExpenseChart.Series[0].XValueMember = "Year";
                         earnExpenseChart.Series[0].YValueMembers = "Earnings";
                         earnExpenseChart.Series[1].XValueMember = "Year";
@@ -473,5 +525,7 @@ namespace Presentation.Forms
                 }
             }
         }
+        #endregion
+
     }
 }

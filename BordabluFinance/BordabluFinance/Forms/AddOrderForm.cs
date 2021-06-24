@@ -24,7 +24,8 @@ namespace Presentation.Forms
         private static Order actualOrder = null;
         #endregion
 
-        public AddOrderForm(string title)
+        #region Constructors
+        public AddOrderForm(string title) //Add
         {
             InitializeComponent();
 
@@ -55,7 +56,7 @@ namespace Presentation.Forms
 
             givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
         }
-        public AddOrderForm(string title, Order order, ref List<Control> controls)
+        public AddOrderForm(string title, Order order, ref List<Control> controls) //View
         {
             InitializeComponent();
 
@@ -97,7 +98,8 @@ namespace Presentation.Forms
             givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
             givenPrice.Value = order.Given_Amount;
         }
-        public AddOrderForm(string title, Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
+        public AddOrderForm(string title, Order order, ref List<OrderDetail> orderDetails,
+            ref List<Product> products) //Edit
         {
             InitializeComponent();
 
@@ -153,6 +155,7 @@ namespace Presentation.Forms
             givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
             givenPrice.Value = order.Given_Amount;
         }
+        #endregion
 
         #region Event Methods
         private void addProdBtn_Click(object sender, EventArgs e)
@@ -314,6 +317,14 @@ namespace Presentation.Forms
         private void deliveryPrice_ValueChanged(object sender, EventArgs e)
         {
             UpdateTotal();
+        }
+        private void orderTotLbl_TextChanged(object sender, EventArgs e)
+        {
+            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
+        }
+        private void givenPrice_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateBIM();
         }
         #endregion
 
@@ -582,15 +593,5 @@ namespace Presentation.Forms
             }
         }
         #endregion
-
-        private void orderTotLbl_TextChanged(object sender, EventArgs e)
-        {
-            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
-        }
-
-        private void givenPrice_ValueChanged(object sender, EventArgs e)
-        {
-            CalculateBIM();
-        }
     }
 }

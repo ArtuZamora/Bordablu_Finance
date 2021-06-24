@@ -21,10 +21,12 @@ namespace Presentation.Forms
         private StringBuilder ID = new StringBuilder();
         #endregion
 
+        #region Constructors
         public FinanceForm()
         {
             InitializeComponent();
         }
+        #endregion
 
         #region Functional Events
         private void FinanceForm_Load(object sender, EventArgs e)

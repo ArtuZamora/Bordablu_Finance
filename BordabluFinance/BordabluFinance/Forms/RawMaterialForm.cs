@@ -13,19 +13,26 @@ namespace Presentation.Forms
 {
     public partial class RawMaterialForm : Form
     {
+        #region Properties
         private static UserModel model = new UserModel();
         private static RawMaterial curr_rawMat = null;
         private static Expense curr_expense = null;
+        #endregion
+
+        #region Constructor
         public RawMaterialForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Event Methods
         private void RawMaterialForm_Load(object sender, EventArgs e)
         {
             LoadRawMaterialData();
             LoadExpensesData();
         }
+        #endregion
 
         #region Raw Material Methods
         private void LoadRawMaterialData()

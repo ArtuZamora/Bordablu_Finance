@@ -16,10 +16,13 @@ namespace Presentation.Forms
 {
     public partial class CheckOrderForm : Form
     {
+        #region Properties
         private UserModel model = new UserModel();
         private Filters filters = new Filters();
         private static List<Order> orders, sortedOrders;
+        #endregion
 
+        #region Constructor
         public CheckOrderForm()
         {
             InitializeComponent();
@@ -30,7 +33,9 @@ namespace Presentation.Forms
             toolStripMenuItem6.Click += ToolStripMenuItem6_Click;
             FilterDgv();
         }
+        #endregion
 
+        #region Functional Events
         private void ToolStripMenuItem6_Click(object sender, EventArgs e)
         {
             if (ordersDgv.CurrentRow.Cells[11].Value.ToString().Trim() == "En Proceso")
@@ -100,6 +105,49 @@ namespace Presentation.Forms
                     break;
             }
         }
+        private void filterLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OrderFilter orderFilter = new OrderFilter(ref filters);
+            orderFilter.FormClosed += OrderFilter_FormClosed;
+            orderFilter.ShowDialog();
+        }
+        private void OrderFilter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FilterDgv();
+        }
+        private void searchTxt_TextChanged(object sender, EventArgs e)
+        {
+            switch (filters.SearchBy)
+            {
+                case 0:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Order_Date.ToString("MM/dd/yyyyy")
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+                case 1:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Delivery_Date.ToString("MM/dd/yyyyy")
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+                case 2:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Client.ToLower()
+                        .Contains(searchTxt.Text.ToLower()))
+                        .ToList();
+                    break;
+                case 3:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Total_Amount.ToString()
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+            }
+        }
+        #endregion
+
+        #region Functional Methods
         private void DgvConfig()
         {
             ordersDgv.Columns[0].Visible = false;
@@ -201,6 +249,17 @@ namespace Presentation.Forms
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
                 "Editar Orden", order, ref orderDetails, ref products);
         }
+        private string FindMatch(ref List<OrderDetail> orderDetails, string ID_S)
+        {
+            foreach (OrderDetail order in orderDetails)
+            {
+                if (order.ID_S == ID_S) return order.Detail;
+            }
+            return "null";
+        }
+        #endregion
+
+        #region Appearence Methods
         private Panel CreateProductPanel(Product product, List<OrderDetail> orderDetails)
         {
             List<Specification> specifications =
@@ -312,60 +371,11 @@ namespace Presentation.Forms
             control.Location = new Point(11, 32);
             return panel;
         }
-        private string FindMatch(ref List<OrderDetail> orderDetails, string ID_S)
-        {
-            foreach (OrderDetail order in orderDetails)
-            {
-                if (order.ID_S == ID_S) return order.Detail;
-            }
-            return "null";
-        }
-
-        private void filterLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            OrderFilter orderFilter = new OrderFilter(ref filters);
-            orderFilter.FormClosed += OrderFilter_FormClosed;
-            orderFilter.ShowDialog();
-        }
-
-        private void OrderFilter_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FilterDgv();
-        }
-
-        private void searchTxt_TextChanged(object sender, EventArgs e)
-        {
-            switch (filters.SearchBy)
-            {
-                case 0:
-                    ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Order_Date.ToString("MM/dd/yyyyy")
-                        .Contains(searchTxt.Text))
-                        .ToList();
-                    break;
-                case 1:
-                    ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Delivery_Date.ToString("MM/dd/yyyyy")
-                        .Contains(searchTxt.Text))
-                        .ToList();
-                    break;
-                case 2:
-                    ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Client.ToLower()
-                        .Contains(searchTxt.Text.ToLower()))
-                        .ToList();
-                    break;
-                case 3:
-                    ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Total_Amount.ToString()
-                        .Contains(searchTxt.Text))
-                        .ToList();
-                    break;
-            }
-        }
+        #endregion
     }
     public class Filters
     {
+        #region Properties
         public int OrderBy { get; set; }
         public int OrderTo { get; set; }
         public int DateFilter { get; set; }
@@ -374,11 +384,15 @@ namespace Presentation.Forms
         public int Month { get; set; }
         public int Day { get; set; }
         public int SearchBy { get; set; }
+        #endregion
+
+        #region Constructors
         public Filters()
         {
             OrderBy = OrderTo = Month = Day =
                 SearchBy = DateFilter = YearIndex = 0;
             Year = "Ninguno";
         }
+        #endregion
     }
 }

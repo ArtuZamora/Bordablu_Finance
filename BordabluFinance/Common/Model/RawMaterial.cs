@@ -6,14 +6,18 @@ namespace Common.Model
 {
     public class RawMaterial
     {
+        #region Properties
         public string ID_RM { get; set; }
         public string Name { get; set; }
         public int Stock { get; set; }
         public decimal Cost { get; set; }
         public string Supplier { get; set; }
         public string Description { get; set; }
+        #endregion
+
+        #region Constructors
         public RawMaterial(string ID_RM, string Name, int Stock,
-            decimal Cost, string Supplier, string Description)
+    decimal Cost, string Supplier, string Description)
         {
             this.ID_RM = ID_RM;
             this.Name = Name;
@@ -24,5 +28,6 @@ namespace Common.Model
         }
         public RawMaterial()
         { }
+        #endregion
     }
 }

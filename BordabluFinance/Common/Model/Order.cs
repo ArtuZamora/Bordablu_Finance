@@ -6,6 +6,7 @@ namespace Common.Model
 {
     public class Order
     {
+        #region Properties
         public string ID_O { get; set; }
         public DateTime Order_Date { get; set; }
         public DateTime Delivery_Date { get; set; }
@@ -20,5 +21,6 @@ namespace Common.Model
         public string Status { get; set; }
         public bool Help { get; set; }
         public decimal Given_Amount { get; set; }
+        #endregion
     }
 }
