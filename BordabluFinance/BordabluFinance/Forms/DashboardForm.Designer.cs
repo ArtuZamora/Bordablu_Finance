@@ -29,6 +29,7 @@ namespace Presentation.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dashPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,8 +50,12 @@ namespace Presentation.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.salesPerCmb = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.noDataPict2 = new System.Windows.Forms.PictureBox();
+            this.noDataPict1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.dashPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noDataPict2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noDataPict1)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -69,6 +74,8 @@ namespace Presentation.Forms
             // 
             // dashPanel
             // 
+            this.dashPanel.Controls.Add(this.noDataPict1);
+            this.dashPanel.Controls.Add(this.noDataPict2);
             this.dashPanel.Controls.Add(this.label3);
             this.dashPanel.Controls.Add(this.graphTypeCmb);
             this.dashPanel.Controls.Add(this.graphMonthLbl);
@@ -293,6 +300,26 @@ namespace Presentation.Forms
             this.label1.TabIndex = 0;
             this.label1.Text = "Gráfico de ventas";
             // 
+            // noDataPict2
+            // 
+            this.noDataPict2.Image = ((System.Drawing.Image)(resources.GetObject("noDataPict2.Image")));
+            this.noDataPict2.Location = new System.Drawing.Point(0, 615);
+            this.noDataPict2.Name = "noDataPict2";
+            this.noDataPict2.Size = new System.Drawing.Size(652, 400);
+            this.noDataPict2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.noDataPict2.TabIndex = 20;
+            this.noDataPict2.TabStop = false;
+            // 
+            // noDataPict1
+            // 
+            this.noDataPict1.Image = ((System.Drawing.Image)(resources.GetObject("noDataPict1.Image")));
+            this.noDataPict1.Location = new System.Drawing.Point(0, 105);
+            this.noDataPict1.Name = "noDataPict1";
+            this.noDataPict1.Size = new System.Drawing.Size(652, 400);
+            this.noDataPict1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.noDataPict1.TabIndex = 21;
+            this.noDataPict1.TabStop = false;
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
@@ -306,6 +333,8 @@ namespace Presentation.Forms
             this.flowLayoutPanel1.ResumeLayout(false);
             this.dashPanel.ResumeLayout(false);
             this.dashPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noDataPict2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noDataPict1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,5 +362,7 @@ namespace Presentation.Forms
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox graphByCmb;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox noDataPict1;
+        private System.Windows.Forms.PictureBox noDataPict2;
     }
 }

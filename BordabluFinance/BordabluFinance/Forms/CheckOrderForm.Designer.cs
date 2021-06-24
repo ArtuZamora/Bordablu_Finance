@@ -104,6 +104,7 @@ namespace Presentation.Forms
             this.ordersDgv.TabIndex = 4;
             this.ordersDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ordersDgv_CellFormatting);
             this.ordersDgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ordersDgv_CellMouseClick);
+            this.ordersDgv.SelectionChanged += new System.EventHandler(this.ordersDgv_SelectionChanged);
             // 
             // pictureBox1
             // 
@@ -170,7 +171,7 @@ namespace Presentation.Forms
             // searchTxt
             // 
             this.searchTxt.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchTxt.Location = new System.Drawing.Point(81, 56);
+            this.searchTxt.Location = new System.Drawing.Point(105, 58);
             this.searchTxt.Name = "searchTxt";
             this.searchTxt.Size = new System.Drawing.Size(157, 26);
             this.searchTxt.TabIndex = 7;
@@ -192,7 +193,7 @@ namespace Presentation.Forms
             this.filterLbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.filterLbl.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.filterLbl.LinkColor = System.Drawing.Color.Yellow;
-            this.filterLbl.Location = new System.Drawing.Point(244, 64);
+            this.filterLbl.Location = new System.Drawing.Point(268, 66);
             this.filterLbl.Name = "filterLbl";
             this.filterLbl.Size = new System.Drawing.Size(53, 18);
             this.filterLbl.TabIndex = 9;

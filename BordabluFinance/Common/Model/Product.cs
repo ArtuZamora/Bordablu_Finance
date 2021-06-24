@@ -19,4 +19,12 @@ namespace Common.Model
         }
         #endregion
     }
+    public class ProductQty : Product
+    {
+        public int P_Num { get; set; }
+        public ProductQty(string ID_P, string Name, int P_Num) : base(ID_P, Name)
+        {
+            this.P_Num = P_Num;
+        }
+    }
 }

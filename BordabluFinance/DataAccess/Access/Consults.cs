@@ -614,12 +614,13 @@ namespace DataAccess.Access
                     foreach (OrderDetail orderDetail in orderDetails)
                     {
                         command.CommandText = "INSERT INTO Order_Details VALUES(@ID_OD," +
-                            " @ID_O, @ID_S, @ID_P, @Detail)";
+                            " @ID_O, @ID_S, @ID_P, @Detail, @P_Num)";
                         command.Parameters.Add("@ID_OD", SqlDbType.NChar).Value = orderDetail.ID_OD;
                         command.Parameters.Add("@ID_O", SqlDbType.NChar).Value = ID_O;
                         command.Parameters.Add("@ID_S", SqlDbType.NChar).Value = orderDetail.ID_S;
                         command.Parameters.Add("@ID_P", SqlDbType.NChar).Value = orderDetail.ID_P;
                         command.Parameters.Add("@Detail", SqlDbType.VarChar).Value = orderDetail.Detail;
+                        command.Parameters.Add("@P_Num", SqlDbType.Int).Value = orderDetail.P_Num;
                         command.ExecuteNonQuery();
                         command.Parameters.Clear();
                     }
@@ -712,29 +713,31 @@ namespace DataAccess.Access
                         orderDetail.ID_S = reader.GetString(2);
                         orderDetail.ID_P = reader.GetString(3);
                         orderDetail.Detail = reader.GetString(4);
+                        orderDetail.P_Num = reader.GetInt32(5);
                         orderDetails.Add(orderDetail);
                     }
                     return orderDetails;
                 }
             }
         }
-        public List<Product> Select_Order_Detail_Products(string ID_O)
+        public List<ProductQty> Select_Order_Detail_Products(string ID_O)
         {
-            List<Product> products = new List<Product>();
+            List<ProductQty> products = new List<ProductQty>();
             using (var connection = GetConnection())
             {
                 connection.Open();
                 using (var command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT DISTINCT OD.ID_P, P.Name " +
-                        "FROM Order_Details OD INNER JOIN Products P ON P.ID_P = OD.ID_P " +
-                        "WHERE ID_O = @ID_O";
+                    command.CommandText = @"SELECT DISTINCT OD.P_Num, OD.ID_P, P.Name
+                                    FROM Order_Details OD INNER JOIN Products P ON P.ID_P = OD.ID_P
+                                    WHERE ID_O = @ID_O";
                     command.Parameters.Add("@ID_O", SqlDbType.NChar).Value = ID_O;
                     reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Product product = new Product(reader.GetString(0), reader.GetString(1));
+                        ProductQty product = new ProductQty(reader.GetString(1), reader.GetString(2),
+                            reader.GetInt32(0));
                         products.Add(product);
                     }
                     return products;

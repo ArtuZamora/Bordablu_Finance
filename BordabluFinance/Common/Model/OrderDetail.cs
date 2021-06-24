@@ -12,6 +12,7 @@ namespace Common.Model
         public string ID_S { get; set; }
         public string ID_P { get; set; }
         public string Detail { get; set; }
+        public int P_Num { get; set; }
         #endregion
     }
 }

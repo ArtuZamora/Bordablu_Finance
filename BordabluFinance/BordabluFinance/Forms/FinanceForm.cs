@@ -262,7 +262,7 @@ namespace Presentation.Forms
 
             cancelBtn.Visible = false;
 
-            numeric.Size = new Size(82, 33);
+            numeric.Size = new Size(120, 33);
             numeric.TextAlign = HorizontalAlignment.Center;
             numeric.DecimalPlaces = 2;
             numeric.Minimum = decimal.MaxValue * -1;
@@ -286,8 +286,8 @@ namespace Presentation.Forms
             lblBalanceAux.Location = new Point(413, 25);
             lblEntity.Location = new Point(178, 46);
             lblBalance.Location = new Point(413, 46);
-            editDoneBtn.Location = new Point(500, 47);
-            cancelBtn.Location = new Point(533, 47);
+            editDoneBtn.Location = new Point(550, 47);
+            cancelBtn.Location = new Point(583, 47);
             numeric.Location = new Point(412, 45);
 
             numeric.Visible = false;

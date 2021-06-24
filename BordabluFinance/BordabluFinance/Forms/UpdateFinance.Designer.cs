@@ -70,7 +70,7 @@ namespace Presentation.Forms
             this.transPM.AutoSize = true;
             this.transPM.Font = new System.Drawing.Font("Roboto Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.transPM.LinkColor = System.Drawing.Color.Yellow;
-            this.transPM.Location = new System.Drawing.Point(144, 34);
+            this.transPM.Location = new System.Drawing.Point(119, 39);
             this.transPM.Name = "transPM";
             this.transPM.Size = new System.Drawing.Size(162, 15);
             this.transPM.TabIndex = 3;
@@ -85,7 +85,7 @@ namespace Presentation.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(140)))), ((int)(((byte)(86)))));
-            this.ClientSize = new System.Drawing.Size(318, 144);
+            this.ClientSize = new System.Drawing.Size(320, 144);
             this.Controls.Add(this.transPM);
             this.Controls.Add(this.accptBtn);
             this.Controls.Add(this.cmb);

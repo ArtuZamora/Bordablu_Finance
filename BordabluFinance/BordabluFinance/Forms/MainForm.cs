@@ -1,4 +1,5 @@
 ﻿using Common.Model;
+using Presentation.Classes;
 using Presentation.Forms;
 using System;
 using System.Collections.Generic;
@@ -74,9 +75,10 @@ namespace Presentation
         {
             if (active != control || force)
             {
-                if(addOrderLbl.Text != "Agregar Orden")
+                if (activeForm != Cache.AddOrderForm && activeForm != Cache.ModifyOrderForm)
+                    activeForm.Close();
+                if(addOrderLbl.Text.ToLower() == "Ver Orden".ToLower())
                     addOrderLbl.Text = "Agregar Orden";
-                activeForm.Close();
                 StayColor(active, 2);
                 active = control;
                 StayColor(active, color);
@@ -95,15 +97,24 @@ namespace Presentation
                         activeForm = new FinanceForm();
                         break;
                     case "addOrderPanel":
-                        activeForm = new AddOrderForm("Agregar nueva orden");
+                        if (Cache.ModifyOrderForm != null)
+                            activeForm = Cache.ModifyOrderForm;
+                        else
+                        {
+                            addOrderLbl.Text = "Agregar Orden";
+                            activeForm = Cache.AddOrderForm;
+                        }
                         break;
                     case "checkOrderPanel":
+                        if (Cache.ModifyOrderForm == null)
+                            addOrderLbl.Text = "Agregar Orden";
                         activeForm = new CheckOrderForm();
                         break;
                 }
                 activeForm.TopLevel = false;
                 activeForm.FormBorderStyle = FormBorderStyle.None;
                 activeForm.Dock = DockStyle.Fill;
+                childFormPanel.Controls.Clear();
                 childFormPanel.Controls.Add(activeForm);
                 activeForm.BringToFront();
                 activeForm.Show();
@@ -123,13 +134,14 @@ namespace Presentation
                 activeForm.TopLevel = false;
                 activeForm.FormBorderStyle = FormBorderStyle.None;
                 activeForm.Dock = DockStyle.Fill;
+                childFormPanel.Controls.Clear();
                 childFormPanel.Controls.Add(activeForm);
                 activeForm.BringToFront();
                 activeForm.Show();
             }
         }
         public void EnterForm(Control control, int color, string text,
-            Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
+            Order order, ref List<OrderDetail> orderDetails, ref List<ProductQty> products)
         {
             if (active != control)
             {
@@ -138,10 +150,12 @@ namespace Presentation
                 StayColor(active, 2);
                 active = control;
                 StayColor(active, color);
-                activeForm = new AddOrderForm(text, order, ref orderDetails, ref products);
+                Cache.ModifyOrderForm = new AddOrderForm(text, order, ref orderDetails, ref products);
+                activeForm = Cache.ModifyOrderForm;
                 activeForm.TopLevel = false;
                 activeForm.FormBorderStyle = FormBorderStyle.None;
                 activeForm.Dock = DockStyle.Fill;
+                childFormPanel.Controls.Clear();
                 childFormPanel.Controls.Add(activeForm);
                 activeForm.BringToFront();
                 activeForm.Show();

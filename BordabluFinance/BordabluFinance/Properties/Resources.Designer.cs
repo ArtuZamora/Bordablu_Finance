@@ -303,9 +303,29 @@ namespace Presentation.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LegendDGV1 {
+            get {
+                object obj = ResourceManager.GetObject("LegendDGV1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LineBar {
             get {
                 object obj = ResourceManager.GetObject("LineBar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap no_Data {
+            get {
+                object obj = ResourceManager.GetObject("no_Data", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

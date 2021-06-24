@@ -32,6 +32,12 @@ namespace Presentation.Forms
             toolStripMenuItem5.Click += ToolStripMenuItem5_Click;
             toolStripMenuItem6.Click += ToolStripMenuItem6_Click;
             FilterDgv();
+            ordersDgv.MultiSelect = false;
+            if (ordersDgv.Rows.Count > 0)
+                if (ordersDgv.Rows[0].Cells[11].Value.ToString().Trim() == "En Proceso")
+                    ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 241, 205);
+                else
+                    ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(114, 194, 0);
         }
         #endregion
 
@@ -42,6 +48,7 @@ namespace Presentation.Forms
             {
                 model.Update_Order_Status(
                     ordersDgv.CurrentRow.Cells[0].Value.ToString(), "Terminado");
+                orders = model.Select_Orders();
                 FilterDgv();
             }
         }
@@ -51,6 +58,7 @@ namespace Presentation.Forms
             {
                 model.Update_Order_Status(
                     ordersDgv.CurrentRow.Cells[0].Value.ToString(), "En Proceso");
+                orders = model.Select_Orders();
                 FilterDgv();
             }
         }
@@ -58,9 +66,9 @@ namespace Presentation.Forms
         {
             foreach (DataGridViewRow Myrow in ordersDgv.Rows)
                 if (Myrow.Cells[11].Value.ToString().Trim() == "En Proceso")
-                    Myrow.DefaultCellStyle.BackColor = Color.FromArgb(241, 89, 42);
+                    Myrow.DefaultCellStyle.BackColor = Color.FromArgb(255, 241, 205);
                 else
-                    Myrow.DefaultCellStyle.BackColor = Color.FromArgb(37, 170, 225);
+                    Myrow.DefaultCellStyle.BackColor = Color.FromArgb(114, 194, 0);
         }
         private void ordersDgv_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -121,13 +129,13 @@ namespace Presentation.Forms
             {
                 case 0:
                     ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Order_Date.ToString("MM/dd/yyyyy")
+                        sortedOrders.Where(o => o.Order_Date.ToString("MM/dd/yyyy")
                         .Contains(searchTxt.Text))
                         .ToList();
                     break;
                 case 1:
                     ordersDgv.DataSource =
-                        sortedOrders.Where(o => o.Delivery_Date.ToString("MM/dd/yyyyy")
+                        sortedOrders.Where(o => o.Delivery_Date.ToString("MM/dd/yyyy")
                         .Contains(searchTxt.Text))
                         .ToList();
                     break;
@@ -224,17 +232,23 @@ namespace Presentation.Forms
             }
             sortedOrders = (List<Order>)ordersDgv.DataSource;
             DgvConfig();
+            if (ordersDgv.Rows.Count > 0)
+                if (ordersDgv.Rows[0].Cells[11].Value.ToString().Trim() == "En Proceso")
+                    ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 241, 205);
+                else
+                    ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(114, 194, 0);
         }
         private void SeeOrderDetail()
         {
             Order order = model.Select_Orders(ordersDgv.CurrentRow.Cells[0].Value.ToString());
             List<OrderDetail> orderDetails = model.Select_Order_Details(order.ID_O);
-            List<Product> products = model.Select_Order_Detail_Products(order.ID_O);
+            List<ProductQty> products = model.Select_Order_Detail_Products(order.ID_O);
             List<Control> controls = new List<Control>();
-            foreach (Product product in products)
+            foreach (ProductQty product in products)
             {
                 Panel productPanel =
-                    CreateProductPanel(product, orderDetails.FindAll(od => od.ID_P == product.ID_P));
+                    CreateProductPanel(product,
+                    orderDetails.FindAll(od => od.ID_P == product.ID_P && od.P_Num == product.P_Num));
                 controls.Add(productPanel);
             }
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
@@ -244,7 +258,7 @@ namespace Presentation.Forms
         {
             Order order = model.Select_Orders(ordersDgv.CurrentRow.Cells[0].Value.ToString());
             List<OrderDetail> orderDetails = model.Select_Order_Details(order.ID_O);
-            List<Product> products = model.Select_Order_Detail_Products(order.ID_O);
+            List<ProductQty> products = model.Select_Order_Detail_Products(order.ID_O);
             List<Control> controls = new List<Control>();
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
                 "Editar Orden", order, ref orderDetails, ref products);
@@ -297,6 +311,20 @@ namespace Presentation.Forms
             }
             return panel;
         }
+        private void ordersDgv_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ordersDgv.CurrentRow != null)
+                    if (ordersDgv.CurrentRow.Cells[11].Value.ToString().Trim() == "En Proceso")
+                        ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 241, 205);
+                    else
+                        ordersDgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(114, 194, 0);
+            }
+            catch (Exception)
+            {
+            }
+        }
         private Panel CreateSpecificationPanel(Specification specification, string data)
         {
             Panel panel = new Panel();
@@ -326,9 +354,11 @@ namespace Presentation.Forms
                     break;
                 case "número entero":
                     NumericUpDown numericUpDown = new NumericUpDown();
-                    numericUpDown.Value = Convert.ToDecimal(data);
                     numericUpDown.Minimum = 1;
+                    numericUpDown.Maximum = Int32.MaxValue;
                     numericUpDown.Size = new Size(120, 33);
+                    if (data != null)
+                        numericUpDown.Value = Convert.ToDecimal(data);
                     numericUpDown.TextAlign = HorizontalAlignment.Center;
                     numericUpDown.Font = new Font("Roboto Condensed", (float)15.75);
                     numericUpDown.Enabled = false;
@@ -336,9 +366,11 @@ namespace Presentation.Forms
                     break;
                 case "número decimal":
                     NumericUpDown numericUpDownDec = new NumericUpDown();
-                    numericUpDownDec.Value = Convert.ToDecimal(data);
-                    numericUpDownDec.Size = new Size(120, 33);
                     numericUpDownDec.DecimalPlaces = 2;
+                    numericUpDownDec.Maximum = decimal.MaxValue;
+                    if (data != null)
+                        numericUpDownDec.Value = Convert.ToDecimal(data);
+                    numericUpDownDec.Size = new Size(120, 33);
                     numericUpDownDec.TextAlign = HorizontalAlignment.Center;
                     numericUpDownDec.Font = new Font("Roboto Condensed", (float)15.75);
                     numericUpDownDec.Enabled = false;
@@ -349,8 +381,10 @@ namespace Presentation.Forms
                     Label moneyLbl = new Label();
                     moneyLbl.AutoSize = true;
                     moneyLbl.Text = "USD";
-                    numericUpDownMoney.Value = Convert.ToDecimal(data);
                     numericUpDownMoney.DecimalPlaces = 2;
+                    numericUpDownMoney.Maximum = decimal.MaxValue;
+                    if (data != null)
+                        numericUpDownMoney.Value = Convert.ToDecimal(data);
                     numericUpDownMoney.Size = new Size(112, 33);
                     numericUpDownMoney.TextAlign = HorizontalAlignment.Center;
                     numericUpDownMoney.Font = new Font("Roboto Condensed", (float)15.75);
@@ -373,6 +407,7 @@ namespace Presentation.Forms
         }
         #endregion
     }
+    #region Internal Class
     public class Filters
     {
         #region Properties
@@ -395,4 +430,5 @@ namespace Presentation.Forms
         }
         #endregion
     }
+    #endregion
 }

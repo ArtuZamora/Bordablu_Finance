@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <UserSecretsId>554332fb-7e49-4915-92b6-29ef15f0966c</UserSecretsId>
+    <ApplicationIcon>bb_logo_black_bgw_c.ico</ApplicationIcon>
+    <AssemblyName>BordabluApp</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

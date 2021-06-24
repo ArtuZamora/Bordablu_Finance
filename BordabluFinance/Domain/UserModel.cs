@@ -136,7 +136,7 @@ namespace Domain
         {
             return consults.Select_Order_Details(ID_O);
         }
-        public List<Product> Select_Order_Detail_Products(string ID_O)
+        public List<ProductQty> Select_Order_Detail_Products(string ID_O)
         {
             return consults.Select_Order_Detail_Products(ID_O);
         }
