@@ -174,6 +174,7 @@ namespace Presentation.Forms
             this.searchTxt.Name = "searchTxt";
             this.searchTxt.Size = new System.Drawing.Size(157, 26);
             this.searchTxt.TabIndex = 7;
+            this.searchTxt.TextChanged += new System.EventHandler(this.searchTxt_TextChanged);
             // 
             // label2
             // 

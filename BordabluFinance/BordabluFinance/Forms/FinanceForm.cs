@@ -1,4 +1,5 @@
-﻿using Common.Model;
+﻿using BordabluFinance;
+using Common.Model;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Presentation.Forms
         private string codeEditing = "";
         private PictureBox pictEditing = null;
         private NumericUpDown numeric = null;
+        private StringBuilder ID = new StringBuilder();
         #endregion
 
         public FinanceForm()
@@ -79,9 +81,14 @@ namespace Presentation.Forms
                 pictDlt.Visible = true;
                 numeric = (NumericUpDown)boardPanel.Controls.Find(codeEditing + "_numeric", true)[0];
                 numeric.Visible = true;
-                numeric.Value =
-                    Convert.ToDecimal(((Label)boardPanel.Controls.
-                    Find(codeEditing + "_lblBalance", true)[0]).Text.Substring(1));
+                Label lbl = ((Label)boardPanel.Controls.
+                    Find(codeEditing + "_lblBalance", true)[0]);
+                decimal value;
+                if (lbl.Text.Substring(0, 1) == "-")
+                    value = Convert.ToDecimal(lbl.Text.Substring(2)) * -1;
+                else 
+                    value = Convert.ToDecimal(lbl.Text.Substring(1));
+                numeric.Value = value;
             }
             else if (codeEditing == s)
             {
@@ -89,25 +96,20 @@ namespace Presentation.Forms
                     MessageBox.Show("¿Está seguro de querer modificar este valor de cuenta?",
                         "ADVERTENCIA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    if (codeEditing.Substring(0, 2) == "PM")
-                    {
-                        PaymentMethod paymentMethod = new PaymentMethod();
-                        paymentMethod.ID_PM = codeEditing;
-                        paymentMethod.Balance = numeric.Value;
-                        model.Update_Payment_Method(paymentMethod);
-
-                    }
+                    decimal diference;
+                    Label lbl = ((Label)boardPanel.Controls.
+                      Find(codeEditing + "_lblBalance", true)[0]);
+                    if (lbl.Text.Substring(0, 1) == "-")
+                        diference = numeric.Value - Convert.ToDecimal(lbl.Text.Substring(2)) * -1;
                     else
-                    {
-                        FinanceDetail financeDetail = new FinanceDetail();
-                        financeDetail.ID_FD = codeEditing;
-                        financeDetail.Balance = numeric.Value;
-                        model.Update_Finance_Detail(financeDetail);
-                    }
-                    ((Label)boardPanel.Controls.
-                        Find(codeEditing + "_lblBalance", true)[0]).Text =
-                        numeric.Value.ToString("$0.00");
-                    CancelBtn_MouseClick(null, null);
+                        diference = numeric.Value - Convert.ToDecimal(lbl.Text.Substring(1));
+                    UpdateFinance update;
+                    if (codeEditing.Substring(0, 2) == "PM")
+                        update = new UpdateFinance(codeEditing, ref ID, diference);
+                    else
+                        update = new UpdateFinance(codeEditing, ref ID, diference);
+                    update.FormClosed += Update_FormClosed;
+                    update.ShowDialog();
                 }
             }
             else
@@ -126,6 +128,41 @@ namespace Presentation.Forms
                 numeric.Value =
                     Convert.ToDecimal(((Label)boardPanel.Controls.
                     Find(codeEditing + "_lblBalance", true)[0]).Text.Substring(1));
+            }
+        }
+        private void Update_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(ID.ToString() != "null")
+            {
+                decimal diference;
+                Label lbl = ((Label)boardPanel.Controls.
+                  Find(codeEditing + "_lblBalance", true)[0]);
+                if (lbl.Text.Substring(0, 1) == "-")
+                    diference = numeric.Value - Convert.ToDecimal(lbl.Text.Substring(2)) * -1;
+                else
+                    diference = numeric.Value - Convert.ToDecimal(lbl.Text.Substring(1));
+                if (codeEditing.Substring(0, 2) == "PM")
+                {
+                    PaymentMethod paymentMethod = new PaymentMethod();
+                    paymentMethod.ID_PM = codeEditing;
+                    paymentMethod.Balance = numeric.Value;
+                    if(ID.ToString().Substring(ID.Length - 1, 1) == "S")
+                    {
+                        ID.Remove(ID.Length - 1, 1);
+                        diference *= -1;
+                        model.Update_Payment_Method(paymentMethod, ID.ToString(), diference);
+                    }
+                    else
+                        model.Update_Payment_Method(paymentMethod, ID.ToString(), diference);
+                }
+                else
+                {
+                    FinanceDetail financeDetail = new FinanceDetail();
+                    financeDetail.ID_FD = codeEditing;
+                    financeDetail.Balance = numeric.Value;
+                    model.Update_Finance_Detail(financeDetail, ID.ToString(), diference);
+                }
+                Program.mainForm.EnterForm(Program.mainForm.financePanel, 1, true);
             }
         }
         #endregion
@@ -226,7 +263,7 @@ namespace Presentation.Forms
             numeric.Size = new Size(82, 33);
             numeric.TextAlign = HorizontalAlignment.Center;
             numeric.DecimalPlaces = 2;
-            numeric.Minimum = 0;
+            numeric.Minimum = decimal.MaxValue * -1;
             numeric.Maximum = decimal.MaxValue;
 
             panel.Controls.AddRange(

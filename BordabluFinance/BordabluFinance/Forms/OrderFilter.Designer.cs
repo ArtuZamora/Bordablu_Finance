@@ -31,6 +31,8 @@ namespace Presentation.Forms
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dateFilterCmb = new System.Windows.Forms.ComboBox();
             this.todayLink = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.searchByCmb = new System.Windows.Forms.ComboBox();
@@ -65,6 +67,8 @@ namespace Presentation.Forms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.dateFilterCmb);
             this.panel1.Controls.Add(this.todayLink);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.searchByCmb);
@@ -83,15 +87,36 @@ namespace Presentation.Forms
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(247, 441);
+            this.panel1.Size = new System.Drawing.Size(228, 499);
             this.panel1.TabIndex = 0;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(35, 182);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(118, 19);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Campo de filtro";
+            // 
+            // dateFilterCmb
+            // 
+            this.dateFilterCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dateFilterCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateFilterCmb.FormattingEnabled = true;
+            this.dateFilterCmb.Location = new System.Drawing.Point(35, 204);
+            this.dateFilterCmb.Name = "dateFilterCmb";
+            this.dateFilterCmb.Size = new System.Drawing.Size(187, 27);
+            this.dateFilterCmb.TabIndex = 28;
+            this.dateFilterCmb.SelectedValueChanged += new System.EventHandler(this.dateFilterCmb_SelectedValueChanged);
             // 
             // todayLink
             // 
             this.todayLink.AutoSize = true;
             this.todayLink.Font = new System.Drawing.Font("Roboto Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.todayLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.todayLink.Location = new System.Drawing.Point(199, 161);
+            this.todayLink.Location = new System.Drawing.Point(194, 161);
             this.todayLink.Name = "todayLink";
             this.todayLink.Size = new System.Drawing.Size(31, 18);
             this.todayLink.TabIndex = 27;
@@ -104,7 +129,7 @@ namespace Presentation.Forms
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(39, 376);
+            this.label8.Location = new System.Drawing.Point(34, 435);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(159, 19);
             this.label8.TabIndex = 26;
@@ -115,16 +140,17 @@ namespace Presentation.Forms
             this.searchByCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchByCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.searchByCmb.FormattingEnabled = true;
-            this.searchByCmb.Location = new System.Drawing.Point(39, 398);
+            this.searchByCmb.Location = new System.Drawing.Point(34, 457);
             this.searchByCmb.Name = "searchByCmb";
             this.searchByCmb.Size = new System.Drawing.Size(187, 27);
             this.searchByCmb.TabIndex = 25;
+            this.searchByCmb.SelectedValueChanged += new System.EventHandler(this.searchByCmb_SelectedValueChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(11, 8);
+            this.label9.Location = new System.Drawing.Point(6, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(105, 19);
             this.label9.TabIndex = 24;
@@ -134,7 +160,7 @@ namespace Presentation.Forms
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(11, 348);
+            this.label7.Location = new System.Drawing.Point(6, 407);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(143, 19);
             this.label7.TabIndex = 23;
@@ -144,7 +170,7 @@ namespace Presentation.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(39, 287);
+            this.label6.Location = new System.Drawing.Point(34, 346);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 19);
             this.label6.TabIndex = 22;
@@ -155,16 +181,17 @@ namespace Presentation.Forms
             this.dayCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dayCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.dayCmb.FormattingEnabled = true;
-            this.dayCmb.Location = new System.Drawing.Point(39, 309);
+            this.dayCmb.Location = new System.Drawing.Point(34, 368);
             this.dayCmb.Name = "dayCmb";
             this.dayCmb.Size = new System.Drawing.Size(187, 27);
             this.dayCmb.TabIndex = 21;
+            this.dayCmb.SelectedValueChanged += new System.EventHandler(this.dayCmb_SelectedValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(39, 232);
+            this.label5.Location = new System.Drawing.Point(34, 291);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 19);
             this.label5.TabIndex = 20;
@@ -175,7 +202,7 @@ namespace Presentation.Forms
             this.monthCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.monthCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.monthCmb.FormattingEnabled = true;
-            this.monthCmb.Location = new System.Drawing.Point(39, 254);
+            this.monthCmb.Location = new System.Drawing.Point(34, 313);
             this.monthCmb.Name = "monthCmb";
             this.monthCmb.Size = new System.Drawing.Size(187, 27);
             this.monthCmb.TabIndex = 19;
@@ -185,7 +212,7 @@ namespace Presentation.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(39, 180);
+            this.label4.Location = new System.Drawing.Point(34, 239);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 19);
             this.label4.TabIndex = 18;
@@ -196,7 +223,7 @@ namespace Presentation.Forms
             this.yearCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.yearCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.yearCmb.FormattingEnabled = true;
-            this.yearCmb.Location = new System.Drawing.Point(39, 202);
+            this.yearCmb.Location = new System.Drawing.Point(34, 261);
             this.yearCmb.Name = "yearCmb";
             this.yearCmb.Size = new System.Drawing.Size(187, 27);
             this.yearCmb.TabIndex = 17;
@@ -206,7 +233,7 @@ namespace Presentation.Forms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(11, 157);
+            this.label3.Location = new System.Drawing.Point(6, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 19);
             this.label3.TabIndex = 16;
@@ -217,36 +244,38 @@ namespace Presentation.Forms
             this.orderToCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderToCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.orderToCmb.FormattingEnabled = true;
-            this.orderToCmb.Location = new System.Drawing.Point(39, 118);
+            this.orderToCmb.Location = new System.Drawing.Point(34, 118);
             this.orderToCmb.Name = "orderToCmb";
             this.orderToCmb.Size = new System.Drawing.Size(187, 27);
             this.orderToCmb.TabIndex = 15;
+            this.orderToCmb.SelectedValueChanged += new System.EventHandler(this.orderToCmb_SelectedValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(30, 96);
+            this.label2.Location = new System.Drawing.Point(25, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 19);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Ordenar de";
+            this.label2.Text = "Ordenar en";
             // 
             // orderByCmb
             // 
             this.orderByCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderByCmb.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.orderByCmb.FormattingEnabled = true;
-            this.orderByCmb.Location = new System.Drawing.Point(39, 55);
+            this.orderByCmb.Location = new System.Drawing.Point(34, 55);
             this.orderByCmb.Name = "orderByCmb";
             this.orderByCmb.Size = new System.Drawing.Size(187, 27);
             this.orderByCmb.TabIndex = 13;
+            this.orderByCmb.SelectedValueChanged += new System.EventHandler(this.orderByCmb_SelectedValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(30, 33);
+            this.label1.Location = new System.Drawing.Point(25, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 19);
             this.label1.TabIndex = 12;
@@ -291,5 +320,7 @@ namespace Presentation.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox searchByCmb;
         private System.Windows.Forms.LinkLabel todayLink;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox dateFilterCmb;
     }
 }

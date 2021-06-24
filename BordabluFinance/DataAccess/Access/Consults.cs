@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Text;
 
 namespace DataAccess.Access
@@ -341,9 +342,11 @@ namespace DataAccess.Access
                     command.Parameters.Add("@Stock", SqlDbType.Int).Value = newStock;
                     command.Parameters.Add("@ID_RM", SqlDbType.NChar).Value = expenseBefore.rawMaterial.ID_RM;
                     command.ExecuteNonQuery();
+                    command.Parameters.Clear();
                     command.CommandText = "UPDATE Finance_Details SET Balance -= @Balance WHERE ID_FD = 'FD001'";
                     command.Parameters.Add("@Balance", SqlDbType.Decimal).Value = balance;
                     command.ExecuteNonQuery();
+                    command.Parameters.Clear();
                     command.CommandText = "UPDATE Payment_Methods SET Balance -= @Balance WHERE ID_PM = 'PM01'";
                     command.Parameters.Add("@Balance", SqlDbType.Decimal).Value = balance;
                     command.ExecuteNonQuery();
@@ -362,10 +365,12 @@ namespace DataAccess.Access
                     command.Parameters.Add("@Stock", SqlDbType.Int).Value = expense.Quantity;
                     command.Parameters.Add("@ID_RM", SqlDbType.NChar).Value = expense.rawMaterial.ID_RM;
                     command.ExecuteNonQuery();
-                    command.CommandText = "UPDATE Finance_Details SET Balance -= @Balance WHERE ID_FD = 'FD001'";
+                    command.Parameters.Clear();
+                    command.CommandText = "UPDATE Finance_Details SET Balance += @Balance WHERE ID_FD = 'FD001'";
                     command.Parameters.Add("@Balance", SqlDbType.Decimal).Value = expense.Amount;
                     command.ExecuteNonQuery();
-                    command.CommandText = "UPDATE Payment_Methods SET Balance -= @Balance WHERE ID_PM = 'PM01'";
+                    command.Parameters.Clear();
+                    command.CommandText = "UPDATE Payment_Methods SET Balance += @Balance WHERE ID_PM = 'PM01'";
                     command.Parameters.Add("@Balance", SqlDbType.Decimal).Value = expense.Amount;
                     command.ExecuteNonQuery();
                 }
@@ -374,7 +379,6 @@ namespace DataAccess.Access
         #endregion
 
         #region Finance Details
-
         public List<FinanceDetail> Select_Finance_Details()
         {
             List<FinanceDetail> financeDetails = new List<FinanceDetail>();
@@ -395,7 +399,7 @@ namespace DataAccess.Access
                 }
             }
         }
-        public void Update_Finance_Detail(FinanceDetail financeDetail)
+        public void Update_Finance_Detail(FinanceDetail financeDetail, string ID_PM, decimal diference)
         {
             using (var connection = GetConnection())
             {
@@ -406,7 +410,13 @@ namespace DataAccess.Access
                     command.CommandText = "UPDATE Finance_Details SET " +
                         "Balance = @Balance WHERE ID_FD = @ID_FD";
                     command.Parameters.Add("@ID_FD", SqlDbType.NChar).Value = financeDetail.ID_FD;
-                    command.Parameters.Add("@Balance", SqlDbType.VarChar).Value = financeDetail.Balance;
+                    command.Parameters.Add("@Balance", SqlDbType.Money).Value = financeDetail.Balance;
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+                    command.CommandText = "UPDATE Payment_Methods SET " +
+                        "Balance += @Balance WHERE ID_PM = @ID_PM";
+                    command.Parameters.Add("@ID_PM", SqlDbType.NChar).Value = ID_PM;
+                    command.Parameters.Add("@Balance", SqlDbType.Money).Value = diference;
                     command.ExecuteNonQuery();
                 }
             }
@@ -434,7 +444,7 @@ namespace DataAccess.Access
                 }
             }
         }
-        public void Update_Payment_Method(PaymentMethod paymentMethod)
+        public void Update_Payment_Method(PaymentMethod paymentMethod, string ID_FD, decimal diference)
         {
             using (var connection = GetConnection())
             {
@@ -447,9 +457,20 @@ namespace DataAccess.Access
                     command.Parameters.Add("@ID_PM", SqlDbType.NChar).Value = paymentMethod.ID_PM;
                     command.Parameters.Add("@Balance", SqlDbType.VarChar).Value = paymentMethod.Balance;
                     command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+                    if (ID_FD.Substring(0, 2) == "FD")
+                        command.CommandText = "UPDATE Finance_Details SET " +
+                            "Balance += @Balance WHERE ID_FD = @ID";
+                    else
+                        command.CommandText = "UPDATE Payment_Methods SET " +
+                            "Balance += @Balance WHERE ID_PM = @ID";
+                    command.Parameters.Add("@ID", SqlDbType.NChar).Value = ID_FD;
+                    command.Parameters.Add("@Balance", SqlDbType.Money).Value = diference;
+                    command.ExecuteNonQuery();
                 }
             }
         }
+
         #endregion
 
         #region Orders
@@ -464,7 +485,7 @@ namespace DataAccess.Access
                     command.Connection = connection;
                     command.CommandText = "SELECT ID_O, Order_Date, Delivery_Date, " +
                         "Client, Total_Amount, Status, Earned_Amount, Help, ID_PM," +
-                        "Total_Amount FROM Orders";
+                        "Total_Amount, Given_Amount FROM Orders";
                     reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -479,6 +500,7 @@ namespace DataAccess.Access
                         order.Help = reader.GetBoolean(7);
                         order.ID_PM = reader.GetString(8);
                         order.Total_Amount = reader.GetDecimal(9);
+                        order.Given_Amount = reader.GetDecimal(10);
                         orders.Add(order);
                     }
                     return orders;
@@ -512,6 +534,7 @@ namespace DataAccess.Access
                         order.Description = reader.GetString(10);
                         order.Status = reader.GetString(11);
                         order.Help = reader.GetBoolean(12);
+                        order.Given_Amount = reader.GetDecimal(13);
                     }
                     return order;
                 }
@@ -527,7 +550,7 @@ namespace DataAccess.Access
                     command.Connection = connection;
                     command.CommandText = "INSERT INTO Orders VALUES(@ID_O, @Order_Date, @Delivery_Date, @Client," +
                         "@Order_Amount, @Delivery_Amount, @Labor_Amount, @Total_Amount, @Earned_Amount, @ID_PM," +
-                        "@Description, @Status, @Help)";
+                        "@Description, @Status, @Help, @Given_Amount)";
                     command.Parameters.Add("@ID_O", SqlDbType.NChar).Value = order.ID_O;
                     command.Parameters.Add("@Order_Date", SqlDbType.Date).Value = order.Order_Date;
                     command.Parameters.Add("@Delivery_Date", SqlDbType.Date).Value = order.Delivery_Date;
@@ -541,8 +564,43 @@ namespace DataAccess.Access
                     command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = order.Description;
                     command.Parameters.Add("@Status", SqlDbType.NChar).Value = order.Status;
                     command.Parameters.Add("@Help", SqlDbType.Bit).Value = order.Help;
+                    command.Parameters.Add("@Given_Amount", SqlDbType.Money).Value = order.Given_Amount;
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
+
+                    command.CommandText = "UPDATE Payment_Methods SET Balance += @Given_Amount " +
+                        "WHERE ID_PM = @ID_PM";
+                    command.Parameters.Add("@ID_PM", SqlDbType.NChar).Value = order.ID_PM;
+                    command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value = order.Earned_Amount;
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+
+
+                    command.CommandText = "UPDATE Finance_Details SET Balance += @Given_Amount " +
+                         "WHERE ID_FD = 'FD001'";
+                    command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                        order.Earned_Amount * (decimal)0.8;
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+
+                    if (order.Help)
+                    {
+                        command.CommandText = "UPDATE Finance_Details SET Balance += @Given_Amount " +
+                           "WHERE ID_FD = 'FD002' OR ID_FD = 'FD003'";
+                        command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                            order.Earned_Amount * (decimal)0.1;
+                        command.ExecuteNonQuery();
+                        command.Parameters.Clear();
+                    }
+                    else
+                    {
+                        command.CommandText = "UPDATE Finance_Details SET Balance += @Given_Amount " +
+                            "WHERE ID_FD = 'FD002'";
+                        command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                            order.Earned_Amount * (decimal)0.2;
+                        command.ExecuteNonQuery();
+                        command.Parameters.Clear();
+                    }
 
                     string ID_O = "";
                     command.CommandText = "SELECT TOP 1 ID_O FROM Orders ORDER BY ID_O DESC";
@@ -594,6 +652,40 @@ namespace DataAccess.Access
                     command.CommandText = "DELETE FROM Orders WHERE ID_O = @ID_O";
                     command.Parameters.Add("@ID_O", SqlDbType.NChar).Value = order.ID_O;
                     command.ExecuteNonQuery();
+
+                    command.CommandText = "UPDATE Payment_Methods SET Balance -= @Given_Amount " +
+                        "WHERE ID_PM = @ID_PM";
+                    command.Parameters.Add("@ID_PM", SqlDbType.NChar).Value = order.ID_PM;
+                    command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value = order.Earned_Amount;
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+
+
+                    command.CommandText = "UPDATE Finance_Details SET Balance -= @Given_Amount " +
+                         "WHERE ID_FD = 'FD001'";
+                    command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                        order.Earned_Amount * (decimal)0.8;
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+
+                    if (order.Help)
+                    {
+                        command.CommandText = "UPDATE Finance_Details SET Balance -= @Given_Amount " +
+                           "WHERE ID_FD = 'FD002' OR ID_FD = 'FD003'";
+                        command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                            order.Earned_Amount * (decimal)0.1;
+                        command.ExecuteNonQuery();
+                        command.Parameters.Clear();
+                    }
+                    else
+                    {
+                        command.CommandText = "UPDATE Finance_Details SET Balance -= @Given_Amount " +
+                            "WHERE ID_FD = 'FD002'";
+                        command.Parameters.Add("@Given_Amount", SqlDbType.Decimal).Value =
+                            order.Earned_Amount * (decimal)0.2;
+                        command.ExecuteNonQuery();
+                        command.Parameters.Clear();
+                    }
                 }
             }
         }
@@ -648,6 +740,295 @@ namespace DataAccess.Access
                     return products;
                 }
             }
+        }
+        #endregion
+
+        #region Other
+        public decimal Obtain_Balance(string ID)
+        {
+            decimal balance = 0;
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    if (ID.Substring(0, 2) == "PM")
+                        command.CommandText = "SELECT Balance FROM Payment_Methods WHERE ID_PM = @ID";
+                    else
+                        command.CommandText = "SELECT Balance FROM Finance_Details WHERE ID_FD = @ID";
+                    command.Parameters.Add("@ID", SqlDbType.NChar).Value = ID;
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        balance = reader.GetDecimal(0);
+                    }
+                    return balance;
+                }
+            }
+        }
+        public DataTable SalesPerProduct()
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT P.Name Product, SUM(CONVERT(int,OD.Detail)) Qty
+                            FROM Order_Details OD
+                            INNER JOIN Products P ON P.ID_P = OD.ID_P
+                            INNER JOIN Specifications S ON S.ID_S = OD.ID_S
+                            WHERE S.Property LIKE 'Cantidad'
+                            GROUP BY P.Name";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable SalesPerYear()
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT YEAR(Order_Date) [Year], COUNT(*) Sales
+                                FROM Orders
+                                GROUP BY YEAR(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable SalesPerMonth(int Year)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT MONTH(Order_Date) [Month], COUNT(*) Sales
+                                FROM Orders
+                                WHERE YEAR(Order_Date) = @Year
+                                GROUP BY MONTH(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            bool find;
+                            for (int i = 1; i <= 12; i++)
+                            {
+                                find = false;
+                                foreach (DataRow item in dataTable.Rows)
+                                    if (item.ItemArray[0].ToString() == i.ToString())
+                                        find = true;
+                                if (!find)
+                                    dataTable.Rows.Add(i, 0);
+                            }
+                            dataTable.Columns[0].ColumnName = "Month";
+                            DataView dv = dataTable.DefaultView;
+                            dv.Sort = "Month asc";
+                            DataTable dt1 = dv.ToTable();
+                            DataTable dt2 = dt1.Clone();
+                            dt2.Columns[0].DataType = typeof(string);
+                            foreach (DataRow row in dt1.Rows)
+                                dt2.ImportRow(row);
+                            foreach (DataRow item in dt2.Rows)
+                                item[0] = MonthName(Convert.ToInt32(item.ItemArray[0]));
+                            return dt2;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable SalesPerDay(int Year, int Month)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT DAY(Order_Date) [Day], COUNT(*) Sales
+                                FROM Orders
+                                WHERE Month(Order_Date) = @Month AND YEAR(Order_Date) = @Year
+                                GROUP BY DAY(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    command.Parameters.Add("@Month", SqlDbType.Int).Value = Month;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable EarningsPerYear()
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT YEAR(Order_Date) [Year], SUM(Earned_Amount) Sales
+                            FROM Orders
+                            GROUP BY YEAR(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable ExpensesPerYear()
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT YEAR(Purchase_Date) [Year], SUM(Amount) Exp
+                            FROM Expenses
+                            GROUP BY YEAR(Purchase_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable EarningsPerMonth(int Year)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT MONTH(Order_Date) [Month], SUM(Earned_Amount) Sales
+                                FROM Orders
+                                WHERE YEAR(Order_Date) = @Year
+                                GROUP BY MONTH(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable ExpensesPerMonth(int Year)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT MONTH(Purchase_Date) [Month], SUM(Amount) Sales
+                                FROM Expenses
+                                WHERE YEAR(Purchase_Date) = @Year
+                                GROUP BY MONTH(Purchase_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable EarningsPerDay(int Year, int Month)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT DAY(Order_Date) [Day], SUM(Earned_Amount) Sales
+                            FROM Orders
+                            WHERE Month(Order_Date) = @Month AND YEAR(Order_Date) = @Year
+                            GROUP BY DAY(Order_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    command.Parameters.Add("@Month", SqlDbType.Int).Value = Month;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        public DataTable ExpensesPerDay(int Year, int Month)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                string sql = @"SELECT DAY(Purchase_Date) [Day], SUM(Amount) Sales
+                            FROM Expenses
+                            WHERE Month(Purchase_Date) = @Month AND YEAR(Purchase_Date) = @Year
+                            GROUP BY DAY(Purchase_Date)";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@Year", SqlDbType.Int).Value = Year;
+                    command.Parameters.Add("@Month", SqlDbType.Int).Value = Month;
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        using (var dataTable = new DataTable())
+                        {
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+        }
+        private string MonthName(int month)
+        {
+            DateTimeFormatInfo dtinfo = new CultureInfo("es-ES", false).DateTimeFormat;
+            return dtinfo.GetMonthName(month);
         }
         #endregion
     }

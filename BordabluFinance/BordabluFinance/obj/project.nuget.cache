@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GDj2zLGYUOFj8gIL/I4WialbqBujLuiyrr2+GhHeiW16qTWeuPaUDXNfBTXNR4YoJ1605zQevrxYDnvAFmec8A==",
+  "dgSpecHash": "+C0XuLqN1OmDiUOZW3dQxArCQU29Uz6ZcQAtpFZyeYDw0stKJZE0Mp9jQgBPR0pw70oVGujbNsr5M6AYO7P9Yw==",
   "success": true,
   "projectFilePath": "C:\\Users\\r2zam\\OneDrive\\Fotos\\Vectors\\Bordablu\\FinanzasApp\\BordabluFinance\\BordabluFinance\\Presentation.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\r2zam\\.nuget\\packages\\system.data.sqlclient\\4.8.2\\system.data.sqlclient.4.8.2.nupkg.sha512",
     "C:\\Users\\r2zam\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\r2zam\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\r2zam\\.nuget\\packages\\system.windows.forms.datavisualization\\1.0.0-prerelease.20110.1\\system.windows.forms.datavisualization.1.0.0-prerelease.20110.1.nupkg.sha512",
     "C:\\Users\\r2zam\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": []

@@ -19,5 +19,6 @@ namespace Common.Model
         public string Description { get; set; }
         public string Status { get; set; }
         public bool Help { get; set; }
+        public decimal Given_Amount { get; set; }
     }
 }

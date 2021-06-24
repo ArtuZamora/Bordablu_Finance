@@ -28,6 +28,10 @@ namespace Presentation.Forms
         {
             InitializeComponent();
 
+            actualOrder = null;
+
+            subTotals.Clear();
+
             FillColors();
             FillStatus();
 
@@ -48,10 +52,15 @@ namespace Presentation.Forms
             textBoxes.Add(client);
 
             deliveryDate.MinDate = orderDate.Value;
+
+            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
         }
         public AddOrderForm(string title, Order order, ref List<Control> controls)
         {
             InitializeComponent();
+
+            actualOrder = null;
+            subTotals.Clear();
 
             titleLbl.Text = title;
 
@@ -84,12 +93,15 @@ namespace Presentation.Forms
             clientTxt.ReadOnly = descriptionTxt.ReadOnly = true;
             orderPrice.Enabled = deliveryPrice.Enabled =
                 handPrice.Enabled = teamWorkChk.Enabled =
-                payMCmb.Enabled = statusCmb.Enabled = false;
+                payMCmb.Enabled = statusCmb.Enabled = givenPrice.Enabled = false;
+            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
+            givenPrice.Value = order.Given_Amount;
         }
         public AddOrderForm(string title, Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
         {
             InitializeComponent();
 
+            subTotals.Clear();
             actualOrder = order;
 
             titleLbl.Text = title;
@@ -137,6 +149,9 @@ namespace Presentation.Forms
             orderBtn.Text = "Modificar Orden";
 
             UpdateTotal();
+
+            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
+            givenPrice.Value = order.Given_Amount;
         }
 
         #region Event Methods
@@ -210,7 +225,11 @@ namespace Presentation.Forms
                         order.Delivery_Amount = deliveryPrice.Value;
                         order.Labor_Amount = handPrice.Value;
                         order.Total_Amount = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
-                        order.Earned_Amount = Convert.ToDecimal(amrtzLbl.Text.Substring(1));
+                        if(actAmortLbl.Text.Substring(0,1) == "-")
+                            order.Earned_Amount = Convert.ToDecimal(actAmortLbl.Text.Substring(2)) * - 1;
+                        else
+                            order.Earned_Amount = Convert.ToDecimal(actAmortLbl.Text.Substring(1));
+                        order.Given_Amount = givenPrice.Value;
                         order.ID_PM = payMCmb.SelectedValue.ToString();
                         order.Description = descriptionTxt.Text;
                         order.Status = statusCmb.SelectedItem.ToString();
@@ -262,7 +281,7 @@ namespace Presentation.Forms
                              "INGRESO CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (actualOrder != null)
                         {
-                            Program.mainForm.EnterForm(Program.mainForm.checkOrderPanel, 1);
+                            Program.mainForm.EnterForm(Program.mainForm.checkOrderPanel, 1, false);
                         }
                         ReloadForm();
                     }
@@ -507,23 +526,29 @@ namespace Presentation.Forms
             {
                 if (((PaymentMethod)payMCmb.SelectedItem).ID_PM == "PM03")
                 {
-                    decimal amount = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
-                    decimal iva, comision, ivaComision;
-                    iva = amount / (decimal)1.13;
-                    comision = iva * (decimal)0.04;
-                    ivaComision = comision * (decimal)0.13;
-                    decimal amort = amount - (comision + ivaComision);
-                    amrtzLbl.Text = amort.ToString("$0.00");
+                    amrtzLbl.Text = CalculateBIM(orderPrice.Value + handPrice.Value)
+                        .ToString("$0.00");
+                    actAmortLbl.Text = CalculateBIM(givenPrice.Value - deliveryPrice.Value).ToString("$0.00");
                 }
                 else
                 {
-                    amrtzLbl.Text = orderTotLbl.Text;
+                    amrtzLbl.Text = (orderPrice.Value + handPrice.Value).ToString("$0.00");
+                    actAmortLbl.Text = (givenPrice.Value - deliveryPrice.Value).ToString("$0.00");
                 }
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+        private decimal CalculateBIM(decimal amount)
+        {
+            decimal iva, comision, ivaComision;
+            iva = amount / (decimal)1.13;
+            comision = iva * (decimal)0.04;
+            ivaComision = comision * (decimal)0.13;
+            decimal amort = amount - (comision + ivaComision);
+            return amort;
         }
         #endregion
 
@@ -558,6 +583,14 @@ namespace Presentation.Forms
         }
         #endregion
 
+        private void orderTotLbl_TextChanged(object sender, EventArgs e)
+        {
+            givenPrice.Maximum = Convert.ToDecimal(orderTotLbl.Text.Substring(1));
+        }
 
+        private void givenPrice_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateBIM();
+        }
     }
 }

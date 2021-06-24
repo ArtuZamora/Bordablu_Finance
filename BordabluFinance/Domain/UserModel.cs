@@ -91,9 +91,9 @@ namespace Domain
         {
             return consults.Select_Finance_Details();
         }
-        public void Update_Finance_Detail(FinanceDetail financeDetail)
+        public void Update_Finance_Detail(FinanceDetail financeDetail, string ID_PM, decimal diference)
         {
-            consults.Update_Finance_Detail(financeDetail);
+            consults.Update_Finance_Detail(financeDetail, ID_PM, diference);
         }
         #endregion
 
@@ -102,9 +102,9 @@ namespace Domain
         {
             return consults.Select_Payment_Methods();
         }
-        public void Update_Payment_Method(PaymentMethod paymentMethod)
+        public void Update_Payment_Method(PaymentMethod paymentMethod, string ID_FD, decimal diference)
         {
-            consults.Update_Payment_Method(paymentMethod);
+            consults.Update_Payment_Method(paymentMethod, ID_FD, diference);
         }
         #endregion
 
@@ -139,6 +139,53 @@ namespace Domain
         public List<Product> Select_Order_Detail_Products(string ID_O)
         {
             return consults.Select_Order_Detail_Products(ID_O);
+        }
+        #endregion
+
+        #region Other
+        public decimal Obtain_Balance(string ID)
+        {
+            return consults.Obtain_Balance(ID);
+        }
+        public DataTable SalesPerProduct()
+        {
+            return consults.SalesPerProduct();
+        }
+        public DataTable SalesPerYear()
+        {
+            return consults.SalesPerYear();
+        }
+        public DataTable SalesPerMonth(int Year)
+        {
+            return consults.SalesPerMonth(Year);
+        }
+        public DataTable SalesPerDay(int Year, int Month)
+        {
+            return consults.SalesPerDay(Year, Month);
+        }
+        public DataTable EarningsPerYear()
+        {
+            return consults.EarningsPerYear();
+        }
+        public DataTable ExpensesPerYear()
+        {
+            return consults.ExpensesPerYear();
+        }
+        public DataTable EarningsPerMonth(int Year)
+        {
+            return consults.EarningsPerMonth(Year);
+        }
+        public DataTable ExpensesPerMonth(int Year)
+        {
+            return consults.ExpensesPerMonth(Year);
+        }
+        public DataTable EarningsPerDay(int Year, int Month)
+        {
+            return consults.EarningsPerDay(Year, Month);
+        }
+        public DataTable ExpensesPerDay(int Year, int Month)
+        {
+            return consults.ExpensesPerDay(Year, Month);
         }
         #endregion
     }

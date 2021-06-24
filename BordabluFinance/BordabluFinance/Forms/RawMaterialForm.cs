@@ -172,7 +172,6 @@ namespace Presentation.Forms
         }
         private void expensesBtn_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (curr_expense != null)

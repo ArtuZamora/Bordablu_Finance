@@ -52,7 +52,8 @@ CREATE TABLE Orders
 	ID_PM char(4) NOT NULL,
 	Description nvarchar(300),
 	Status char(30) NOT NULL DEFAULT 'En Proceso',
-	Help bit NOT NULL DEFAULT 0
+	Help bit NOT NULL DEFAULT 0,
+	Given_Amount money NOT NULL
 	CONSTRAINT PK_Orders PRIMARY KEY (ID_O),
 	CONSTRAINT FK_Orders_Payment_Method FOREIGN KEY (ID_PM) REFERENCES Payment_Methods(ID_PM)
 )
@@ -225,3 +226,63 @@ INSERT INTO Finance_Details VALUES
 	('FD000', 'Margarita', 0.00);
 INSERT INTO Finance_Details VALUES
 	('FD000', 'Andrea', 0.00);
+
+--Ventas por producto
+SELECT P.Name Product, SUM(CONVERT(int,OD.Detail)) Qty
+FROM Order_Details OD
+INNER JOIN Products P ON P.ID_P = OD.ID_P
+INNER JOIN Specifications S ON S.ID_S = OD.ID_S
+WHERE S.Property LIKE 'Cantidad'
+GROUP BY P.Name
+
+--Ventas por año
+SELECT YEAR(Order_Date) [Year], COUNT(*) Sales
+FROM Orders
+GROUP BY YEAR(Order_Date)
+
+--Ventas por mes
+SET LANGUAGE Spanish
+SELECT DATENAME(MONTH, Order_Date) [Month], COUNT(*) Sales
+FROM Orders
+WHERE YEAR(Order_Date) = '2021'
+GROUP BY DATENAME(MONTH, Order_Date)
+SET LANGUAGE English
+
+--Ventas por dia
+SELECT DAY(Order_Date) [Day], COUNT(*) Sales
+FROM Orders
+WHERE Month(Order_Date) = 7 AND YEAR(Order_Date) = 2021
+GROUP BY DAY(Order_Date)
+
+--Ganancias/Gastos por año
+SELECT YEAR(Order_Date) [Year], SUM(Earned_Amount) Sales
+FROM Orders
+GROUP BY YEAR(Order_Date)
+
+SELECT YEAR(Purchase_Date), SUM(Amount)
+FROM Expenses
+GROUP BY YEAR(Purchase_Date)
+
+--Ganancias/Gastos por mes
+SET LANGUAGE Spanish
+SELECT DATENAME(MONTH, Order_Date) [Month], SUM(Earned_Amount) Sales
+FROM Orders
+WHERE YEAR(Order_Date) = '2021'
+GROUP BY DATENAME(MONTH, Order_Date)
+
+SELECT DATENAME(MONTH, Purchase_Date) [Month], SUM(Amount) Sales
+FROM Expenses
+WHERE YEAR(Purchase_Date) = '2021'
+GROUP BY DATENAME(MONTH, Purchase_Date)
+SET LANGUAGE English
+
+--Ganancias/Gastos por dia
+SELECT DAY(Order_Date) [Day], SUM(Earned_Amount) Sales
+FROM Orders
+WHERE Month(Order_Date) = '7' AND YEAR(Order_Date) = '2021'
+GROUP BY DAY(Order_Date)
+
+SELECT DAY(Purchase_Date) [Day], SUM(Amount) Sales
+FROM Expenses
+WHERE Month(Purchase_Date) = '7' AND YEAR(Purchase_Date) = '2021'
+GROUP BY DAY(Purchase_Date)

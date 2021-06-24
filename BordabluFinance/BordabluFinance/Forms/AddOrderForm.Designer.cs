@@ -46,6 +46,11 @@ namespace Presentation.Forms
             this.addProdBtn = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lastPanel = new System.Windows.Forms.Panel();
+            this.actAmortLbl = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.givenPrice = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.teamWorkChk = new System.Windows.Forms.CheckBox();
             this.orderBtn = new System.Windows.Forms.Button();
             this.statusCmb = new System.Windows.Forms.ComboBox();
@@ -77,6 +82,7 @@ namespace Presentation.Forms
             ((System.ComponentModel.ISupportInitialize)(this.addProdBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.lastPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.givenPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.handPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderPrice)).BeginInit();
@@ -234,6 +240,11 @@ namespace Presentation.Forms
             // 
             // lastPanel
             // 
+            this.lastPanel.Controls.Add(this.actAmortLbl);
+            this.lastPanel.Controls.Add(this.label19);
+            this.lastPanel.Controls.Add(this.label10);
+            this.lastPanel.Controls.Add(this.givenPrice);
+            this.lastPanel.Controls.Add(this.label12);
             this.lastPanel.Controls.Add(this.teamWorkChk);
             this.lastPanel.Controls.Add(this.orderBtn);
             this.lastPanel.Controls.Add(this.statusCmb);
@@ -260,10 +271,62 @@ namespace Presentation.Forms
             this.lastPanel.Size = new System.Drawing.Size(652, 283);
             this.lastPanel.TabIndex = 0;
             // 
+            // actAmortLbl
+            // 
+            this.actAmortLbl.AutoSize = true;
+            this.actAmortLbl.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.actAmortLbl.ForeColor = System.Drawing.Color.DarkRed;
+            this.actAmortLbl.Location = new System.Drawing.Point(42, 254);
+            this.actAmortLbl.Name = "actAmortLbl";
+            this.actAmortLbl.Size = new System.Drawing.Size(51, 23);
+            this.actAmortLbl.TabIndex = 30;
+            this.actAmortLbl.Text = "$0.00";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(42, 227);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(127, 19);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Amortizado actual";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(21, 185);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(19, 23);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "$";
+            // 
+            // givenPrice
+            // 
+            this.givenPrice.DecimalPlaces = 2;
+            this.givenPrice.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.givenPrice.Location = new System.Drawing.Point(46, 182);
+            this.givenPrice.Name = "givenPrice";
+            this.givenPrice.Size = new System.Drawing.Size(110, 30);
+            this.givenPrice.TabIndex = 27;
+            this.givenPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.givenPrice.ValueChanged += new System.EventHandler(this.givenPrice_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(26, 159);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 19);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Monto entregado";
+            // 
             // teamWorkChk
             // 
             this.teamWorkChk.AutoSize = true;
-            this.teamWorkChk.Location = new System.Drawing.Point(485, 189);
+            this.teamWorkChk.Location = new System.Drawing.Point(459, 227);
             this.teamWorkChk.Name = "teamWorkChk";
             this.teamWorkChk.Size = new System.Drawing.Size(138, 23);
             this.teamWorkChk.TabIndex = 25;
@@ -272,7 +335,7 @@ namespace Presentation.Forms
             // 
             // orderBtn
             // 
-            this.orderBtn.Location = new System.Drawing.Point(242, 225);
+            this.orderBtn.Location = new System.Drawing.Point(252, 227);
             this.orderBtn.Name = "orderBtn";
             this.orderBtn.Size = new System.Drawing.Size(150, 47);
             this.orderBtn.TabIndex = 24;
@@ -285,7 +348,7 @@ namespace Presentation.Forms
             this.statusCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.statusCmb.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusCmb.FormattingEnabled = true;
-            this.statusCmb.Location = new System.Drawing.Point(276, 184);
+            this.statusCmb.Location = new System.Drawing.Point(459, 181);
             this.statusCmb.Name = "statusCmb";
             this.statusCmb.Size = new System.Drawing.Size(176, 31);
             this.statusCmb.TabIndex = 23;
@@ -294,7 +357,7 @@ namespace Presentation.Forms
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(276, 162);
+            this.label16.Location = new System.Drawing.Point(459, 159);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(116, 19);
             this.label16.TabIndex = 22;
@@ -346,7 +409,7 @@ namespace Presentation.Forms
             this.amrtzLbl.AutoSize = true;
             this.amrtzLbl.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.amrtzLbl.ForeColor = System.Drawing.Color.DarkRed;
-            this.amrtzLbl.Location = new System.Drawing.Point(161, 189);
+            this.amrtzLbl.Location = new System.Drawing.Point(319, 186);
             this.amrtzLbl.Name = "amrtzLbl";
             this.amrtzLbl.Size = new System.Drawing.Size(51, 23);
             this.amrtzLbl.TabIndex = 19;
@@ -356,21 +419,22 @@ namespace Presentation.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(161, 162);
+            this.label13.Location = new System.Drawing.Point(319, 159);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(83, 19);
+            this.label13.Size = new System.Drawing.Size(117, 19);
             this.label13.TabIndex = 18;
-            this.label13.Text = "Amortizado";
+            this.label13.Text = "Amortizado total";
             // 
             // orderTotLbl
             // 
             this.orderTotLbl.AutoSize = true;
             this.orderTotLbl.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.orderTotLbl.Location = new System.Drawing.Point(28, 189);
+            this.orderTotLbl.Location = new System.Drawing.Point(186, 186);
             this.orderTotLbl.Name = "orderTotLbl";
             this.orderTotLbl.Size = new System.Drawing.Size(51, 23);
             this.orderTotLbl.TabIndex = 17;
             this.orderTotLbl.Text = "$0.00";
+            this.orderTotLbl.TextChanged += new System.EventHandler(this.orderTotLbl_TextChanged);
             // 
             // label8
             // 
@@ -386,7 +450,7 @@ namespace Presentation.Forms
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(28, 162);
+            this.label11.Location = new System.Drawing.Point(186, 159);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(100, 19);
             this.label11.TabIndex = 16;
@@ -510,6 +574,7 @@ namespace Presentation.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.lastPanel.ResumeLayout(false);
             this.lastPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.givenPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.handPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderPrice)).EndInit();
@@ -557,5 +622,10 @@ namespace Presentation.Forms
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ComboBox productListCmb;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown givenPrice;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label actAmortLbl;
+        private System.Windows.Forms.Label label19;
     }
 }

@@ -10,11 +10,25 @@ namespace Presentation.Forms
 {
     public partial class OrderFilter : Form
     {
-        private bool filling = false, filling2 = false;
+        private bool filling = false, filling2 = false, filling3 = false, filling4 = false;
+        private static Dictionary<int, string> years;
+        private Filters filters;
         public OrderFilter(ref Filters filters)
         {
             InitializeComponent();
+            filling3 = true;
             FillCombos();
+            filling3 = false;
+            this.filters = filters;
+
+            orderByCmb.SelectedIndex = filters.OrderBy;
+            orderToCmb.SelectedIndex = filters.OrderTo;
+            dateFilterCmb.SelectedIndex = filters.DateFilter;
+            yearCmb.SelectedIndex = filters.YearIndex;
+            monthCmb.SelectedIndex = filters.Month;
+            dayCmb.SelectedIndex = filters.Day;
+            searchByCmb.SelectedIndex = filters.SearchBy;
+
         }
         private void FillCombos()
         {
@@ -28,11 +42,22 @@ namespace Presentation.Forms
             fields2.Add(1, "Fecha de entrega");
             fields2.Add(2, "Cliente");
             fields2.Add(3, "Costo");
-            orderByCmb.DataSource = searchByCmb.DataSource = null;
+            Dictionary<int, string> fields3 = new Dictionary<int, string>();
+            fields3.Add(0, "Fecha de orden");
+            fields3.Add(1, "Fecha de entrega");
+            Dictionary<int, string> fields4 = new Dictionary<int, string>();
+            fields4.Add(0, "Orden ascendente");
+            fields4.Add(1, "Orden descendente");
+            orderByCmb.DataSource = searchByCmb.DataSource =
+                dateFilterCmb.DataSource = null;
             orderByCmb.DataSource = new BindingSource(fields, null);
             searchByCmb.DataSource = new BindingSource(fields2, null);
-            orderByCmb.ValueMember = searchByCmb.ValueMember = "Key";
-            orderByCmb.DisplayMember = searchByCmb.DisplayMember = "Value";
+            dateFilterCmb.DataSource = new BindingSource(fields3, null);
+            orderToCmb.DataSource = new BindingSource(fields4, null);
+            orderByCmb.ValueMember = searchByCmb.ValueMember = 
+                dateFilterCmb.ValueMember = orderToCmb.ValueMember = "Key";
+            orderByCmb.DisplayMember = searchByCmb.DisplayMember = 
+                dateFilterCmb.DisplayMember = orderToCmb.DisplayMember = "Value";
 
             FillYears();
 
@@ -63,7 +88,7 @@ namespace Presentation.Forms
         private void FillYears()
         {
             filling2 = true;
-            Dictionary<int, string> years = new Dictionary<int, string>();
+            years = new Dictionary<int, string>();
             years.Add(0, "Ninguno");
             int year = DateTime.Now.Year;
             for (int i = 1; i <= 10; i++)
@@ -81,6 +106,7 @@ namespace Presentation.Forms
         {
             if (!filling && !filling2)
             {
+                filling4 = true;
                 Dictionary<int, string> days = new Dictionary<int, string>();
                 int length = 31;
                 string yearValue = ((KeyValuePair<int, string>)yearCmb.SelectedItem).Value;
@@ -110,12 +136,8 @@ namespace Presentation.Forms
                 dayCmb.DataSource = new BindingSource(days, null);
                 dayCmb.ValueMember = "Key";
                 dayCmb.DisplayMember = "Value";
+                filling4 = false;
             }
-        }
-
-        private void yearCmb_SelectedValueChanged(object sender, EventArgs e)
-        {
-            FillDays();
         }
 
         private void todayLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -125,9 +147,52 @@ namespace Presentation.Forms
             dayCmb.SelectedIndex = DateTime.Now.Day;
         }
 
+        private void orderByCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!filling3)
+                filters.OrderBy = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+        }
+
+        private void orderToCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!filling3)
+                filters.OrderTo = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+        }
+
+        private void dateFilterCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!filling3)
+                filters.DateFilter = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+        }
+
+        private void dayCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!filling4)
+                filters.Day = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+        }
+
         private void monthCmb_SelectedValueChanged(object sender, EventArgs e)
         {
             FillDays();
+            if (!filling3)
+                filters.Month = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
         }
+
+        private void yearCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            FillDays();
+            if (!filling3)
+            {
+                filters.YearIndex = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+                filters.Year = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Value;
+            }
+        }
+
+        private void searchByCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!filling3)
+                filters.SearchBy = ((KeyValuePair<int, string>)((ComboBox)sender).SelectedItem).Key;
+        }
+
     }
 }

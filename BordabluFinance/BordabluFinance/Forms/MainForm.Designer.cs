@@ -482,7 +482,6 @@ namespace Presentation
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel financePanel;
         private System.Windows.Forms.Label financeLbl;
         private System.Windows.Forms.PictureBox financePict;
         private System.Windows.Forms.Panel panel7;
@@ -492,5 +491,6 @@ namespace Presentation
         private System.Windows.Forms.PictureBox checkOrderPict;
         public System.Windows.Forms.Panel addOrderPanel;
         public System.Windows.Forms.Panel checkOrderPanel;
+        public System.Windows.Forms.Panel financePanel;
     }
 }

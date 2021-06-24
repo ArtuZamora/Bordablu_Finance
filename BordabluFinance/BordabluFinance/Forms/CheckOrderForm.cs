@@ -9,6 +9,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Presentation.Forms
 {
@@ -16,15 +18,17 @@ namespace Presentation.Forms
     {
         private UserModel model = new UserModel();
         private Filters filters = new Filters();
-        
+        private static List<Order> orders, sortedOrders;
+
         public CheckOrderForm()
         {
             InitializeComponent();
+            orders = model.Select_Orders();
             ordersDgv.ShowCellToolTips = false;
 
             toolStripMenuItem5.Click += ToolStripMenuItem5_Click;
             toolStripMenuItem6.Click += ToolStripMenuItem6_Click;
-            FillOrdersDgv();
+            FilterDgv();
         }
 
         private void ToolStripMenuItem6_Click(object sender, EventArgs e)
@@ -33,7 +37,7 @@ namespace Presentation.Forms
             {
                 model.Update_Order_Status(
                     ordersDgv.CurrentRow.Cells[0].Value.ToString(), "Terminado");
-                FillOrdersDgv();
+                FilterDgv();
             }
         }
         private void ToolStripMenuItem5_Click(object sender, EventArgs e)
@@ -42,7 +46,7 @@ namespace Presentation.Forms
             {
                 model.Update_Order_Status(
                     ordersDgv.CurrentRow.Cells[0].Value.ToString(), "En Proceso");
-                FillOrdersDgv();
+                FilterDgv();
             }
         }
         private void ordersDgv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -82,7 +86,8 @@ namespace Presentation.Forms
                             order.Help = Convert.ToBoolean(ordersDgv.CurrentRow.Cells[12].Value);
                             order.ID_PM = ordersDgv.CurrentRow.Cells[9].Value.ToString();
                             model.Delete_Order(order);
-                            FillOrdersDgv();
+                            orders = model.Select_Orders();
+                            FilterDgv();
                             MessageBox.Show("Orden eliminada con éxito",
                              "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -95,10 +100,8 @@ namespace Presentation.Forms
                     break;
             }
         }
-        private void FillOrdersDgv()
+        private void DgvConfig()
         {
-            ordersDgv.DataSource = null;
-            ordersDgv.DataSource = model.Select_Orders();
             ordersDgv.Columns[0].Visible = false;
             ordersDgv.Columns[1].Visible = true;
             ordersDgv.Columns[1].HeaderText = "Fecha Pedido";
@@ -115,8 +118,64 @@ namespace Presentation.Forms
             ordersDgv.Columns[8].Visible = false;
             ordersDgv.Columns[9].Visible = false;
             ordersDgv.Columns[10].Visible = false;
-            ordersDgv.Columns[11].Visible = false; //status
+            ordersDgv.Columns[11].Visible = false;
             ordersDgv.Columns[12].Visible = false;
+            ordersDgv.Columns[13].Visible = false;
+        }
+        private void FilterDgv()
+        {
+            ordersDgv.DataSource = null;
+            switch (filters.OrderBy)
+            {
+                case 0:
+                    if (filters.OrderTo == 0)
+                        ordersDgv.DataSource = orders.OrderBy(o => o.Order_Date).ToList();
+                    else
+                        ordersDgv.DataSource = orders.OrderByDescending(o => o.Order_Date).ToList();
+                    break;
+                case 1:
+                    if (filters.OrderTo == 0)
+                        ordersDgv.DataSource = orders.OrderBy(o => o.Delivery_Date).ToList();
+                    else
+                        ordersDgv.DataSource = orders.OrderByDescending(o => o.Delivery_Date).ToList();
+                    break;
+                case 2:
+                    if (filters.OrderTo == 0)
+                        ordersDgv.DataSource = orders.OrderBy(o => o.Client).ToList();
+                    else
+                        ordersDgv.DataSource = orders.OrderByDescending(o => o.Client).ToList();
+                    break;
+                case 3:
+                    if (filters.OrderTo == 0)
+                        ordersDgv.DataSource = orders.OrderBy(o => o.Total_Amount).ToList();
+                    else
+                        ordersDgv.DataSource = orders.OrderByDescending(o => o.Total_Amount).ToList();
+                    break;
+            }
+            if (!(filters.YearIndex == 0 && filters.Month == 0 && filters.Day == 0))
+            {
+                string year, month, day;
+                year = filters.YearIndex == 0 ? "[0-9][0-9][0-9][0-9]" : filters.Year;
+                month = filters.Month == 0 ? "[0-9][0-9]" : filters.Month.ToString();
+                day = filters.Day == 0 ? "[0-9][0-9]" : filters.Day.ToString();
+
+                List<Order> currOrders = (List<Order>)ordersDgv.DataSource;
+                string rx = string.Format("{0}/{1}/{2}", month, day, year);
+                var myRegex = new Regex(rx);
+
+                if (filters.DateFilter == 0)
+                {
+                    ordersDgv.DataSource = currOrders.
+                        Where(o => myRegex.IsMatch(o.Order_Date.ToString("MM/dd/yyyy"))).ToList();
+                }
+                else
+                {
+                    ordersDgv.DataSource = currOrders.
+                        Where(o => myRegex.IsMatch(o.Delivery_Date.ToString("MM/dd/yyyy"))).ToList();
+                }
+            }
+            sortedOrders = (List<Order>)ordersDgv.DataSource;
+            DgvConfig();
         }
         private void SeeOrderDetail()
         {
@@ -126,7 +185,7 @@ namespace Presentation.Forms
             List<Control> controls = new List<Control>();
             foreach (Product product in products)
             {
-                Panel productPanel = 
+                Panel productPanel =
                     CreateProductPanel(product, orderDetails.FindAll(od => od.ID_P == product.ID_P));
                 controls.Add(productPanel);
             }
@@ -271,19 +330,55 @@ namespace Presentation.Forms
 
         private void OrderFilter_FormClosed(object sender, FormClosedEventArgs e)
         {
+            FilterDgv();
+        }
+
+        private void searchTxt_TextChanged(object sender, EventArgs e)
+        {
+            switch (filters.SearchBy)
+            {
+                case 0:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Order_Date.ToString("MM/dd/yyyyy")
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+                case 1:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Delivery_Date.ToString("MM/dd/yyyyy")
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+                case 2:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Client.ToLower()
+                        .Contains(searchTxt.Text.ToLower()))
+                        .ToList();
+                    break;
+                case 3:
+                    ordersDgv.DataSource =
+                        sortedOrders.Where(o => o.Total_Amount.ToString()
+                        .Contains(searchTxt.Text))
+                        .ToList();
+                    break;
+            }
         }
     }
     public class Filters
     {
         public int OrderBy { get; set; }
         public int OrderTo { get; set; }
-        public int Year { get; set; }
+        public int DateFilter { get; set; }
+        public int YearIndex { get; set; }
+        public string Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }
         public int SearchBy { get; set; }
         public Filters()
         {
-            OrderBy = OrderTo = Year = Month = Day = SearchBy = 0;
+            OrderBy = OrderTo = Month = Day =
+                SearchBy = DateFilter = YearIndex = 0;
+            Year = "Ninguno";
         }
     }
 }

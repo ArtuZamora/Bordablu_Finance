@@ -62,9 +62,9 @@ namespace Presentation
                 control.BackColor = Color.FromArgb(200, 163, 136);
             }
         }
-        public void EnterForm(Control control, int color)
+        public void EnterForm(Control control, int color, bool force)
         {
-            if (active != control)
+            if (active != control || force)
             {
                 if(addOrderLbl.Text != "Agregar Orden")
                     addOrderLbl.Text = "Agregar Orden";
@@ -288,75 +288,75 @@ namespace Presentation
 
         private void dashLbl_Click(object sender, EventArgs e)
         {
-            EnterForm(dashPanel, 1);
+            EnterForm(dashPanel, 1, false);
         }
         private void dashPanel_Click(object sender, EventArgs e)
         {
-            EnterForm(dashPanel, 1);
+            EnterForm(dashPanel, 1, false);
         }
         private void dashPict_Click(object sender, EventArgs e)
         {
-            EnterForm(dashPanel, 1);
+            EnterForm(dashPanel, 1, false);
         }
         private void rawMatPanel_Click(object sender, EventArgs e)
         {
-            EnterForm(rawMatPanel, 1);
+            EnterForm(rawMatPanel, 1, false);
         }
         private void rawMatPict_Click(object sender, EventArgs e)
         {
-            EnterForm(rawMatPanel, 1);
+            EnterForm(rawMatPanel, 1, false);
         }
         private void rawMatLbl_Click(object sender, EventArgs e)
         {
-            EnterForm(rawMatPanel, 1);
+            EnterForm(rawMatPanel, 1, false);
         }
         private void productPanel_Click(object sender, EventArgs e)
         {
-            EnterForm(productPanel, 1);
+            EnterForm(productPanel, 1, false);
         }
         private void productLbl_Click(object sender, EventArgs e)
         {
-            EnterForm(productPanel, 1);
+            EnterForm(productPanel, 1, false);
         }
         private void productPic_Click(object sender, EventArgs e)
         {
-            EnterForm(productPanel, 1);
+            EnterForm(productPanel, 1, false);
         }
         private void financePanel_Click(object sender, EventArgs e)
         {
-            EnterForm(financePanel, 1);
+            EnterForm(financePanel, 1, false);
         }
         private void financeLbl_Click(object sender, EventArgs e)
         {
-            EnterForm(financePanel, 1);
+            EnterForm(financePanel, 1, false);
         }
         private void financePict_Click(object sender, EventArgs e)
         {
-            EnterForm(financePanel, 1);
+            EnterForm(financePanel, 1, false);
         }
         private void addOrderPanel_Click(object sender, EventArgs e)
         {
-            EnterForm(addOrderPanel, 3);
+            EnterForm(addOrderPanel, 3, false);
         }
         private void addOrderLbl_Click(object sender, EventArgs e)
         {
-            EnterForm(addOrderPanel, 3);
+            EnterForm(addOrderPanel, 3, false);
         }
         private void addOrderPict_Click(object sender, EventArgs e)
         {
-            EnterForm(addOrderPanel, 3);
+            EnterForm(addOrderPanel, 3, false);
         }
         private void checkOrderPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            EnterForm(checkOrderPanel, 1);
+            EnterForm(checkOrderPanel, 1, false);
         }
         private void checkOrderLbl_MouseClick(object sender, MouseEventArgs e)
         {
-            EnterForm(checkOrderPanel, 1);
+            EnterForm(checkOrderPanel, 1, false);
         }
         private void checkOrderPict_MouseClick(object sender, MouseEventArgs e)
         {
-            EnterForm(checkOrderPanel, 1);
+            EnterForm(checkOrderPanel, 1, false);
         }
         #endregion
     }
