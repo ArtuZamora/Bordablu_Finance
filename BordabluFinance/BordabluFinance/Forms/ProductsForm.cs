@@ -69,7 +69,7 @@ namespace Presentation.Forms
                     GlobalMethods.errorProvider.SetError(productNameTxt, "No debe dejar el campo vacío");
                 else
                 {
-                    if(curr_product != null)
+                    if (curr_product != null)
                     {
                         curr_product.Name = productNameTxt.Text.Trim();
                         model.Update_Product(curr_product);
@@ -123,9 +123,9 @@ namespace Presentation.Forms
                     productBtn.Text = "Modificar";
                     break;
                 case "Eliminar":
-                    if(DialogResult.Yes ==
+                    if (DialogResult.Yes ==
                         MessageBox.Show("¿Está seguro de querer eliminar este registro?",
-                            "ADVERTENCIA",MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                            "ADVERTENCIA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         try
                         {
@@ -181,16 +181,17 @@ namespace Presentation.Forms
         }
         private void FillSpecificationsDgv()
         {
-            try
-            {
-                specifDgv.DataSource = null;
-                specifDgv.DataSource = model.Select_Specifications(productCmb.SelectedValue.ToString());
-                specifDgv.Columns[0].Visible = false;
-                specifDgv.Columns[2].HeaderText = "Descripción";
-                specifDgv.Columns[3].HeaderText = "Tipo";
-                specifDgv.Columns[1].Visible = false;
-            }
-            catch (Exception ex) { Console.WriteLine(ex); throw; }
+            if (!filling && ((List<Product>)productCmb.DataSource).Count != 0)
+                try
+                {
+                    specifDgv.DataSource = null;
+                    specifDgv.DataSource = model.Select_Specifications(productCmb.SelectedValue.ToString());
+                    specifDgv.Columns[0].Visible = false;
+                    specifDgv.Columns[2].HeaderText = "Descripción";
+                    specifDgv.Columns[3].HeaderText = "Tipo";
+                    specifDgv.Columns[1].Visible = false;
+                }
+                catch (Exception ex) { Console.WriteLine(ex); throw; }
         }
         private void productCmb_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -253,7 +254,7 @@ namespace Presentation.Forms
                         specifDgv.CurrentRow.Cells[2].Value.ToString(),
                         specifDgv.CurrentRow.Cells[3].Value.ToString());
                     specifTxt.Text = curr_specification.Property;
-                    dataTypeCmb.SelectedValue = 
+                    dataTypeCmb.SelectedValue =
                         dataTypes.Find(dt => dt.Type == curr_specification.Data_Type).ID;
                     specifTxt.Focus();
                     specifBtn.Text = "Modificar";

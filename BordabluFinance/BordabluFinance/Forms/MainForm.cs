@@ -129,7 +129,7 @@ namespace Presentation
             }
         }
         public void EnterForm(Control control, int color, string text,
-            Order order, ref List<OrderDetail> orderDetails, ref List<Product> products)
+            Order order, ref List<OrderDetail> orderDetails, ref List<ProductQty> products)
         {
             if (active != control)
             {

@@ -41,7 +41,8 @@ namespace Presentation.Forms
             if (ordersDgv.CurrentRow.Cells[11].Value.ToString().Trim() == "En Proceso")
             {
                 model.Update_Order_Status(
-                    ordersDgv.CurrentRow.Cells[0].Value.ToString(), "Terminado");
+                    ordersDgv.CurrentRow.Cells[0].Value.ToString(), "Terminado"); 
+                orders = model.Select_Orders();
                 FilterDgv();
             }
         }
@@ -51,6 +52,7 @@ namespace Presentation.Forms
             {
                 model.Update_Order_Status(
                     ordersDgv.CurrentRow.Cells[0].Value.ToString(), "En Proceso");
+                orders = model.Select_Orders();
                 FilterDgv();
             }
         }
@@ -229,12 +231,13 @@ namespace Presentation.Forms
         {
             Order order = model.Select_Orders(ordersDgv.CurrentRow.Cells[0].Value.ToString());
             List<OrderDetail> orderDetails = model.Select_Order_Details(order.ID_O);
-            List<Product> products = model.Select_Order_Detail_Products(order.ID_O);
+            List<ProductQty> products = model.Select_Order_Detail_Products(order.ID_O);
             List<Control> controls = new List<Control>();
-            foreach (Product product in products)
+            foreach (ProductQty product in products)
             {
                 Panel productPanel =
-                    CreateProductPanel(product, orderDetails.FindAll(od => od.ID_P == product.ID_P));
+                    CreateProductPanel(product, 
+                    orderDetails.FindAll(od => od.ID_P == product.ID_P && od.P_Num == product.P_Num));
                 controls.Add(productPanel);
             }
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
@@ -244,7 +247,7 @@ namespace Presentation.Forms
         {
             Order order = model.Select_Orders(ordersDgv.CurrentRow.Cells[0].Value.ToString());
             List<OrderDetail> orderDetails = model.Select_Order_Details(order.ID_O);
-            List<Product> products = model.Select_Order_Detail_Products(order.ID_O);
+            List<ProductQty> products = model.Select_Order_Detail_Products(order.ID_O);
             List<Control> controls = new List<Control>();
             Program.mainForm.EnterForm(Program.mainForm.addOrderPanel, 3,
                 "Editar Orden", order, ref orderDetails, ref products);
@@ -326,7 +329,8 @@ namespace Presentation.Forms
                     break;
                 case "número entero":
                     NumericUpDown numericUpDown = new NumericUpDown();
-                    numericUpDown.Value = Convert.ToDecimal(data);
+                    if(data != null)
+                        numericUpDown.Value = Convert.ToDecimal(data);
                     numericUpDown.Minimum = 1;
                     numericUpDown.Size = new Size(120, 33);
                     numericUpDown.TextAlign = HorizontalAlignment.Center;
@@ -336,7 +340,8 @@ namespace Presentation.Forms
                     break;
                 case "número decimal":
                     NumericUpDown numericUpDownDec = new NumericUpDown();
-                    numericUpDownDec.Value = Convert.ToDecimal(data);
+                    if (data != null)
+                        numericUpDownDec.Value = Convert.ToDecimal(data);
                     numericUpDownDec.Size = new Size(120, 33);
                     numericUpDownDec.DecimalPlaces = 2;
                     numericUpDownDec.TextAlign = HorizontalAlignment.Center;
@@ -349,7 +354,8 @@ namespace Presentation.Forms
                     Label moneyLbl = new Label();
                     moneyLbl.AutoSize = true;
                     moneyLbl.Text = "USD";
-                    numericUpDownMoney.Value = Convert.ToDecimal(data);
+                    if (data != null)
+                        numericUpDownMoney.Value = Convert.ToDecimal(data);
                     numericUpDownMoney.DecimalPlaces = 2;
                     numericUpDownMoney.Size = new Size(112, 33);
                     numericUpDownMoney.TextAlign = HorizontalAlignment.Center;

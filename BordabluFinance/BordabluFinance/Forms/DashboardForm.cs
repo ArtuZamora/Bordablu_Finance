@@ -65,6 +65,11 @@ namespace Presentation.Forms
 
             salesChart.Series[0].BorderWidth = earnExpenseChart.Series[0].BorderWidth =
                 earnExpenseChart.Series[1].BorderWidth = 3;
+
+            if (((DataTable)salesChart.DataSource).Rows.Count != 0)
+                noDataPict1.Visible = false;
+            if (((DataTable)earnExpenseChart.DataSource).Rows.Count != 0)
+                noDataPict2.Visible = false;
         }
         #endregion
 
@@ -235,69 +240,6 @@ namespace Presentation.Forms
         }
         #endregion
 
-        #region Internal Classes
-        public class CustomChart : Chart
-        {
-            public CustomChart()
-            {
-                InitializeChart();
-                this.Enabled = false;
-                this.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-                this.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
-                this.CustomizeLegend += CustomChart_CustomizeLegend;
-            }
-            private void CustomChart_CustomizeLegend(object sender, CustomizeLegendEventArgs e)
-            {
-                foreach (LegendItem lit in e.LegendItems)
-                {
-                    var cells = lit.Cells;
-                    cells[0].Margins = new Margins(0, 0, 0, 0);
-                    cells[1].Margins = new Margins(0, 0, 0, 0);
-                }
-            }
-            private void InitializeChart()
-            {
-                ChartArea chartArea1 = new ChartArea();
-                Legend legend1 = new Legend();
-                ((ISupportInitialize)(this)).BeginInit();
-                this.BackColor = Color.FromArgb(211, 140, 86);
-                chartArea1.Area3DStyle.IsRightAngleAxes = false;
-                chartArea1.Area3DStyle.Rotation = 5;
-                chartArea1.Area3DStyle.WallWidth = 5;
-                chartArea1.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-                chartArea1.AxisX2.IntervalAutoMode = IntervalAutoMode.VariableCount;
-                chartArea1.BackColor = Color.FromArgb(211, 140, 86);
-                chartArea1.Name = "ChartArea1";
-                this.ChartAreas.Add(chartArea1);
-                legend1.BackColor = Color.FromArgb(211, 140, 86);
-                legend1.Font = new Font("Roboto Condensed", 10F);
-                legend1.InterlacedRowsColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-                legend1.IsTextAutoFit = false;
-                legend1.Name = "Legend1";
-                legend1.Title = "Cantidad";
-                this.Legends.Add(legend1);
-                this.Location = new Point(40, 177);
-                this.Name = "chart";
-                this.Palette = ChartColorPalette.Chocolate;
-                AddSeries();
-                this.Size = new Size(652, 400);
-                this.TabIndex = 0;
-                this.Text = "chartTop5";
-            }
-            public void AddSeries()
-            {
-                Series series = new Series();
-                series.ChartArea = "ChartArea1";
-                series.Font = new Font("Roboto Condensed", 13F, FontStyle.Bold);
-                series.IsValueShownAsLabel = true;
-                series.LabelBackColor = Color.Transparent;
-                series.LabelForeColor = Color.Black;
-                series.Legend = "Legend1";
-                this.Series.Add(series);
-            }
-        }
-        #endregion
-
         #region Sales Event Methods
         private void salesPerCmb_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -336,6 +278,10 @@ namespace Presentation.Forms
                         break;
                 }
                 salesChart.DataBind();
+                if (((DataTable)salesChart.DataSource).Rows.Count != 0)
+                    noDataPict1.Visible = false;
+                else
+                    noDataPict1.Visible = true;
             }
         }
         private void salesYearCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -364,6 +310,10 @@ namespace Presentation.Forms
                         break;
                 }
                 salesChart.DataBind();
+                if (((DataTable)salesChart.DataSource).Rows.Count != 0)
+                    noDataPict1.Visible = false;
+                else
+                    noDataPict1.Visible = true;
             }
         }
         private void salesMonthCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -378,6 +328,10 @@ namespace Presentation.Forms
                 salesChart.Series[0].XValueMember = "Day";
                 salesChart.Series[0].YValueMembers = "Sales";
                 salesChart.DataBind();
+                if (((DataTable)salesChart.DataSource).Rows.Count != 0)
+                    noDataPict1.Visible = false;
+                else
+                    noDataPict1.Visible = true;
             }
         }
         private void chartTypeCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -447,6 +401,10 @@ namespace Presentation.Forms
                         break;
                 }
                 earnExpenseChart.DataBind();
+                if (((DataTable)earnExpenseChart.DataSource).Rows.Count != 0)
+                    noDataPict2.Visible = false;
+                else
+                    noDataPict2.Visible = true;
             }
         }
         private void graphYearCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -487,6 +445,10 @@ namespace Presentation.Forms
                         break;
                 }
                 earnExpenseChart.DataBind();
+                if (((DataTable)earnExpenseChart.DataSource).Rows.Count != 0)
+                    noDataPict2.Visible = false;
+                else
+                    noDataPict2.Visible = true;
             }
         }
         private void graphMonthCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -506,6 +468,10 @@ namespace Presentation.Forms
                 earnExpenseChart.Series[1].XValueMember = "Year";
                 earnExpenseChart.Series[1].YValueMembers = "Expenses";
                 earnExpenseChart.DataBind();
+                if (((DataTable)earnExpenseChart.DataSource).Rows.Count != 0)
+                    noDataPict2.Visible = false;
+                else
+                    noDataPict2.Visible = true;
             }
         }
         private void graphTypeCmb_SelectedValueChanged(object sender, EventArgs e)
@@ -527,5 +493,69 @@ namespace Presentation.Forms
         }
         #endregion
 
+
+
+        #region Internal Classes
+        public class CustomChart : Chart
+        {
+            public CustomChart()
+            {
+                InitializeChart();
+                this.Enabled = false;
+                this.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                this.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+                this.CustomizeLegend += CustomChart_CustomizeLegend;
+            }
+            private void CustomChart_CustomizeLegend(object sender, CustomizeLegendEventArgs e)
+            {
+                foreach (LegendItem lit in e.LegendItems)
+                {
+                    var cells = lit.Cells;
+                    cells[0].Margins = new Margins(0, 0, 0, 0);
+                    cells[1].Margins = new Margins(0, 0, 0, 0);
+                }
+            }
+            private void InitializeChart()
+            {
+                ChartArea chartArea1 = new ChartArea();
+                Legend legend1 = new Legend();
+                ((ISupportInitialize)(this)).BeginInit();
+                this.BackColor = Color.FromArgb(211, 140, 86);
+                chartArea1.Area3DStyle.IsRightAngleAxes = false;
+                chartArea1.Area3DStyle.Rotation = 5;
+                chartArea1.Area3DStyle.WallWidth = 5;
+                chartArea1.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+                chartArea1.AxisX2.IntervalAutoMode = IntervalAutoMode.VariableCount;
+                chartArea1.BackColor = Color.FromArgb(211, 140, 86);
+                chartArea1.Name = "ChartArea1";
+                this.ChartAreas.Add(chartArea1);
+                legend1.BackColor = Color.FromArgb(211, 140, 86);
+                legend1.Font = new Font("Roboto Condensed", 10F);
+                legend1.InterlacedRowsColor = Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+                legend1.IsTextAutoFit = false;
+                legend1.Name = "Legend1";
+                legend1.Title = "Cantidad";
+                this.Legends.Add(legend1);
+                this.Location = new Point(40, 177);
+                this.Name = "chart";
+                this.Palette = ChartColorPalette.Chocolate;
+                AddSeries();
+                this.Size = new Size(652, 400);
+                this.TabIndex = 0;
+                this.Text = "chartTop5";
+            }
+            public void AddSeries()
+            {
+                Series series = new Series();
+                series.ChartArea = "ChartArea1";
+                series.Font = new Font("Roboto Condensed", 13F, FontStyle.Bold);
+                series.IsValueShownAsLabel = true;
+                series.LabelBackColor = Color.Transparent;
+                series.LabelForeColor = Color.Black;
+                series.Legend = "Legend1";
+                this.Series.Add(series);
+            }
+        }
+        #endregion
     }
 }

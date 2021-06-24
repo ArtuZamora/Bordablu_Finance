@@ -30,10 +30,11 @@ namespace Presentation.Forms
             InitializeComponent();
 
             actualOrder = null;
+            ids.Clear();
 
             subTotals.Clear();
 
-            FillColors();
+            colors = FillColors();
             FillStatus();
 
             titleLbl.Text = title;
@@ -62,7 +63,7 @@ namespace Presentation.Forms
 
             actualOrder = null;
             subTotals.Clear();
-
+            ids.Clear();
             titleLbl.Text = title;
 
             FillStatus();
@@ -99,17 +100,18 @@ namespace Presentation.Forms
             givenPrice.Value = order.Given_Amount;
         }
         public AddOrderForm(string title, Order order, ref List<OrderDetail> orderDetails,
-            ref List<Product> products) //Edit
+            ref List<ProductQty> products) //Edit
         {
             InitializeComponent();
 
             subTotals.Clear();
             actualOrder = order;
+            ids.Clear();
 
             titleLbl.Text = title;
             toolTip1.SetToolTip(addProdBtn, "Agregar producto");
 
-            FillColors();
+            colors = FillColors();
             FillStatus();
 
             productListCmb.DataSource = model.Select_Products();
@@ -139,10 +141,12 @@ namespace Presentation.Forms
             client.Add(clientTxt);
             textBoxes.Add(client);
 
-            foreach (Product product in products)
+            foreach (ProductQty product in products)
             {
                 Panel productPanel =
-                    CreateProductPanel(product, orderDetails.FindAll(od => od.ID_P == product.ID_P));
+                    CreateProductPanel(
+                        product, 
+                        orderDetails.FindAll(od => od.ID_P == product.ID_P && od.P_Num == product.P_Num));
                 mainFlowPanel.Controls.Add(productPanel);
             }
             mainFlowPanel.Controls.Add(addPanel);
@@ -160,9 +164,18 @@ namespace Presentation.Forms
         #region Event Methods
         private void addProdBtn_Click(object sender, EventArgs e)
         {
-            mainFlowPanel.Controls.Add(CreateProductPanel((Product)productListCmb.SelectedItem, null));
-            mainFlowPanel.Controls.Add(addPanel);
-            mainFlowPanel.Controls.Add(lastPanel);
+            Control prod = CreateProductPanel((Product)productListCmb.SelectedItem, null);
+            if(prod != null)
+            {
+                mainFlowPanel.Controls.Add(prod);
+                mainFlowPanel.Controls.Add(addPanel);
+                mainFlowPanel.Controls.Add(lastPanel);
+            }
+            else
+            {
+                MessageBox.Show("No existen especificaciones para este producto",
+                     "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Erase_Click(object sender, EventArgs e)
         {
@@ -251,6 +264,7 @@ namespace Presentation.Forms
                                 orderDetail.ID_OD = "OD0000000";
                                 orderDetail.ID_S = specifications[j].ID_S;
                                 orderDetail.ID_P = ID_P;
+                                orderDetail.P_Num = i;
                                 string detail = "";
                                 Control controlSpec = mainFlowPanel.Controls[i].Controls[2].Controls[j].Controls[1];
                                 switch (specifications[j].Data_Type.ToLower().Trim())
@@ -332,46 +346,50 @@ namespace Presentation.Forms
         private Panel CreateProductPanel(Product product, List<OrderDetail> orderDetails)
         {
             List<Specification> specifications = model.Select_Specifications(product.ID_P);
-            List<Control> controls = new List<Control>();
-            Panel panel = new Panel();
-            Label label = new Label();
-            PictureBox erase = new PictureBox();
-            TableLayoutPanel table = new TableLayoutPanel();
-
-            panel.AutoSize = label.AutoSize = table.AutoSize = true;
-            panel.BorderStyle = BorderStyle.FixedSingle;
-            label.Text = product.Name;
-            ids.Add(product.ID_P);
-            label.Font = new Font("Roboto Condensed", (float)16, FontStyle.Bold);
-            erase.Size = new Size(29, 25);
-            erase.Image = Properties.Resources.Black_CancelIcon1;
-            erase.SizeMode = PictureBoxSizeMode.Zoom;
-            erase.Cursor = Cursors.Hand;
-            erase.Click += Erase_Click;
-
-            table.ColumnCount = 2;
-            table.RowCount = (int)Math.Ceiling(Convert.ToDouble(specifications.Count / 2));
-
-            panel.Controls.Add(label);
-            panel.Controls.Add(erase);
-            panel.Controls.Add(table);
-
-            label.Location = new Point(18, 10);
-            table.Location = new Point(45, 36);
-            erase.Location = new Point(618, 4);
-
-            foreach (Specification specification in specifications)
+            if(specifications.Count != 0)
             {
-                if(orderDetails != null)
+                List<Control> controls = new List<Control>();
+                Panel panel = new Panel();
+                Label label = new Label();
+                PictureBox erase = new PictureBox();
+                TableLayoutPanel table = new TableLayoutPanel();
+
+                panel.AutoSize = label.AutoSize = table.AutoSize = true;
+                panel.BorderStyle = BorderStyle.FixedSingle;
+                label.Text = product.Name;
+                ids.Add(product.ID_P);
+                label.Font = new Font("Roboto Condensed", (float)16, FontStyle.Bold);
+                erase.Size = new Size(29, 25);
+                erase.Image = Properties.Resources.Black_CancelIcon1;
+                erase.SizeMode = PictureBoxSizeMode.Zoom;
+                erase.Cursor = Cursors.Hand;
+                erase.Click += Erase_Click;
+
+                table.ColumnCount = 2;
+                table.RowCount = (int)Math.Ceiling(Convert.ToDouble(specifications.Count / 2));
+
+                panel.Controls.Add(label);
+                panel.Controls.Add(erase);
+                panel.Controls.Add(table);
+
+                label.Location = new Point(18, 10);
+                table.Location = new Point(45, 36);
+                erase.Location = new Point(618, 4);
+
+                foreach (Specification specification in specifications)
                 {
-                    string data = FindMatch(ref orderDetails, specification.ID_S);
-                    table.Controls.Add(CreateSpecificationPanel(specification, ref controls, data));
+                    if (orderDetails != null)
+                    {
+                        string data = FindMatch(ref orderDetails, specification.ID_S);
+                        table.Controls.Add(CreateSpecificationPanel(specification, ref controls, data));
+                    }
+                    else
+                        table.Controls.Add(CreateSpecificationPanel(specification, ref controls, "null"));
                 }
-                else
-                    table.Controls.Add(CreateSpecificationPanel(specification, ref controls, "null"));
-            }
-            textBoxes.Add(controls);
-            return panel;
+                textBoxes.Add(controls);
+                return panel;
+            } 
+            return null;
         }
         private Panel CreateSpecificationPanel(Specification specification, ref List<Control> controls, string data)
         {
@@ -443,12 +461,27 @@ namespace Presentation.Forms
                     break;
                 case "color":
                     ComboBox combo = new ComboBox();
-                    if (data != "nul")
-                        combo.SelectedItem = colors.Find(c => c.Colors.Trim() == data.Trim());
+                    combo.DropDownStyle = ComboBoxStyle.DropDownList;
+                    combo.Visible = true;
+                    combo.FormattingEnabled = true;
                     combo.Size = new Size(258, 27);
-                    combo.DataSource = colors;
+                    combo.DataSource = null;
                     combo.ValueMember = "ID";
                     combo.DisplayMember = "Colors";
+                    combo.DataSource = FillColors();
+                    if (data != "null")
+                    {
+                        Color col = ((List<Color>)combo.DataSource)
+                            .Find(c => c.Colors.Trim() == data.Trim());
+                        int ix = ((List<Color>)combo.DataSource).IndexOf(col);
+                        EventHandler visibleChangedHandler = null;
+                        visibleChangedHandler = delegate
+                        {
+                            combo.SelectedIndex = ix;
+                            combo.VisibleChanged -= visibleChangedHandler;
+                        };
+                        combo.VisibleChanged += visibleChangedHandler;
+                    }
                     control = combo;
                     break;
             }
@@ -487,14 +520,16 @@ namespace Presentation.Forms
             }
             return "null";
         }
-        private void FillColors()
+        private List<Color> FillColors()
         {
-            colors.Clear();
-            colors.Add(new Color(1, "Azul"));
-            colors.Add(new Color(2, "Rojo"));
-            colors.Add(new Color(3, "Amarillo"));
-            colors.Add(new Color(4, "Negro"));
-            colors.Add(new Color(5, "Blanco"));
+            List<Color> colorss = new List<Color>();
+            colorss.Clear();
+            colorss.Add(new Color(1, "Azul"));
+            colorss.Add(new Color(2, "Rojo"));
+            colorss.Add(new Color(3, "Amarillo"));
+            colorss.Add(new Color(4, "Negro"));
+            colorss.Add(new Color(5, "Blanco"));
+            return colorss;
         }
         private void FillStatus()
         {

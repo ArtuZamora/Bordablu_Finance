@@ -121,6 +121,9 @@
   <data name="Blue_EditIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blue_EditIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LegendDGV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LegendDGV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Black_CancelIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Black_CancelIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -132,9 +135,6 @@
   </data>
   <data name="FinanceIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FinanceIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Black_DoneIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Black_DoneIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Black_EditIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Black_EditIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,8 +160,8 @@
   <data name="Black_CancelIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Black_CancelIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddLineBar_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddLineBar_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Black_DoneIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black_DoneIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DashboardIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DashboardIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,6 +190,9 @@
   <data name="BB_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BB_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddLineBar_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddLineBar_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CashIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CashIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -199,7 +202,7 @@
   <data name="BB_Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BB_Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LegendDGV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LegendDGV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="no_Data" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\no_Data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

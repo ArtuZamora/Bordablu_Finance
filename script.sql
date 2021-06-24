@@ -64,7 +64,8 @@ CREATE TABLE Order_Details
 	ID_O char(8) NOT NULL,
 	ID_S char(5) NOT NULL,
 	ID_P char(5) NOT NULL,
-	Detail varchar(50) NOT NULL
+	Detail varchar(50) NOT NULL,
+	P_Num int NOT NULL
 	CONSTRAINT PK_Orders_Details PRIMARY KEY (ID_OD),
 	CONSTRAINT FK_Orders_Details_Orders FOREIGN KEY (ID_O) REFERENCES Orders(ID_O) ON DELETE CASCADE,
 	CONSTRAINT FK_Orders_Details_Specification FOREIGN KEY (ID_S) REFERENCES Specifications(ID_S),

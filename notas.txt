@@ -1,7 +1,8 @@
 SQLCMD Script:
 
-sqlcmd -S DESKTOP-G2BG0KM\SQLEXPRESS -i C:\Users\r2zam\OneDrive\Fotos\Vectors\Bordablu\FinanzasApp\script.sql
+sqlcmd -S [Tu Maquina]\SQLEXPRESS -i C:\script.sql
 
+Colores (no se carga el que se debe) //sepaxd
 
 
 
