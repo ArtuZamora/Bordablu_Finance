@@ -517,8 +517,8 @@ namespace Presentation.Forms
             mainFlowPanel.Controls.Add(c2);
             mainFlowPanel.Controls.Add(c1);
             subTotals.Clear();
-            textBoxes.Clear();
             ids.Clear();
+            textBoxes.Clear();
             List<Control> client = new List<Control>();
             client.Add(clientTxt);
             textBoxes.Add(client);
