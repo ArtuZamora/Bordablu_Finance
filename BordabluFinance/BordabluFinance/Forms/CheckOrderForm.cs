@@ -215,6 +215,13 @@ namespace Presentation.Forms
                 month = filters.Month == 0 ? "[0-9][0-9]" : filters.Month.ToString();
                 day = filters.Day == 0 ? "[0-9][0-9]" : filters.Day.ToString();
 
+                if(filters.Day != 0)
+                    if (day.Length == 1)
+                        day = "0" + day;
+                if (filters.Month != 0)
+                    if (month.Length == 1)
+                        month = "0" + month;
+
                 List<Order> currOrders = (List<Order>)ordersDgv.DataSource;
                 string rx = string.Format("{0}/{1}/{2}", month, day, year);
                 var myRegex = new Regex(rx);
